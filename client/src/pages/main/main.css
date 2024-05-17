@@ -1,9 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 body{
     background-color: #F2F2F2;
+    font-family: 'Montserrat' !important;;
 }
 
 .main-page {
     background-color: #F2F2F2;
+}
+
+.logo{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+    margin-bottom: 6%;
+}
+
+.hello{
+    color: rgb(103,107,87);
 }
 
 .main-card{
@@ -21,7 +35,7 @@ body{
     flex-direction: column;
     align-items: center !important;
     justify-content: center;
-    height: 100%;
+    justify-content: center;
 }
 
 .ab{
@@ -35,11 +49,13 @@ body{
 .search-bar {
     background-color: #f2f2f2; /* Фон строки поиска */
     border-radius: 10px; /* Скругление углов поля */
+    width: 90%;
+    margin-bottom: 3.5%;
   }
   
   .aw.h {
     display: flex; /* Работаем с flexbox для размещения элементов */
-    justify-content: center; /* Центрирование содержимого */
+    /* justify-content: center; Центрирование содержимого */
     align-items: center; /* Выравнивание по центру */
     padding: 10px; /* Добавляем внутренний отступ */
   }
@@ -62,15 +78,64 @@ body{
 
   /* tripple-bar */
   .tripple-bar{
+    width: 98%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5.6%;
   }
 
   .bar-course, .bar-group, .bar-minigroup{
     background-color:#F2F2F2;
+    width: 30%;
+    border-radius: 15px;
+    /* потом убрать */
+    height: 120px;
+}
+
+.bar-content{
+    margin: 7% 0% 0% 7%; 
+    font-size: 24px;
+}
+
+  .course {
+    color: rgb(103,107,87);
+    font-weight: bold;
+    margin-bottom: 7%;
   }
 
+.text-course{
+    display: flex;
+    color: #ABABAB;
+    flex-direction: row;
+    align-items: center;
+}
 
+.text-course span{
+font-weight: 500;
+}
 
-  
-  
+  .mini-line{
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+
+  .main-page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 50px); /* Вычитаем высоту header и footer, если они есть */
+    width: 100%;
+}
+
+.main-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 2.5% 4% 2.5% 4%;
+    width: 50%;
+}
