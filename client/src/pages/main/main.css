@@ -1,3 +1,76 @@
-* {
+body{
     background-color: #F2F2F2;
 }
+
+.main-page {
+    background-color: #F2F2F2;
+}
+
+.main-card{
+    display: flex !important;
+    background-color: #ffffff;
+    border-radius: 10px;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    padding: 2.5% 4% 2.5% 4%;    
+}
+
+.main-page-content{
+    display: flex !important;
+    flex-direction: column;
+    align-items: center !important;
+    justify-content: center;
+    height: 100%;
+}
+
+.ab{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+}
+
+/* search-bar */
+
+.search-bar {
+    background-color: #f2f2f2; /* Фон строки поиска */
+    border-radius: 10px; /* Скругление углов поля */
+  }
+  
+  .aw.h {
+    display: flex; /* Работаем с flexbox для размещения элементов */
+    justify-content: center; /* Центрирование содержимого */
+    align-items: center; /* Выравнивание по центру */
+    padding: 10px; /* Добавляем внутренний отступ */
+  }
+  
+  .ab.ax.ay.az.ba.q.bb.bc {
+    display: flex; /* Используем flexbox для размещения элементов */
+    align-items: center; /* Выравнивание по центру */
+  }
+  
+  .ax.bd.be.bf.z.bg.bh.bi.bj.bk {
+    flex-grow: 1; /* Размер поля занимает 1/3 экрана */
+    border-radius: 10px; /* Скругление углов поля */
+    padding: 0px; /* Добавляем внутренний отступ */
+    font-size: 16px; /* Устанавливаем размер шрифта */
+    color: #333; /* Цвет текста */
+    background-color: transparent; /* Фон поля прозрачный */
+    outline: none; /* Убираем границу вокруг поля */
+    border: none;
+  }
+
+  /* tripple-bar */
+  .tripple-bar{
+    display: flex;
+    flex-direction: row;
+  }
+
+  .bar-course, .bar-group, .bar-minigroup{
+    background-color:#F2F2F2;
+  }
+
+
+
+  
+  
