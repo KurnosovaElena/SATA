@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 
 namespace AssemblyService.Domain.Entities.Exceptions
 {
-    internal class ExceptionResponse
-    {
-    }
+    public record ExceptionResponse(HttpStatusCode StatusCode, string Message) { }
 }

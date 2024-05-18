@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AssemblyService.Domain.Entities.Constants
+﻿namespace AssemblyService.Domain.Entities.Constants
 {
-    internal class UserRoles
+    public static class UserRoles
     {
+        public const string User = "User";
+        public const string Student = "Student";
+        public const string Teacher = "Teacher";
+        public const string Admin = "Admin";
     }
 }

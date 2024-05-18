@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace AssemblyService.Domain.Interfaces.Repositories
 {
-    internal interface IRepositoryBase
+    public interface IRepositoryBase<TEntity> where TEntity : class
     {
+        Task<IEnumerable<TEntity>> GetAllAsync(CancellationToken cancellationToken);
+
+        Task<TEntity?> GetByConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+
+        Task Add(TEntity entity, CancellationToken cancellationToken);
+
+        void Delete(TEntity entity);
     }
 }

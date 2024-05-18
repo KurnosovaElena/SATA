@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace AssemblyService.Domain.Interfaces
 {
-    internal interface IItemLinks
+    public interface IItemLinks
     {
+        
     }
 }
