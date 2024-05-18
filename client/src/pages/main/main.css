@@ -139,3 +139,18 @@ font-weight: 500;
     padding: 2.5% 4% 2.5% 4%;
     width: 50%;
 }
+
+.menu-lines{
+  margin: 15px 0% 0% 15px !important;
+}
+
+.content{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-in{
+  margin: 0 15px 0 0;
+  font-weight: bold;
+}

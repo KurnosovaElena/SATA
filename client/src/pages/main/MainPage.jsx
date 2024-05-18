@@ -2,7 +2,6 @@ import React from 'react'
 import "./main.css"
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material";
-import Menu from "../components/Menu"
 
 function MainPage() {
   const theme = createTheme({
@@ -15,7 +14,26 @@ function MainPage() {
 
   return (
     <div className='main-page'>
-      <Menu></Menu>
+      <div className='content'>
+      <div className="menu-lines">
+        <svg width="41" height="27" viewBox="0 0 41 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 13.6567H38.3008H3ZM3 24.3134H38.3008H3ZM3 3H38.3008H3Z" fill="#ABABAB" />
+          <path d="M3 13.6567H38.3008M3 24.3134H38.3008M3 3H38.3008" stroke="#ABABAB" stroke-width="5" stroke-linecap="round" />
+        </svg>
+      </div>
+      <div className="button-in">
+      <ThemeProvider theme={theme}>
+      <Button
+              className="primary-button"
+              variant="contained"
+              sx={{ width: "100%" , background: "#83A36B", fontFamily: "Montserrat", fontWeight: "bold", color:"white", borderRadius: "10px", }}
+              type="submit"
+            >
+              Вход
+            </Button>
+      </ThemeProvider>
+      </div>
+    </div>
       <div className='main-page-content'>
         <div className="main-card">
           <div className="logo">
