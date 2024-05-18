@@ -4,16 +4,7 @@
     justify-content: space-between;
 }
 
-.student-schedule-days {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    background-color: #ffffff;
-    width: 85%;
-    margin-right: 15px;
-    border-radius: 10px;
-}
-
+/* time */
 .student-schedule-time {
     background-color: #ffffff;
     margin-left: 15px;
@@ -34,7 +25,6 @@
 
 .line-under{
     margin: -12px auto 5% auto;
-    color: #000000;
 }
 
 .time-up{
@@ -51,6 +41,8 @@
     flex-direction: row;
     align-items: flex-start; 
     justify-content: space-between;
+    /* изменить после добавления меню
+    margin-bottom: 8%; */
 }
 
 .time{
@@ -59,3 +51,78 @@
     flex-direction: column;
     align-items: flex-end;
 }
+
+/* days */
+.hat p{
+    margin: 11% auto 0px auto;
+    color: #32381C;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+.line-days-gor{
+    margin: -12px auto 5% auto;
+}
+
+.student-schedule-days {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ffffff;
+    width: 87%;
+    margin: 0 15px 0 0;
+    border-radius: 10px;
+}
+
+.hat{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.schedule-day-monday, .schedule-day-saturday, .schedule-day-friday, .schedule-day-thursday, .schedule-day-tuesday, .schedule-day-wednesday{
+    margin: 0 auto 0 auto;
+}
+
+.par-1, .par-2, .par-3, .par-4, .par-5, .par-6{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    /* justify-content: space-between; */
+}
+
+.par-1 .line, .par-2 .line, .par-3 .line, .par-4 .line, .par-5 .line, .par-6 .line{
+    margin-right: 3%;
+}
+
+.classname p{
+    margin: auto auto 0px auto;
+    color: #EEDC7C;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.name-and-professor{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.class-content{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-end;
+    gap: 3em;
+}
+
+.professor-name p{
+    margin: 3% 0 0px 0;
+    color: #000000;
+    font-weight: 500;
+    font-size: 10px;
+    white-space: nowrap;
+}
+
+
+

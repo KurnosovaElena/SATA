@@ -94,7 +94,438 @@ function StudentSchedulePage() {
                     </div>
                 </div>
                 <div className="student-schedule-days">
-                    <div className="schedule-day-monday">monday
+                    <div className="schedule-day-monday">
+                        <div className="hat">
+                            <p>Понедельник</p>
+                            <div className="line-days-gor">
+                                <svg width="180" height="2" viewBox="0 0 180 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="1" y1="1" x2="199" y2="1" stroke="#ABABAB" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="par-1">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-2">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-3">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-4">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-5">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-6">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="schedule-day-tuesday">
+                        <div className="hat">
+                            <p>Вторник</p>
+                            <div className="line-days-gor">
+                                <svg width="180" height="2" viewBox="0 0 180 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="1" y1="1" x2="199" y2="1" stroke="#ABABAB" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="par-1">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-2">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-3">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-4">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-5">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-6">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="schedule-day-wednesday">
+                        <div className="hat">
+                            <p>Среда</p>
+                            <div className="line-days-gor">
+                                <svg width="180" height="2" viewBox="0 0 180 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="1" y1="1" x2="199" y2="1" stroke="#ABABAB" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="par-1">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-2">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-3">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-4">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-5">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-6">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="schedule-day-thursday">
+                        <div className="hat">
+                            <p>Четверг</p>
+                            <div className="line-days-gor">
+                                <svg width="180" height="2" viewBox="0 0 180 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="1" y1="1" x2="199" y2="1" stroke="#ABABAB" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="par-1">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#EEDC7C" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                        <p>СТК</p>
+                                    </div>
+                                    <div className="professor-name">
+                                        <p>Скрылёв Н.П.</p>
+                                    </div>
+                                </div>
+                                <div className="classroom">
+                                    416/2
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-2">2</div>
+                        <div className="par-3">3</div>
+                        <div className="par-4">4</div>
+                        <div className="par-5">5</div>
+                        <div className="par-6">6</div>
+                    </div>
+                    <div className="schedule-day-friday">
+                        <div className="hat">
+                            <p>Пятница</p>
+                            <div className="line-days-gor">
+                                <svg width="180" height="2" viewBox="0 0 180 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="1" y1="1" x2="199" y2="1" stroke="#ABABAB" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
                         <div className="par-1">1</div>
                         <div className="par-2">2</div>
                         <div className="par-3">3</div>
@@ -102,45 +533,123 @@ function StudentSchedulePage() {
                         <div className="par-5">5</div>
                         <div className="par-6">6</div>
                     </div>
-                    <div className="schedule-day-tuesday">tuesday
-                        <div className="par-1">1</div>
-                        <div className="par-2">2</div>
-                        <div className="par-3">3</div>
-                        <div className="par-4">4</div>
-                        <div className="par-5">5</div>
-                        <div className="par-6">6</div>
-                    </div>
-                    <div className="schedule-day-wednesday">wednesday
-                        <div className="par-1">1</div>
-                        <div className="par-2">2</div>
-                        <div className="par-3">3</div>
-                        <div className="par-4">4</div>
-                        <div className="par-5">5</div>
-                        <div className="par-6">6</div>
-                    </div>
-                    <div className="schedule-day-thursday">thursday
-                        <div className="par-1">1</div>
-                        <div className="par-2">2</div>
-                        <div className="par-3">3</div>
-                        <div className="par-4">4</div>
-                        <div className="par-5">5</div>
-                        <div className="par-6">6</div>
-                    </div>
-                    <div className="schedule-day-friday">friday
-                        <div className="par-1">1</div>
-                        <div className="par-2">2</div>
-                        <div className="par-3">3</div>
-                        <div className="par-4">4</div>
-                        <div className="par-5">5</div>
-                        <div className="par-6">6</div>
-                    </div>
-                    <div className="schedule-day-saturday">saturday
-                        <div className="par-1">1</div>
-                        <div className="par-2">2</div>
-                        <div className="par-3">3</div>
-                        <div className="par-4">4</div>
-                        <div className="par-5">5</div>
-                        <div className="par-6">6</div>
+                    <div className="schedule-day-saturday">
+                        <div className="hat">
+                            <p>Суббота</p>
+                            <div className="line-days-gor">
+                                <svg width="180" height="2" viewBox="0 0 180 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <line x1="1" y1="1" x2="199" y2="1" stroke="#ABABAB" stroke-opacity="0.3" stroke-width="2" stroke-linecap="round" />
+                                </svg>
+                            </div>
+                        </div>
+                        <div className="par-1">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-2">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-3">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-4">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-5">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div className="par-6">
+                            <div className="line">
+                                <svg width="3" height="76" viewBox="0 0 3 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="3" height="76" rx="1.5" fill="#ABABAB" />
+                                </svg>
+                            </div>
+                            <div className="class-content">
+                                <div className="name-and-professor">
+                                    <div className="classname">
+                                    </div>
+                                    <div className="professor-name">
+                                    </div>
+                                </div>
+                                <div className="classroom">
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
