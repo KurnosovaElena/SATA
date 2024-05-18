@@ -1,11 +1,61 @@
-.students-content{
+.students-content {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.student-schedule-days{
+.student-schedule-days {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    background-color: #ffffff;
+    width: 85%;
+    margin-right: 15px;
+    border-radius: 10px;
+}
+
+.student-schedule-time {
+    background-color: #ffffff;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 8%;
+    border-radius: 10px;
+    padding: 1.5% 0.7% 0.7% 0.7%;
+}
+
+.student-schedule-time p{
+    margin: 0;
+    color: #32381C;
+    font-size: 24px;
+    font-weight: bold;
+    margin: auto auto 0px auto;
+}
+
+.line-under{
+    margin: -12px auto 5% auto;
+    color: #000000;
+}
+
+.time-up{
+    font-size: 24px;
+}
+
+.time-down{
+    font-size: 20px;
+    color: #ABABAB;
+}
+
+.par-1-time, .par-2-time, .par-3-time, .par-4-time, .par-5-time, .par-6-time {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start; 
+    justify-content: space-between;
+}
+
+.time{
+    /* margin-right: 5%; */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
