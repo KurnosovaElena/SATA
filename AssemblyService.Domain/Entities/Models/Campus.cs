@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class Campus
-    {   public int Id { get; set; }
-        public string[] Coordinates { get; set; }
+    public class Campus
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public string? Coordinates { get; set; }
     }
 }

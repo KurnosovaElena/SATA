@@ -1,22 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AssemblyService.Domain.Entities.Enums;
+using NodaTime;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class CompletedSlot
+    public class CompletedSlot
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public int SubjectId { get; set; }
-        public int ClassroomId { get; set; }
-        public string DayName { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
-        public byte[] WeekType { get; set; }
 
-        public Subject Subject { get; set; } // Navigation property
-        public Classroom Classroom { get; set; } 
+        public DayOfWeek DayName { get; set; }
+        public LocalDateTime Start { get; set; }
+        public LocalDateTime End { get; set; }
+
+        public WeekType WeekType { get; set; }
+
+        public int SubjectId { get; set; }
+        public Subject Subject { get; set; } = null!;
+
+        public int ClassroomId { get; set; }
+        public Classroom Classroom { get; set; } = null!;
+
+        public ICollection<Subgroup> Subgroups { get; set; } = [];
     }
 }

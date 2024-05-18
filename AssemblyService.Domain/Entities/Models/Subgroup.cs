@@ -1,25 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class Subgroup
+    public class Subgroup
     {
-
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        [ForeignKey("Group")]
-        public int GroupId { get; set; }
-
-        [Required]
-        [Range(1, 999)]
-        [Index(IsUnique = true)]
         public int SubgroupNumber { get; set; }
 
-        public Group Group { get; set; }
+        public int GroupId { get; set; }
+        public Group Group { get; set; } = null!;
+
+        public ICollection<CompletedSlot>? CompletedSlots { get; set; }
     }
 }

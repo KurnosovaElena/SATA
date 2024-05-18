@@ -1,24 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using NodaTime;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class Group
+    public class Group
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        
-        [ForeignKey("Department")]
-        public int DepartmentId { get; set; }
-        public Department Department { get; set; }
-        
-        public string Name { get; set; }
-        public DateTime StartYear { get; set; }
-        public DateTime EndYear { get; set; }
+
+        public string Name { get; set; } = null!;
+        public LocalDate StartYear { get; set; }
+        public LocalDate EndYear { get; set; }
         public int Course { get; set; }
         public int IdentityNumber { get; set; }
+
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; } = null!;
+
+        public ICollection<Subgroup> Subgroups { get; set; } = [];
     }
 }

@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class Subject
+    public class Subject
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+
+
         public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; } = null!;
+
         public int DisciplineId { get; set; }
+        public Discipline Discipline { get; set; } = null!;
+
         public int SubjectTypeId { get; set; }
-        public int DetailSubjectId { get; set; }
+        public SubjectType SubjectType { get; set; } = null!;
+
+        public ICollection<Detail>? Details { get; set; }
     }
 }

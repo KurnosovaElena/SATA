@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class Detail
+    public class Detail
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public string Name { get; set; } = null!;
+
+        public ICollection<Subject>? Subjects { get; set; }
+
+        public ICollection<Classroom>? Classrooms { get; set; }
     }
 }

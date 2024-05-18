@@ -1,18 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AssemblyService.Domain.Entities.Models
 {
-    internal class Discipline
+    public class Discipline
     {
-        public int id { get; set; }
-        public int teacher_id { get; set; }
-        public string name { get; set; }
-        public string short_name { get; set; }
-        public int department_id { get; set; }
-        public int specific_id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+
+        public string Name { get; set; } = null!;
+        public string? ShortName { get; set; }
+
+        public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; } = null!;
+
+        public int DepartmentId { get; set; }
+        public Department Department { get; set; } = null!;
     }
 }
