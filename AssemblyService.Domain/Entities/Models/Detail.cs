@@ -8,5 +8,7 @@ namespace AssemblyService.Domain.Entities.Models
 {
     internal class Detail
     {
+        public int id { get; set; }
+        public string name { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 namespace AssemblyService.Domain.Entities.Models
 {
     internal class Campus
-    {
+    {   public int Id { get; set; }
+        public string[] Coordinates { get; set; }
     }
 }
