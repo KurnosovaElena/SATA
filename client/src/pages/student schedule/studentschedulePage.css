@@ -1,0 +1,11 @@
+.students-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.student-schedule-days{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
