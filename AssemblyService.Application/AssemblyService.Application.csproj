@@ -10,4 +10,12 @@
     <ProjectReference Include="..\AssemblyService.Domain\AssemblyService.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="CQRS\Commands\" />
+    <Folder Include="CQRS\Queries\" />
+    <Folder Include="MappingProfiles\" />
+    <Folder Include="DataTransferObjects\" />
+    <Folder Include="Validators\" />
+  </ItemGroup>
+
 </Project>

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\AssemblyService.Application\AssemblyService.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Configurations\" />
+  </ItemGroup>
+
 </Project>

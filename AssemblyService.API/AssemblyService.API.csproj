@@ -17,4 +17,8 @@
     <ProjectReference Include="..\AssemblyService.Infrastructure\AssemblyService.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
 </Project>
