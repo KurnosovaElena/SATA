@@ -15,7 +15,7 @@
     padding: 1.5% 0.7% 0.7% 0.7%;
 }
 
-.student-schedule-time p{
+.student-schedule-time p {
     margin: 0;
     color: #32381C;
     font-size: 24px;
@@ -23,29 +23,34 @@
     margin: auto auto 0px auto;
 }
 
-.line-under{
+.line-under {
     margin: -12px auto 5% auto;
 }
 
-.time-up{
+.time-up {
     font-size: 24px;
 }
 
-.time-down{
+.time-down {
     font-size: 20px;
     color: #ABABAB;
 }
 
-.par-1-time, .par-2-time, .par-3-time, .par-4-time, .par-5-time, .par-6-time {
+.par-1-time,
+.par-2-time,
+.par-3-time,
+.par-4-time,
+.par-5-time,
+.par-6-time {
     display: flex;
     flex-direction: row;
-    align-items: flex-start; 
+    align-items: flex-start;
     justify-content: space-between;
     /* изменить после добавления меню
     margin-bottom: 8%; */
 }
 
-.time{
+.time {
     /* margin-right: 5%; */
     display: flex;
     flex-direction: column;
@@ -53,14 +58,14 @@
 }
 
 /* days */
-.hat p{
+.hat p {
     margin: 11% auto 0px auto;
     color: #32381C;
     font-weight: bold;
     font-size: 24px;
 }
 
-.line-days-gor{
+.line-days-gor {
     margin: -12px auto 5% auto;
 }
 
@@ -74,41 +79,56 @@
     border-radius: 10px;
 }
 
-.hat{
+.hat {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.schedule-day-monday, .schedule-day-saturday, .schedule-day-friday, .schedule-day-thursday, .schedule-day-tuesday, .schedule-day-wednesday{
+.schedule-day-monday,
+.schedule-day-saturday,
+.schedule-day-friday,
+.schedule-day-thursday,
+.schedule-day-tuesday,
+.schedule-day-wednesday {
     margin: 0 auto 0 auto;
 }
 
-.par-1, .par-2, .par-3, .par-4, .par-5, .par-6{
+.par-1,
+.par-2,
+.par-3,
+.par-4,
+.par-5,
+.par-6 {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     /* justify-content: space-between; */
 }
 
-.par-1 .line, .par-2 .line, .par-3 .line, .par-4 .line, .par-5 .line, .par-6 .line{
+.par-1 .line,
+.par-2 .line,
+.par-3 .line,
+.par-4 .line,
+.par-5 .line,
+.par-6 .line {
     margin-right: 3%;
 }
 
-.classname p{
+.classname p {
     margin: auto auto 0px auto;
     color: #EEDC7C;
     font-weight: 500;
     font-size: 16px;
 }
 
-.name-and-professor{
+.name-and-professor {
     display: flex;
     flex-direction: column;
 }
 
 
-.class-content{
+.class-content {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -116,13 +136,10 @@
     gap: 3em;
 }
 
-.professor-name p{
+.professor-name p {
     margin: 3% 0 0px 0;
     color: #000000;
     font-weight: 500;
     font-size: 10px;
     white-space: nowrap;
 }
-
-
-

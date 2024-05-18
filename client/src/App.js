@@ -7,15 +7,17 @@ import {
 import LoginPage from './pages/LoginPage';
 import MainPage from './pages/main/MainPage';
 import StudentSchedulePage from './pages/student schedule/StudentSchedulePage';
+import StudentProfilePage from './pages/student profile/StudentProfilePage';
 
 function App() {
   return (
     <div className="App">
       <Router>
         <Routes>
-        <Route path="/stschedule" element={<StudentSchedulePage/>} />
-          <Route path="/login" element={<LoginPage/>} />
-          <Route path="/" element={<MainPage/>} />
+          <Route path="/stprofile" element={<StudentProfilePage />} />
+          <Route path="/stschedule" element={<StudentSchedulePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/" element={<MainPage />} />
         </Routes>
       </Router>
     </div>
