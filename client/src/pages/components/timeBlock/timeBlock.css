@@ -1,0 +1,28 @@
+/* client\src\components\TimeBlock.css */
+
+.time-up {
+    font-size: 24px;
+}
+
+.time-down {
+    font-size: 20px;
+    color: #ABABAB;
+}
+
+.par-time {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom:5px;
+}
+
+.time {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.line {
+    margin-right: 3%;
+}

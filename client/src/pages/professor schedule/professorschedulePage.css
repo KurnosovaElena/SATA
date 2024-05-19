@@ -1,13 +1,4 @@
-/* client\src\pages\student schedule\studentschedulePage.css */
-
-.students-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-/* time */
-.student-schedule-time {
+.professor-schedule-time {
     background-color: #ffffff;
     margin-left: 15px;
     display: flex;
@@ -17,7 +8,7 @@
     padding: 1.5% 0.7% 0.7% 0.7%;
 }
 
-.student-schedule-time p {
+.professor-schedule-time p {
     margin: 0;
     color: #32381C;
     font-size: 24px;
@@ -25,12 +16,17 @@
     margin: auto auto 0px auto;
 }
 
+.professors-content{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .line-under {
     margin: -12px auto 5% auto;
 }
 
-/* days */
-.student-schedule-days {
+.professor-schedule-days {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -39,5 +35,4 @@
     padding: 0 20px;
     margin: 0 15px 0 0;
     border-radius: 10px;
-    
 }
