@@ -1,12 +1,7 @@
 ﻿using AssemblyService.Domain.Interfaces.Repositories;
 using AssemblyService.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AssemblyService.Infrastructure.Repositories
 {
@@ -18,9 +13,15 @@ namespace AssemblyService.Infrastructure.Repositories
         public async Task<TEntity?> GetByConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) =>
             await context.Set<TEntity>().FirstOrDefaultAsync(predicate, cancellationToken);
 
+        public async Task<IEnumerable<TEntity>> GetListByConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) =>
+            await context.Set<TEntity>().ToListAsync(cancellationToken);
+
+        public async Task<bool> IsAnyAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) =>
+            await context.Set<TEntity>().AnyAsync(predicate, cancellationToken);
+
         public async Task Add(TEntity entity, CancellationToken cancellationToken)
         {
-            await context.Set<TEntity>().AddAsync(entity);
+            await context.Set<TEntity>().AddAsync(entity, cancellationToken);
         }
 
         public void Delete(TEntity entity)

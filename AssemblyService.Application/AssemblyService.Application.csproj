@@ -11,11 +11,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="CQRS\Commands\" />
     <Folder Include="CQRS\Queries\" />
     <Folder Include="MappingProfiles\" />
-    <Folder Include="DataTransferObjects\" />
     <Folder Include="Validators\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="11.9.1" />
+    <PackageReference Include="FluentValidationExtensions.AutoMapper" Version="11.0.0" />
+    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
 </Project>

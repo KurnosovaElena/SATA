@@ -9,5 +9,9 @@ namespace AssemblyService.Domain.Entities.Models
         public string Name { get; set; } = null!;
 
         public ICollection<Teacher>? Teachers { get; set; }
+
+        public ICollection<Discipline>? Disciplines { get; set; }
+
+        public ICollection<Group>? Groups { get; set; }
     }
 }

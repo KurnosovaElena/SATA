@@ -27,6 +27,8 @@ namespace AssemblyService.Infrastructure.Context
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(UnitOfWork).Assembly);
+
+            new Seed(modelBuilder).SeedTestData();
         }
     }
 }

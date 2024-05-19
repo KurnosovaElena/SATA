@@ -10,8 +10,8 @@ namespace AssemblyService.Domain.Entities.Models
         public int Id { get; set; }
 
         public DayOfWeek DayName { get; set; }
-        public LocalDateTime Start { get; set; }
-        public LocalDateTime End { get; set; }
+        public Period Start { get; set; }
+        public Period End { get; set; }
 
         public WeekType WeekType { get; set; }
 
