@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState }  from 'react';
 import "./main.css"
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 function MainPage() {
+  const [searchInputValue, setSearchInputValue] = useState('');
+
   const theme = createTheme({
     palette: {
       primary: {
@@ -52,10 +54,22 @@ function MainPage() {
                 </div>
                 <div className="bm bn ab">
                   <svg width="24" height="24" viewBox="0 0 24 24" border="1px solid">
-                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.1 11.06a6.95 6.95 0 1 1 13.9 0 6.95 6.95 0 0 1-13.9 0zm6.94-8.05a8.05 8.05 0 1 0 5.13 14.26l3.75 3.75a.56.56 0 1 0.8-.79l-3.74-3.73A8.05 8.05 0 0 0 11.04 3v.01z" fill="#ABABAB"></path>
+                    <path fill-rule="evenodd" clip-rule="evenodd" d="M4.1 11.06a6.95 6.95 0 1 1 13.9 0 6.95 6.95 0 0 1-13.9 0zm6.94-8.05a8.05 8.05 0 1 0 5.13 14.26l3.75 3.75a.56.56 0 1 0 .8-.79l-3.74-3.73A8.05 8.05 0 0 0 11.04 3v.01z" fill="#ABABAB"></path>
                   </svg>
                 </div>
-                <input role="combobox" aria-controls="searchResults" aria-expanded="false" aria-label="search" data-testid="headerSearchInput" tabindex="0" className="ax bd be bf z bg bh bi bj bk" placeholder="Введите преподавателя" value="" />
+                <input
+                  role="combobox"
+                  aria-controls="searchResults"
+                  aria-expanded="false"
+                  aria-label="search"
+                  data-testid="headerSearchInput"
+                  tabindex="0"
+                  className="ax bd be bf z bg bh bi bj bk"
+                  style={{ paddingLeft: "1px" }}
+                  placeholder="Введите преподавателя"
+                  value={searchInputValue}
+                  onChange={(e) => setSearchInputValue(e.target.value)}
+                />
               </div>
             </div>
           </div>

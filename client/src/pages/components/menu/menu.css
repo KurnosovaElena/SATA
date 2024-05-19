@@ -1,10 +1,75 @@
-body{
+body {
     background-color: #F2F2F2;
 }
 
-.menu-component, .left-combo, .right-combo, .middle-combo{
+.menu-component,
+.left-combo,
+.right-combo,
+.middle-combo {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
+.menu-component{
+    margin: 15px;
+}
+
+
+.switch-weeks {
+    background-color: #ffffff;
+    border-radius: 10px;
+    color: #83A36B;
+    font-weight: bold;
+    font-family: "Montserrat";
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 2% 0 5.8%;
+}
+
+.switch-right svg {
+    transform: scaleX(-1);
+}
+
+.switch-weeks p {
+    white-space: nowrap;
+    margin: 0;
+}
+
+.middle-combo {
+    display: flex;
+    flex-direction: row;
+    /* width: 60%; */
+}
+
+.up-week:focus-visible,
+.down-week:focus-visible {
+    outline: none;
+}
+
+.up-week button,
+.down-week button,
+.switch-right,
+.switch-left,
+.menu-vector,
+.notification-icon,
+.search-button,
+.profile-icon{
+    cursor: pointer;
+}
+
+.menu-vector, .search-button{
+    margin-right: 20px;
+}
+
+/* middle */
+.switch-weeks {
+    display: flex; /* Используется для горизонтальной раскладки элементов внутри */
+    align-items: center; /* Выравнивание дочерних элементов по центру по вертикали */
+    justify-content: center; /* Выравнивание содержимого по центру */
+    gap: 25px; /* Расстояние между элементами */
+    padding: 0 1% 0 1%;
+  }
+  

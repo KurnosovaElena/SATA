@@ -2,6 +2,7 @@ import React from 'react'
 import Menu from '../components/menu/Menu'
 import "./studentschedulePage.css"
 
+
 function StudentSchedulePage() {
     return (
         <div className="studentschedulepage">
