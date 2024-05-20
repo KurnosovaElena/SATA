@@ -1,12 +1,12 @@
 import React from 'react';
-import "./up_down.css"
+import "./up_down.css";
 
-const ButtinUpDown = ({ label }) => {
+const ButtonUpDown = ({ label, isActive, onClick }) => {
   return (
-    <button className="custom-button">
+    <button className={`custom-button ${isActive ? 'active' : ''}`} onClick={onClick}>
       {label}
     </button>
   );
 };
 
-export default ButtinUpDown; 
+export default ButtonUpDown;

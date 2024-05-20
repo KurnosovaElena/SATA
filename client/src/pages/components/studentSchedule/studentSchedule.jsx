@@ -3,7 +3,7 @@ import TimeBlock from '../timeBlock/timeBlock'
 import DaySchedule from '../daySchedule/dayScheduleW'
 import "./studentSchedule.css"
 
-function StudentSchedule() {
+const StudentSchedule = ({ activeWeek }) => {
     const currentDay = new Date().getDay();
 
     const timeBlocks = [
@@ -14,9 +14,10 @@ function StudentSchedule() {
         { timeUp: '16:05', timeDown: '17:40' },
         { timeUp: '17:50', timeDown: '19:25' }
     ];
+
     const dayNames = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
-    const schedules = {
+    const schedulesUpper = {
         Понедельник: [
             { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
             { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "practice" },
@@ -67,6 +68,57 @@ function StudentSchedule() {
         ],
     };
 
+    const schedulesLower = {
+        Понедельник: [
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "", professorName: "", classroom: "", type: "" },
+        ],
+        Вторник: [
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "", professorName: "", classroom: "", type: "" },
+        ],
+        Среда: [
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "", professorName: "", classroom: "", type: "" },
+        ],
+        Четверг: [
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "", professorName: "", classroom: "", type: "" },
+        ],
+        Пятница: [
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
+            { className: "", professorName: "", classroom: "", type: "" },
+        ],
+        Суббота: [
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            { className: "", professorName: "", classroom: "", type: "" },
+            ]
+    };
+
+    const schedules = activeWeek === 'upper' ? schedulesUpper : schedulesLower;
+
     return (
         <div className="students-content">
             <div className="student-schedule-time">
@@ -96,6 +148,6 @@ function StudentSchedule() {
             </div>
         </div>
     );
-}
+};
 
 export default StudentSchedule;
