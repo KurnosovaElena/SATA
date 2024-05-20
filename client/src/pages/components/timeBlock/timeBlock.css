@@ -27,6 +27,11 @@
     margin-right: 3%;
 }
 
-.current-time {
-    color: green;
+.current-time .time-up,
+.current-time .time-down {
+    color: #83A36B;
+}
+
+.current-time .line svg rect {
+    fill: #83A36B;
 }

@@ -15,6 +15,14 @@
     font-size: 24px;
 }
 
+.current-day .hat p {
+    color: #83A36B;
+}
+
+.current-day .line-days-gor svg line {
+    stroke: #83A36B;
+}
+
 .line-days-gor {
     margin: -12px auto 5% auto;
     width: 100%; /* Ensure the line spans the full width */

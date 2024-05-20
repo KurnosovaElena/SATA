@@ -1,7 +1,7 @@
 import React from 'react';
 import './daySchedule.css'; 
 
-const DaySchedule = ({ dayName, schedule }) => {
+const DaySchedule = ({ dayName, schedule, isCurrentDay }) => {
     const getLineColor = (type) => {
         switch (type) {
             case 'lecture':
@@ -27,7 +27,7 @@ const DaySchedule = ({ dayName, schedule }) => {
     };
 
     return (
-        <div className={`schedule-day-${dayName.toLowerCase()}`}>
+        <div className={`schedule-day ${isCurrentDay ? 'current-day' : ''}`}>
             <div className="hat">
                 <p>{dayName}</p>
                 <div className="line-days-gor">

@@ -5,8 +5,8 @@ import DaySchedule from '../components/daySchedule/dayScheduleW'
 import "./studentschedulePage.css"
 
 function StudentSchedulePage() {
-
     const [currentTimeBlock, setCurrentTimeBlock] = useState(null);
+    const [currentDay, setCurrentDay] = useState(new Date().getDay());
 
     const timeBlocks = [
         { timeUp: '08:30', timeDown: '10:05' },
@@ -16,27 +16,24 @@ function StudentSchedulePage() {
         { timeUp: '16:05', timeDown: '17:40' },
         { timeUp: '17:50', timeDown: '19:25' }
     ];
+    const dayNames = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
 
     useEffect(() => {
         const checkCurrentTimeBlock = () => {
             const currentTime = new Date();
-            const currentHours = currentTime.getUTCHours() + 3; // Adjust to GMT+3
-            const currentMinutes = currentTime.getUTCMinutes();
+            const currentHours = currentTime.getHours();
+            const currentMinutes = currentTime.getMinutes();
+
+            const currentMinutesTotal = currentHours * 60 + currentMinutes;
 
             timeBlocks.forEach((block, index) => {
                 const [startHours, startMinutes] = block.timeUp.split(':').map(Number);
                 const [endHours, endMinutes] = block.timeDown.split(':').map(Number);
 
-                const startTime = new Date();
-                startTime.setHours(startHours, startMinutes, 0, 0);
+                const startMinutesTotal = startHours * 60 + startMinutes;
+                const endMinutesTotal = endHours * 60 + endMinutes;
 
-                const endTime = new Date();
-                endTime.setHours(endHours, endMinutes, 0, 0);
-
-                const adjustedStartTime = new Date(startTime.setUTCHours(startTime.getUTCHours() - 3)); // Adjust start time to UTC
-                const adjustedEndTime = new Date(endTime.setUTCHours(endTime.getUTCHours() - 3)); // Adjust end time to UTC
-
-                if (currentTime >= adjustedStartTime && currentTime <= adjustedEndTime) {
+                if (currentMinutesTotal >= startMinutesTotal && currentMinutesTotal <= endMinutesTotal) {
                     setCurrentTimeBlock(index);
                 }
             });
@@ -47,8 +44,9 @@ function StudentSchedulePage() {
 
         return () => clearInterval(intervalId);
     }, [timeBlocks]);
+    const schedules = {
 
-    const mondaySchedule = [
+    Понедельник: [
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "practice" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
@@ -56,16 +54,16 @@ function StudentSchedulePage() {
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "", professorName: "", classroom: "", type: "" },
        
-    ];
-    const tuesdaySchedule = [
+    ],
+    Вторник: [
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "practice" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "", professorName: "", classroom: "", type: "" },
-    ];
-    const wednesdaySchedule = [
+    ], 
+    Среда: [
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
@@ -73,8 +71,8 @@ function StudentSchedulePage() {
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "", professorName: "", classroom: "", type: "" },
        
-    ];
-    const thursdaySchedule = [
+    ],
+    Четверг: [
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
@@ -82,8 +80,8 @@ function StudentSchedulePage() {
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "", professorName: "", classroom: "", type: "" },
        
-    ];
-    const fridaySchedule = [
+    ],
+    Пятница: [
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "СТК", professorName: "Скрылёв Н.П.", classroom: "416/2", type: "lecture" },
         { className: "", professorName: "", classroom: "", type: "" },
@@ -91,8 +89,8 @@ function StudentSchedulePage() {
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "", professorName: "", classroom: "", type: "" },
        
-    ];
-    const saturdaySchedule = [
+    ],
+    Суббота: [
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "", professorName: "", classroom: "", type: "" },
@@ -100,7 +98,8 @@ function StudentSchedulePage() {
         { className: "", professorName: "", classroom: "", type: "" },
         { className: "", professorName: "", classroom: "", type: "" },
        
-    ];
+    ],
+};
     return (
         <div className="studentschedulepage">
             <Menu></Menu>
@@ -122,12 +121,14 @@ function StudentSchedulePage() {
                 ))}
                 </div>
                 <div className="student-schedule-days">
-                    <DaySchedule dayName="Понедельник" schedule={mondaySchedule} />
-                    <DaySchedule dayName="Вторник" schedule={tuesdaySchedule} />
-                    <DaySchedule dayName="Среда" schedule={wednesdaySchedule} />
-                    <DaySchedule dayName="Четверг" schedule={thursdaySchedule} />
-                    <DaySchedule dayName="Пятница" schedule={fridaySchedule} />
-                    <DaySchedule dayName="Суббота" schedule={saturdaySchedule} />
+                {dayNames.map((dayName, index) => (
+                    <DaySchedule
+                        key={dayName}
+                        dayName={dayName}
+                        schedule={schedules[dayName] || []}
+                        isCurrentDay={index === currentDay-1}/* текущий день -1 (нумерация с 0) */
+                    />
+                ))}
                 </div>
             </div>
         </div>
