@@ -12,6 +12,7 @@ namespace AssemblyService.Domain.Entities.Models
         public LocalDate StartYear { get; set; }
         public LocalDate EndYear { get; set; }
         public int Course { get; set; }
+        public int StudentCount { get; set; }
         public int IdentityNumber { get; set; }
 
         public int DepartmentId { get; set; }

@@ -17,12 +17,16 @@ namespace AssemblyService.Infrastructure.Configurations
                 .HasKey(x => x.Id);
 
             builder
+                .HasIndex(x => new { x.DayOfWeek, x.TimeSlot, x.WeekType })
+                .IsUnique();
+
+            builder
                 .HasOne(cs => cs.Classroom)
                 .WithMany(c => c.CompletedSlots);
 
             builder
-                .HasMany(cs => cs.Subgroups)
-                .WithMany(sg => sg.CompletedSlots);
+                .HasOne(cs => cs.Subject)
+                .WithMany(s => s.CompletedSlots);
 
             builder
                 .Property(cs => cs.WeekType)

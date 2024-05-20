@@ -8,6 +8,9 @@ namespace AssemblyService.Domain.Entities.Models
         public int Id { get; set; }
         public string Name { get; set; } = null!;
 
+        public int CampusId { get; set; }
+        public Campus Campus { get; set; } = null!;
+
         public ICollection<Teacher>? Teachers { get; set; }
 
         public ICollection<Discipline>? Disciplines { get; set; }

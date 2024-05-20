@@ -21,10 +21,6 @@ namespace AssemblyService.Infrastructure.Configurations
                 .WithMany(g => g.Subgroups);
 
             builder
-                .HasMany(sg => sg.CompletedSlots)
-                .WithMany(cs => cs.Subgroups);
-
-            builder
                 .ToTable("subgroup");
         }
     }

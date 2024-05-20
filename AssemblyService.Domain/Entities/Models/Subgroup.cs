@@ -7,6 +7,6 @@
         public int GroupId { get; set; }
         public Group Group { get; set; } = null!;
 
-        public ICollection<CompletedSlot>? CompletedSlots { get; set; }
+        public ICollection<Subject>? Subjects { get; set; }
     }
 }

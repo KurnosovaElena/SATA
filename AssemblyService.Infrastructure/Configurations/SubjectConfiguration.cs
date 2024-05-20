@@ -20,6 +20,14 @@ namespace AssemblyService.Infrastructure.Configurations
                 .WithMany(d => d.Subjects);
 
             builder
+                .HasMany(s => s.Subgroups)
+                .WithMany(d => d.Subjects);
+
+            builder
+                .HasMany(s => s.CompletedSlots)
+                .WithOne(cs => cs.Subject);
+
+            builder
                 .ToTable("subject");
         }
     }

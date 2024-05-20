@@ -16,6 +16,10 @@ namespace AssemblyService.Infrastructure.Configurations
                 .WithMany(t => t.Departments);
 
             builder
+                .HasOne(d => d.Campus)
+                .WithMany(c => c.Departments);
+
+            builder
                 .ToTable("department");
         }
     }

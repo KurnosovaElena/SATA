@@ -9,10 +9,9 @@ namespace AssemblyService.Domain.Entities.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public DayOfWeek DayName { get; set; }
-        public Period Start { get; set; }
-        public Period End { get; set; }
-
+        //Params to arrange subject by slots
+        public DayOfWeek DayOfWeek { get; set; }
+        public TimeSlot TimeSlot { get; set; }
         public WeekType WeekType { get; set; }
 
         public int SubjectId { get; set; }
@@ -20,7 +19,5 @@ namespace AssemblyService.Domain.Entities.Models
 
         public int ClassroomId { get; set; }
         public Classroom Classroom { get; set; } = null!;
-
-        public ICollection<Subgroup> Subgroups { get; set; } = [];
     }
 }

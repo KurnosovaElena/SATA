@@ -12,5 +12,6 @@ namespace AssemblyService.Domain.Entities.Models
         public string? Coordinates { get; set; }
 
         public ICollection<Classroom> Classrooms { get; set; } = null!;
+        public ICollection<Department>? Departments { get; set; }
     }
 }
