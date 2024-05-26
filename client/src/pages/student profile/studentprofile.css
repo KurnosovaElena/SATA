@@ -1,3 +1,108 @@
-.re{
-    font-size: 56px;
-}
+body {
+    background-color: #F2F2F2;
+    font-family: 'Montserrat', sans-serif;
+    margin: 0; /* Add this line to remove default margin from the body */
+  }
+  
+  .profile-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0; /* Ensure there is no margin on the profile page */
+  }
+  
+  .profile-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #F2F2F2;
+    margin: 0; /* Add this line to remove any margin from the header */
+    box-sizing: border-box; /* Ensure padding does not add to the total width */
+  }
+  
+  .header-left, .header-right {
+    display: flex;
+    align-items: center;
+  }
+  
+  .menu-icon, .notification-icon, .search-icon, .profile-icon {
+    margin-right: 20px;
+  }
+  
+  .profile-content {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 5rem;
+  }
+  
+  .profile-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px; /* Add space between profile info and actions */
+  }
+  
+  .profile-image {
+    margin-bottom: 20px;
+  }
+  
+  .profile-info {
+    text-align: center;
+  }
+  
+  .profile-name {
+    color: #676B57;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .profile-group {
+    color: #83A36B;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .profile-faculty {
+    color: #676B57;
+    font-size: 1rem;
+  }
+  
+  .profile-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+  }
+  
+  .profile-action-button {
+    background-color: #83A36B;
+    color: white;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .profile-action-button:hover {
+    background-color: #6f9058;
+  }
+  
