@@ -19,16 +19,21 @@ body {
     align-items: center;
     padding: 10px 20px;
     background-color: #F2F2F2;
-    margin: 0; /* Add this line to remove any margin from the header */
+    margin: 5px; /* Add this line to remove any margin from the header */
     box-sizing: border-box; /* Ensure padding does not add to the total width */
   }
   
-  .header-left, .header-right {
+  .header-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-right {
     display: flex;
     align-items: center;
   }
   
-  .menu-icon, .notification-icon, .search-icon, .profile-icon {
+  .menu-icon, .notification-icon{
     margin-right: 20px;
   }
   
@@ -59,7 +64,7 @@ body {
   }
   
   .profile-image {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
   }
   
   .profile-info {
