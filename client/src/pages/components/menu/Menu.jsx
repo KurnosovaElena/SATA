@@ -1,6 +1,7 @@
 import React from 'react';
 import './menu.css';
 import ButtonUpDown from '../button_up_down/ButtonUpDown';
+
 const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
   return (
     <div className='menu-component'>
@@ -31,7 +32,7 @@ const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
               <path d="M8.74042 1L1.17042 7.624C1.11688 7.67093 1.07398 7.72875 1.04459 7.79359C1.0152 7.85844 1 7.92881 1 8C1 8.07119 1.0152 8.14156 1.04459 8.20641C1.07398 8.27125 1.11688 8.32907 1.17042 8.376L8.74042 15" stroke="#83A36B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
           </div>
-          <p>{weekRange}</p>
+          <p className="week-range">{weekRange}</p>
           <div className="switch-right" onClick={() => switchWeek('next')}>
             <svg width="10" height="16" viewBox="0 0 10 16" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M8.74042 1L1.17042 7.624C1.11688 7.67093 1.07398 7.72875 1.04459 7.79359C1.0152 7.85844 1 7.92881 1 8C1 8.07119 1.0152 8.14156 1.04459 8.20641C1.07398 8.27125 1.11688 8.32907 1.17042 8.376L8.74042 15" stroke="#83A36B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />

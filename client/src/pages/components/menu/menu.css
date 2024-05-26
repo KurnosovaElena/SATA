@@ -2,6 +2,9 @@ body {
     background-color: #F2F2F2;
 }
 
+.week-range {
+    user-select: none; /* Prevent text selection */
+  }
 .menu-component,
 .left-combo,
 .right-combo,
@@ -27,6 +30,7 @@ body {
     align-items: center;
     justify-content: center;
     margin: 0 2% 0 5.8%;
+    height: 39px;
 }
 
 .switch-right svg {
