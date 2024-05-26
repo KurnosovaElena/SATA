@@ -208,6 +208,7 @@ body {
 
 .menu-lines {
   margin: 15px 0% 0% 15px !important;
+  cursor: pointer;
 }
 
 .content {

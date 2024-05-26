@@ -10,10 +10,10 @@ const Sidebar = ({ isOpen, onClose }) => {
             <path d="M6 18L18 6M6 6L18 18" stroke="#ABABAB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </div>
-        <ul>
-          <li className="active">Расписание / неделя</li>
-          <li className="active">Расписание</li>
-          <li className="active">Личный кабинет</li>
+        <ul className="sidebar-menu">
+            <li><a className='active' href="/week-schedule">Расписание преп (тест)</a></li>
+            <li><a className='active' href="/stschedule">Расписание (тест)</a></li>
+            <li><a className='active' href="/stprofile">Личный кабинет (тест)</a></li>
         </ul>
       </div>
       <div className={`overlay ${isOpen ? 'open' : ''}`} onClick={onClose}></div>

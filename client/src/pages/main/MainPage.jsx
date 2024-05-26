@@ -3,6 +3,7 @@ import "./main.css"
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
+import { Link } from 'react-router-dom';
 
 function MainPage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -43,6 +44,7 @@ function MainPage() {
               variant="contained"
               sx={{ width: "100%", background: "#83A36B", fontFamily: "Montserrat", fontWeight: "bold", color: "white", borderRadius: "10px", }}
               type="submit"
+              component={Link} to="/login"
             >
               Вход
             </Button>

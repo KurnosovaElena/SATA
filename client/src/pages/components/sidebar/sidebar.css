@@ -34,33 +34,33 @@
   }
   
   .sidebar ul {
-    list-style: none;
     padding: 0;
     margin: 0;
+    list-style: none;
   }
   
   .sidebar ul li {
-    padding: 0.8rem 1rem;
+    padding: 0.6rem;
+  }
+  
+  .sidebar ul li a {
+    color: #ABABAB;
+    text-decoration: none;
     font-size: 16px;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
   }
   
-  .sidebar ul li.active {
+  .sidebar ul li a:hover {
     color: #83A36B;
-  }
-  
+    text-decoration: none;
+}
+   
   .sidebar ul li::before {
     content: '•';
     color: #ABABAB;
-    font-size: 20px;
+    font-size: 16px;
     display: inline-block;
     width: 1rem;
-  }
-  
-  .sidebar ul li.active::before {
-    color: #83A36B;
+    margin-right: 0.5rem;
   }
   
   .overlay {
@@ -79,3 +79,4 @@
     opacity: 1;
   }
   
+
