@@ -1,113 +1,256 @@
 body {
-    background-color: #F2F2F2;
-    font-family: 'Montserrat', sans-serif;
-    margin: 0; /* Add this line to remove default margin from the body */
-  }
-  
-  .profile-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0; /* Ensure there is no margin on the profile page */
-  }
-  
-  .profile-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #F2F2F2;
-    margin: 5px; /* Add this line to remove any margin from the header */
-    box-sizing: border-box; /* Ensure padding does not add to the total width */
-  }
-  
-  .header-left {
-    display: flex;
-    align-items: center;
-  }
+  background-color: #F2F2F2;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
 
-  .header-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .menu-icon, .notification-icon{
-    margin-right: 20px;
-  }
-  
-  .profile-content {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 5rem;
-  }
-  
-  .profile-card {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .profile-left {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-right: 50px; /* Add space between profile info and actions */
-  }
-  
-  .profile-image {
-    margin-bottom: 0px;
-  }
-  
-  .profile-info {
-    text-align: center;
-  }
-  
-  .profile-name {
-    color: #676B57;
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .profile-group {
-    color: #83A36B;
-    font-size: 1.25rem;
-    margin-bottom: 0.5rem;
-  }
-  
-  .profile-faculty {
-    color: #676B57;
-    font-size: 1rem;
-  }
-  
-  .profile-actions {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-  }
-  
-  .profile-action-button {
-    background-color: #83A36B;
-    color: white;
-    font-weight: bold;
-    font-size: 1rem;
-    padding: 10px 20px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .profile-action-button:hover {
-    background-color: #6f9058;
-  }
-  
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.profile-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #F2F2F2;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon, .notification-icon {
+  margin-right: 20px;
+}
+
+.profile-icon {
+  position: relative;
+}
+
+.default-icon, .hover-icon {
+  position: absolute;
+  top: -23px;
+  right: -6px;
+  transition: opacity 0.3s;
+}
+
+.default-icon {
+  opacity: 1;
+}
+
+.hover-icon {
+  opacity: 0;
+}
+
+.profile-icon:hover .default-icon {
+  opacity: 0;
+}
+
+.profile-icon:hover .hover-icon {
+  opacity: 1;
+}
+
+.profile-content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 5rem;
+}
+
+.profile-card {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: white;
+  width: 100%;
+  height: 70%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 50px;
+}
+
+.profile-image {
+  margin-bottom: 0px;
+}
+
+.profile-info {
+  text-align: center;
+}
+
+.profile-name {
+  color: #676B57;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-group {
+  color: #83A36B;
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.profile-faculty {
+  color: #676B57;
+  font-size: 1rem;
+}
+
+.profile-right {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.lab-work-button {
+  background-color: #F2F2F2;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.lab-work-button:hover {
+  background-color: #E0E0E0;
+}
+
+.profile-section-title {
+  color: #676B57;
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.progress-bar-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.progress-bar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.subject {
+  width: 80px;
+  font-size: 1rem;
+  color: #676B57;
+}
+
+.progress {
+  flex-grow: 1;
+  height: 10px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  margin: 0 10px;
+  position: relative;
+}
+
+.progress-filled {
+  height: 100%;
+  background-color: #83A36B;
+  border-radius: 5px;
+}
+
+.progress-text {
+  width: 40px;
+  text-align: right;
+  font-size: 1rem;
+  color: #676B57;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.profile-action-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F2F2;
+  color: #676B57;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 48%;
+}
+
+.profile-action-button:hover {
+  background-color: #E0E0E0;
+}
+
+.icon-placeholder {
+  width: 20px;
+  height: 20px;
+  background-color: #ABABAB;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.close-popup {
+  background-color: #83A36B;
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 10px 20px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.close-popup:hover {
+  background-color: #6f9058;
+}
