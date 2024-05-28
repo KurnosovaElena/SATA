@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import "./studentprofile.css";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Link } from 'react-router-dom';
+import Popup from './lab-pop-up/Popup';
 
 function StudentProfilePage() {
   const [isSidebarOpen, setSidebarOpen] = useState(false);
@@ -158,14 +159,10 @@ function StudentProfilePage() {
         </div>
       </div>
 
-      {showLabPopup && (
-        <div className="popup">
-          <div className="popup-content">
-            {/* You can populate this with lab work details later */}
-            <button className="close-popup" onClick={handleLabWork}>Закрыть</button>
-          </div>
-        </div>
-      )}
+      <Popup
+        isVisible={showLabPopup}
+        onClose={handleLabWork}
+      />
     </div>
   );
 }
