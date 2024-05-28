@@ -3,17 +3,7 @@ using AssemblyService.Domain.Entities.Models;
 
 namespace AssemblyService.Application
 {
-    public class Timetable
-    {
-        public int ClassroomId { get; set; }
-        public int SubjectId { get; set; }
-        public int TeacherId { get; set; }
-        public DayOfWeek Day { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
-    }
-
-    public class EmptySlot
+    public record EmptySlot
     {
         public DayOfWeek DayOfWeek { get; set; }
         public TimeSlot TimeSlot { get; set; }
@@ -27,7 +17,7 @@ namespace AssemblyService.Application
         private List<Teacher> teachers;
         private List<EmptySlot> timeSlots;
         private List<CompletedSlot> timetable;
-        private List<Group> groups; 
+        private List<Group> groups;
 
         public TimetableComposer(List<Classroom> classrooms, List<Subject> subjects, List<Teacher> teachers, List<Group> groups)
         {
@@ -47,12 +37,22 @@ namespace AssemblyService.Application
             {
                 for (TimeSlot timeSlot = TimeSlot.First; timeSlot <= TimeSlot.Fifth; timeSlot++)
                 {
-                    slots.Add(new EmptySlot
-                    {
-                        DayOfWeek = day,
-                        TimeSlot = timeSlot,
-                        WeekType = WeekType.Neutral
-                    });
+                    slots.AddRange(
+                        new List<EmptySlot>
+                        {
+                            new()
+                            {
+                                DayOfWeek = day,
+                                TimeSlot = timeSlot,
+                                WeekType = WeekType.Upper
+                            },
+                            new()
+                            {
+                                DayOfWeek = day,
+                                TimeSlot = timeSlot,
+                                WeekType = WeekType.Lower
+                            }
+                        });
                 }
             }
 
@@ -72,6 +72,7 @@ namespace AssemblyService.Application
 
             foreach (var subject in subjects.OrderBy(s => s.SubjectType.Name == "PE" ? 0 : 1).ThenBy(s => s.DisciplineId))
             {
+                //assign according to groups count
                 var availableClassrooms = classrooms
                     .Where(c => c.Capacity >= subject.SubjectType.Id)
                     .ToList();
@@ -88,19 +89,52 @@ namespace AssemblyService.Application
                     {
                         if (IsTeacherAvailable(teacher, slot) && IsClassroomAvailable(availableClassrooms, slot, out Classroom assignedClassroom))
                         {
-                            timetable.Add(new CompletedSlot
+                            //Remove taken slot from emptySlots
+                            if(slot.WeekType is WeekType.Lower || slot.WeekType is WeekType.Upper)
                             {
-                                ClassroomId = assignedClassroom.Id,
-                                SubjectId = subject.Id,
-                            });
+                                subject.HoursPerWeek--;
+                                timetable.Add(new CompletedSlot
+                                {
+                                    ClassroomId = assignedClassroom.Id,
+                                    SubjectId = subject.Id,
+                                    WeekType = slot.WeekType
+                                });
+
+                                daySlots.Remove(slot);
+                            }
+                            else
+                            {
+                               if(subject.HoursPerWeek % 2 != 0)
+                                {
+                                    subject.HoursPerWeek--;
+                                    timetable.Add(new CompletedSlot
+                                    {
+                                        ClassroomId = assignedClassroom.Id,
+                                        SubjectId = subject.Id,
+                                        WeekType = WeekType.Upper
+                                    });
+
+                                    daySlots.Remove(slot);
+                                }
+                                else
+                                {
+                                    subject.HoursPerWeek -= 2;
+                                    timetable.Add(new CompletedSlot
+                                    {
+                                        ClassroomId = assignedClassroom.Id,
+                                        SubjectId = subject.Id,
+                                        WeekType = WeekType.Neutral
+                                    });
+
+                                    daySlots.Remove(slot);
+                                    daySlots.Remove(daySlots.Where(s => s.DayOfWeek == slot.DayOfWeek && s.TimeSlot == slot.TimeSlot).FirstOrDefault());
+                                }
+                            }
                             subjectsPerDay[day]++;
                             MarkSlotAsTaken(teacher, assignedClassroom, slot);
                             break;
                         }
                     }
-
-                    if (subjectsPerDay[day] >= 4)
-                        break;
                 }
             }
         }
@@ -112,7 +146,9 @@ namespace AssemblyService.Application
 
         private bool IsClassroomAvailable(List<Classroom> availableClassrooms, EmptySlot slot, out Classroom assignedClassroom)
         {
-            assignedClassroom = availableClassrooms.FirstOrDefault(c => !timetable.Any(t => t.ClassroomId == c.Id && t.DayOfWeek == slot.DayOfWeek && t.WeekType == slot.WeekType));
+            assignedClassroom = availableClassrooms.FirstOrDefault(c => !timetable.Any(t => t.ClassroomId == c.Id 
+            && t.DayOfWeek == slot.DayOfWeek
+            && (t.WeekType == slot.WeekType || t.WeekType is WeekType.Neutral)));
             return assignedClassroom != null;
         }
 
@@ -130,7 +166,6 @@ namespace AssemblyService.Application
             return timetable;
         }
     }
-
 }
 
 // Example usage:
