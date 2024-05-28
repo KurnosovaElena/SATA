@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import './popup.css';
 
-const Popup = ({ isVisible, onClose, onAddSubject }) => {
-  const [subjects, setSubjects] = useState([]);
-
+const Popup = ({ isVisible, onClose, subjects, setSubjects }) => {
   const handleAddSubject = () => {
     const newSubject = { name: '', labCount: 0, labs: [] };
     setSubjects([...subjects, newSubject]);
