@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Menu from '../components/menu/Menu'
 import StudentSchedule from '../components/studentSchedule/studentSchedule'
 import "./studentschedulePage.css"
+import Sidebar from '../components/sidebar/Sidebar';
 
 // Helper function to format dates
 const formatDate = (date) => {
@@ -37,6 +38,7 @@ const getWeekRange = (date) => {
   };
   
   function StudentSchedulePage() {
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
     const [currentDate, setCurrentDate] = useState(new Date());
     const [activeWeek, setActiveWeek] = useState(() => getInitialWeekType(new Date()));
   
@@ -52,9 +54,19 @@ const getWeekRange = (date) => {
     };
   
     const weekRange = getWeekRange(new Date(currentDate)); // Fix the week range calculation
+    
+    const toggleSidebar = () => {
+      setSidebarOpen(!isSidebarOpen);
+    };
   
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
+
     return (
       <div className="studentschedulepage">
+        <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+        {isSidebarOpen && <div className="overlay active" onClick={toggleSidebar}></div>}
         <Menu activeWeek={activeWeek} setActiveWeek={setActiveWeek} weekRange={weekRange} switchWeek={switchWeek} />
         <StudentSchedule activeWeek={activeWeek} />
       </div>

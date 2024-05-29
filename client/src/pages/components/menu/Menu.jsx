@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './menu.css';
 import ButtonUpDown from '../button_up_down/ButtonUpDown';
+import Sidebar from '../sidebar/Sidebar';
 
 const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
+
+  const [isSidebarOpen, setSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
-    <div className='menu-component'>
+    <div className='menu-component' >
+      <Sidebar isOpen={isSidebarOpen} onClose={closeSidebar} />
+        {isSidebarOpen && <div className="overlay active" onClick={toggleSidebar}></div>}
       <div className="left-combo">
-        <div className="menu-vector">
+        <div className="menu-vector" onClick={toggleSidebar}>
           <svg width="41" height="27" viewBox="0 0 41 27" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3 13.6567H38.3008H3ZM3 24.3134H38.3008H3ZM3 3H38.3008H3Z" fill="#ABABAB" />
             <path d="M3 13.6567H38.3008M3 24.3134H38.3008M3 3H38.3008" stroke="#ABABAB" stroke-width="5" stroke-linecap="round" />
