@@ -147,7 +147,6 @@ body {
   align-items: center;
   margin-bottom: 1rem;
   margin-left: 10px;
-
 }
 
 .lab-work-header .icon-placeholder {
@@ -292,4 +291,45 @@ body {
 
 .close-popup:hover {
   background-color: #6f9058;
+}
+
+.empty-slot {
+  border: 2px solid white;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.empty-slot:hover {
+  border: 2px dotted #ABABAB;
+  background-color: #E0E0E0;
+}
+
+.empty-text {
+  font-size: 1rem;
+  color: #676B57;
+}
+
+.report-generator {
+  justify-content: center;
+  width: 50%;
+  height: 35px;
+  align-self: center;
+  text-decoration: none;
+  border: 3px solid #6f9058;
+}
+
+.report-generator:hover {
+  background-color: #E0E0E0;
+  border: 3px dotted #6f9058;
+}
+
+.report-text {
+  text-decoration: none; /* убираем подчеркивание */
+  color: #676B57;
+}
+
+.report-text:hover {
+  color: #6f9058;
 }

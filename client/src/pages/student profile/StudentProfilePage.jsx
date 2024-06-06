@@ -101,8 +101,8 @@ function StudentProfilePage() {
                 </div>
                 <h3 className="profile-section-title">Лабораторные работы</h3>
               </div>
-               <div className="progress-bar-container">
-                {subjects.slice(0, 5).map((subject, index) => {
+              <div className="progress-bar-container">
+                {subjects.slice(0, 4).map((subject, index) => {
                   const completedLabs = subject.labs.filter(lab => lab.completed).length;
                   const totalLabs = subject.labs.length;
                   const width = calculateWidth(completedLabs, totalLabs);
@@ -114,11 +114,14 @@ function StudentProfilePage() {
                     </div>
                   );
                 })}
-                {Array.from({ length: 5 - subjects.length }).map((_, index) => (
+                {Array.from({ length: 4 - subjects.length }).map((_, index) => (
                   <div className="progress-bar empty-slot" key={`empty-${index}`}>
                     <span className="progress-text empty-text">Добавить предмет</span>
                   </div>
                 ))}
+                <Link to="/report-generator" className="progress-bar report-generator">
+                  <span className="progress-text report-text">Генератор отчетов</span>
+                </Link>
               </div>
             </button>
             <div className="profile-actions">

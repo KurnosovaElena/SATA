@@ -11,6 +11,7 @@ import StudentProfilePage from './pages/student profile/StudentProfilePage';
 import ProfessorSchedulePage from './pages/professor schedule/ProfessorSchedulePage';
 import ProfessorDoubleSchedule from './pages/professor double schedule/ProfessorDoubleSchedule';
 import StudentDoubleSchedule from './pages/student double schedule/StudentDoubleSchedule';
+import ReportGeneratorPage from './pages/report generator page/ReportGeneratorPage'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/stprofile" element={<StudentProfilePage />} />
           <Route path="/stschedule" element={<StudentSchedulePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/report-generator" element={<ReportGeneratorPage />} />
           <Route path="/" element={<MainPage />} />
         </Routes>
       </Router>
