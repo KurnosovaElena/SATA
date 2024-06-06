@@ -1,83 +1,157 @@
 body {
-    background-color: #F2F2F2;
-    font-family: 'Montserrat', sans-serif;
-    margin: 0;
-  }
-  
-  .report-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-  }
-  
-  .report-header {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #F2F2F2;
-    margin: 5px;
-    box-sizing: border-box;
-  }
-  
-  .header-left {
-    display: flex;
-    align-items: center;
-  }
-  
-  .header-right {
-    display: flex;
-    align-items: center;
-  }
-  
-  .menu-icon, .notification-icon {
-    margin-right: 20px;
-  }
-  
-  .profile-icon {
-    position: relative;
-  }
-  
-  .default-icon, .hover-icon {
-    position: absolute;
-    top: -23px;
-    right: -6px;
-    transition: opacity 0.3s;
-  }
-  
-  .default-icon {
-    opacity: 1;
-  }
-  
-  .hover-icon {
-    opacity: 0;
-  }
-  
-  .profile-icon:hover .default-icon {
-    opacity: 0;
-  }
-  
-  .profile-icon:hover .hover-icon {
-    opacity: 1;
-  }
-  
-  .report-content {
-    display: flex;
-    flex-grow: 1;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 5rem;
-  }
-  
-  .report-card {
-    background-color: white;
-    width: 80%;
-    height: 70%;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
+  background-color: #F2F2F2;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+
+.report-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.report-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #F2F2F2;
+  margin: 5px;
+  box-sizing: border-box;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+}
+
+.menu-icon, .notification-icon {
+  margin-right: 20px;
+}
+
+.profile-icon {
+  position: relative;
+}
+
+.default-icon, .hover-icon {
+  position: absolute;
+  top: -23px;
+  right: -6px;
+  transition: opacity 0.3s;
+}
+
+.default-icon {
+  opacity: 1;
+}
+
+.hover-icon {
+  opacity: 0;
+}
+
+.profile-icon:hover .default-icon {
+  opacity: 0;
+}
+
+.profile-icon:hover .hover-icon {
+  opacity: 1;
+}
+
+.report-content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 5rem;
+  overflow: hidden;
+}
+
+.report-card {
+  background-color: white;
+  width: 80%;
+  height: 70%;
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.report-title {
+  font-size: 2rem;
+  color: #32381C;
+  margin: 0 0 20px 0; /* Убраны отступы сверху */
+}
+
+.report-selection {
+  background-color: #F2F2F2;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.report-selection-title {
+  font-size: 1.5rem;
+  color: #32381C;
+  margin: 5px 0 40px 0; /* Убраны отступы сверху */
+}
+
+.report-types {
+  display: flex;
+  overflow-x: auto;
+  gap: 10px;
+  padding-bottom: 10px;
+  scroll-behavior: smooth;
+}
+
+.report-type {
+  flex-shrink: 0;
+}
+
+.report-button {
+  background-color: #FFFFFF;
+  border: 2px solid #E5E5E5;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+  width: 300px;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+.report-button:hover {
+  border-color: #F1E0B8;
+}
+
+.report-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.report-icon img {
+  width: 30px;
+  height: 30px;
+}
+
+.report-text {
+  font-size: 1rem;
+  color: #32381C;
+  text-align: center;
+}

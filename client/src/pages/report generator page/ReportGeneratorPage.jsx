@@ -1,18 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "./reportgenerator.css";
 import Sidebar from "../components/sidebar/Sidebar";
 import { Link } from 'react-router-dom';
 
 function ReportGeneratorPage() {
-  const [isSidebarOpen, setSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setSidebarOpen(!isSidebarOpen);
-  };
-
-  const closeSidebar = () => {
-    setSidebarOpen(false);
-  };
+    const [isSidebarOpen, setSidebarOpen] = useState(false);
+    const reportTypesRef = useRef(null);
+  
+    useEffect(() => {
+      const handleWheel = (event) => {
+        if (reportTypesRef.current) {
+          event.preventDefault();
+          reportTypesRef.current.scrollLeft += event.deltaY;
+        }
+      };
+  
+      const reportTypesElement = reportTypesRef.current;
+      if (reportTypesElement) {
+        reportTypesElement.addEventListener('wheel', handleWheel);
+      }
+  
+      return () => {
+        if (reportTypesElement) {
+          reportTypesElement.removeEventListener('wheel', handleWheel);
+        }
+      };
+    }, []);
+  
+    const toggleSidebar = () => {
+      setSidebarOpen(!isSidebarOpen);
+    };
+  
+    const closeSidebar = () => {
+      setSidebarOpen(false);
+    };
 
   return (
     <div className="report-page">
@@ -53,7 +74,52 @@ function ReportGeneratorPage() {
 
       <div className="report-content">
         <div className="report-card">
-          {/* Центральное белое окно */}
+          <h1 className="report-title">Отчет</h1>
+          <div className="report-selection">
+            <h2 className="report-selection-title">Выберите необходимый отчет</h2>
+            <div className="report-types" ref={reportTypesRef}>
+              <div className="report-type">
+                <button className="report-button">
+                  <div className="report-icon">
+                    <img src={require('../report generator page/report1.png')} alt="Иконка отчета" />
+                  </div>
+                  <div className="report-text">Отчет по расписанию подгруппы</div>
+                </button>
+              </div>
+              <div className="report-type">
+                <button className="report-button">
+                  <div className="report-icon">
+                    <img src={require('../report generator page/report2.png')} alt="Иконка отчета" />
+                  </div>
+                  <div className="report-text">Отчет по расписанию предмета</div>
+                </button>
+              </div>
+              <div className="report-type">
+                <button className="report-button">
+                  <div className="report-icon">
+                    <img src={require('../report generator page/report3.png')} alt="Иконка отчета" />
+                  </div>
+                  <div className="report-text">Отчет по нагрузке преподавателя</div>
+                </button>
+              </div>
+              <div className="report-type">
+                <button className="report-button">
+                  <div className="report-icon">
+                    <img src={require('../report generator page/report4.png')} alt="Иконка отчета" />
+                  </div>
+                  <div className="report-text">Отчет 4</div>
+                </button>
+              </div>
+              <div className="report-type">
+                <button className="report-button">
+                  <div className="report-icon">
+                    <img src={require('../report generator page/report5.png')} alt="Иконка отчета" />
+                  </div>
+                  <div className="report-text">Отчет 5</div>
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
