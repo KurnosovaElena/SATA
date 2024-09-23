@@ -9,5 +9,6 @@ namespace AssemblyService.Domain.Interfaces.Repositories
 {
     public interface IDepartmentRepository : IRepositoryBase<Department>
     {
+    
     }
 }

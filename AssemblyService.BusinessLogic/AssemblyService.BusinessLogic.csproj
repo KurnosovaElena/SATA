@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Entities\Constants\Messages\" />
+    <ProjectReference Include="..\AssemblyService.DataAccess\AssemblyService.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

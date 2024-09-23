@@ -7,19 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AssemblyService.Domain\AssemblyService.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CQRS\Queries\" />
-    <Folder Include="MappingProfiles\" />
-    <Folder Include="Validators\" />
+    <Compile Remove="MappingProfiles\**" />
+    <Compile Remove="Validators\**" />
+    <EmbeddedResource Remove="MappingProfiles\**" />
+    <EmbeddedResource Remove="Validators\**" />
+    <None Remove="MappingProfiles\**" />
+    <None Remove="Validators\**" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.9.1" />
     <PackageReference Include="FluentValidationExtensions.AutoMapper" Version="11.0.0" />
-    <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
 </Project>
