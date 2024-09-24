@@ -10,12 +10,14 @@ public class Subject
     public Guid DisciplineId { get; set; }
     public Discipline Discipline { get; set; } = null!;
 
-    public int HoursPerWeek { get; set; }
+    public int RequestedHoursPerWeek { get; set; }
 
     public Guid SubjectTypeId { get; set; }
     public SubjectType SubjectType { get; set; } = null!;
 
     public ICollection<Detail>? Details { get; set; }
     public ICollection<Subgroup>? Subgroups { get; set; }
-    public ICollection<CompletedSlot>? CompletedSlots { get; set; }
+
+    //Lazy
+    public virtual ICollection<CompletedSlot>? CompletedSlots { get; set; }
 }
