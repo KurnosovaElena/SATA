@@ -1,6 +1,6 @@
 ﻿namespace AssemblyService.DataAccess.Entities;
 
-public class Group
+public class GroupEntity
 {
     public Guid Id { get; set; }
 
@@ -14,5 +14,6 @@ public class Group
     public Guid DepartmentId { get; set; }
     public Department Department { get; set; } = null!;
 
-    public ICollection<Subgroup> Subgroups { get; set; } = [];
+    //Lazy loading
+    public virtual ICollection<Subgroup> Subgroups { get; set; } = [];
 }

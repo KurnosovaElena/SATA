@@ -12,5 +12,5 @@ public class Department
 
     public ICollection<Discipline>? Disciplines { get; set; }
 
-    public ICollection<Group>? Groups { get; set; }
+    public ICollection<GroupEntity>? Groups { get; set; }
 }
