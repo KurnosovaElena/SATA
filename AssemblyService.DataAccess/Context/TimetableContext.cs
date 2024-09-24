@@ -1,11 +1,15 @@
 ﻿using AssemblyService.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace AssemblyService.DataAccess.Context;
 
-public class TimetableContext(DbContextOptions options) : DbContext(options)
+public class TimetableContext : DbContext
 {
+    public TimetableContext(DbContextOptions options) : base(options)
+    {
+        Database.Migrate();
+    }
+
     public DbSet<Campus> Campuses { get; set; }
     public DbSet<Classroom> Classrooms { get; set; }
     public DbSet<CompletedSlot> CompletedSlots { get; set; }
