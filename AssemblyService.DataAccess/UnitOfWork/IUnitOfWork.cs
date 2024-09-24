@@ -12,7 +12,7 @@ public interface IUnitOfWork : IDisposable
     IGenericRepository<Detail> Detail { get; }
     IDisciplineRepository Discipline { get; }
     IGroupRepository Group { get; }
-    IGenericRepository<Subgroup> Subgroup { get; }
+    ISubgroupRepository Subgroup { get; }
     IGenericRepository<Subject> Subject { get; }
     IGenericRepository<SubjectType> SubjectType { get; }
     ITeacherRepository Teacher { get; }
