@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace AssemblyService.BusinessLogic.DI;
 
+/// <summary>
+/// Extension class (e.g. Helper class)
+/// </summary>
 public static class ServicesConfiguration
 {
     /// <summary>
