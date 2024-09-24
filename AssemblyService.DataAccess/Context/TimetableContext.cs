@@ -12,7 +12,7 @@ public class TimetableContext(DbContextOptions options) : DbContext(options)
     public DbSet<Department> Departments { get; set; }
     public DbSet<Detail> Details { get; set; }
     public DbSet<Discipline> Disciplines { get; set; }
-    public DbSet<Group> Groups { get; set; }
+    public DbSet<GroupEntity> Groups { get; set; }
     public DbSet<Subgroup> Subgroups { get; set; }
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<SubjectType> SubjectTypes { get; set; }
