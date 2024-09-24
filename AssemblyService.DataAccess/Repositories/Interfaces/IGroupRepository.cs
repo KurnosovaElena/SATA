@@ -1,5 +1,4 @@
 ﻿using AssemblyService.DataAccess.Entities;
-using System.Text.RegularExpressions;
 
 namespace AssemblyService.DataAccess.Repositories.Interfaces;
 

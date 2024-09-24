@@ -3,10 +3,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AssemblyService.DataAccess.Context;
 
+/// <summary>
+/// EF Database Context
+/// </summary>
 public class TimetableContext : DbContext
 {
     public TimetableContext(DbContextOptions options) : base(options)
     {
+        //Add migrations on context initialization
         Database.Migrate();
     }
 
