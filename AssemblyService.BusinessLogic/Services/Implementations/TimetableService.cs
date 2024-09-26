@@ -4,6 +4,7 @@ using AssemblyService.BusinessLogic.Models;
 using AssemblyService.BusinessLogic.Services.Interfaces;
 using AssemblyService.DataAccess.Enums;
 using AssemblyService.DataAccess.UnitOfWork;
+using Mapster;
 
 namespace AssemblyService.BusinessLogic.Services.Implementations;
 
@@ -119,6 +120,7 @@ public class TimetableService(IUnitOfWork unitOfWork,
                         if (subject.RequestedHoursPerWeek == 0)
                             continue;
 
+                        //get teachers slots
                         var teacher = await teacherService.GetByIdAsync(subject.TeacherId, cancellationToken);
 
                         if (teacher.Subjects is null || teacher.Subjects.Count == 0)
@@ -128,7 +130,7 @@ public class TimetableService(IUnitOfWork unitOfWork,
                         foreach (var teacherSubject in teacher.Subjects)
                             if (teacherSubject.CompletedSlots is not null && teacherSubject.CompletedSlots.Count > 0)
                                 teacherSlots.AddRange(teacherSubject.CompletedSlots);
-                        
+
                         foreach (var newSlot in newSlots)
                         {
                             //If teacher has no free slots, continue
@@ -136,24 +138,55 @@ public class TimetableService(IUnitOfWork unitOfWork,
                                 continue;
 
                             //get assigned slots of the subject in the same day
-                            var similarAssignedSlots = assignedSlots.Where(slot => slot.SubjectId == subject.Id && slot.DayOfWeek == newSlot.DayOfWeek);
+                            var similarAssignedSlots = assignedSlots.Where(slot => slot.SubjectId == subject.Id && slot.DayOfWeek == newSlot.DayOfWeek).ToList();
 
-                            //if it occurs every week, break
-                            if (similarAssignedSlots.Any(slot => slot.WeekType is WeekType.Neutral))
-                                break;
+                            if (similarAssignedSlots.Count > 0)
+                            {
+                                //if it occurs every week, break
+                                if (similarAssignedSlots.Any(slot => slot.WeekType is WeekType.Neutral))
+                                    break;
 
-                            var sameAssignedSlot = similarAssignedSlots.FirstOrDefault(slot => slot.TimeSlot == newSlot.TimeSlot);
+                                var sameAssignedSlot = similarAssignedSlots.FirstOrDefault(slot => slot.TimeSlot == newSlot.TimeSlot);
 
-                            //if it does not occur in the same time slot or if it occurs in the same week type, continue
-                            if (sameAssignedSlot is null || sameAssignedSlot.WeekType == newSlot.WeekType)
-                                continue;
+                                //if it does not occur in the same time slot or if it occurs in the same week type, continue
+                                if (sameAssignedSlot is null || sameAssignedSlot.WeekType == newSlot.WeekType)
+                                    continue;
 
-                            //else, make it occur every week
-                            sameAssignedSlot.WeekType = WeekType.Neutral;
+                                //else, make it occur every week
+                                sameAssignedSlot.WeekType = WeekType.Neutral;
+
+                                newSlot.Adapt(sameAssignedSlot);
+
+                                subject.RequestedHoursPerWeek--;
+                            }
+                            else
+                            {
+                                newSlot.SubjectId = subject.Id;
+                            }
 
                             //Get available classroom
+                            var recommendedClassrooms = subject.Classrooms;
 
-                            subject.RequestedHoursPerWeek--;
+                            if (recommendedClassrooms is null || recommendedClassrooms.Count == 0)
+                                throw new BadRequestException("teacher has no assigned subjects");
+
+                            ClassroomModel? assignedClassroom = null;
+                            foreach (var classroom in recommendedClassrooms)
+                            {
+                                if (classroom.CompletedSlots is not null)
+                                {
+                                    if (classroom.CompletedSlots.Count > 0 && classroom.CompletedSlots.Any(slot => slot.WeekType == newSlot.WeekType && slot.DayOfWeek == newSlot.DayOfWeek && slot.TimeSlot == newSlot.TimeSlot))
+                                        continue;
+
+                                    classroom.CompletedSlots.Add(newSlot);
+                                }
+                                else
+                                {
+                                    classroom.CompletedSlots = [newSlot];
+                                }
+
+                                assignedClassroom = classroom;
+                            }
 
                             newSlots.Remove(newSlot);
                         }
