@@ -1,4 +1,6 @@
-﻿namespace AssemblyService.BusinessLogic.Models;
+﻿using AssemblyService.DataAccess.Entities;
+
+namespace AssemblyService.BusinessLogic.Models;
 
 public class SubjectModel
 {
@@ -18,4 +20,6 @@ public class SubjectModel
     public ICollection<DetailModel>? Details { get; set; }
     public ICollection<SubgroupModel>? Subgroups { get; set; }
     public ICollection<CompletedSlotModel>? CompletedSlots { get; set; }
+
+    public ICollection<ClassroomModel>? Classrooms { get; set; }
 }

@@ -1,4 +1,6 @@
-﻿namespace AssemblyService.BusinessLogic.Models;
+﻿using AssemblyService.DataAccess.Entities;
+
+namespace AssemblyService.BusinessLogic.Models;
 
 public class ClassroomModel
 {
@@ -12,4 +14,6 @@ public class ClassroomModel
 
     public ICollection<DetailModel>? Details { get; set; }
     public ICollection<CompletedSlotModel>? CompletedSlots { get; set; }
+
+    public ICollection<SubjectModel>? Subjects { get; set; }
 }
