@@ -20,4 +20,7 @@ public class Subject
 
     //Lazy
     public virtual ICollection<CompletedSlot>? CompletedSlots { get; set; }
+
+    //Recommended classrooms
+    public ICollection<Classroom>? Classrooms { get; set; }
 }

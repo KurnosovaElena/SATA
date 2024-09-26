@@ -12,5 +12,7 @@ public class Classroom
 
     public ICollection<Detail>? Details { get; set; }
 
-    public ICollection<CompletedSlot>? CompletedSlots { get; set; }
+    public virtual ICollection<CompletedSlot>? CompletedSlots { get; set; }
+
+    public ICollection<Subject>? Subjects { get; set; }
 }
