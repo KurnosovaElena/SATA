@@ -1,5 +1,4 @@
-﻿using AssemblyService.Infrastructure.Context;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace AssemblyService.API.Extensions
 {

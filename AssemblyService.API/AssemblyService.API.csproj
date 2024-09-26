@@ -19,4 +19,8 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AssemblyService.BusinessLogic\AssemblyService.BusinessLogic.csproj" />
+  </ItemGroup>
+
 </Project>

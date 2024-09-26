@@ -1,45 +1,45 @@
 ﻿using AssemblyService.DataAccess.Entities;
 using AssemblyService.DataAccess.Enums;
 
-namespace AssemblyService.Application
+namespace AssemblyService.BusinessLogic;
+
+public record EmptySlot
 {
-    public record EmptySlot
+    public DayOfWeek DayOfWeek { get; set; }
+    public TimeSlot TimeSlot { get; set; }
+    public WeekType WeekType { get; set; }
+}
+
+public class TimetableComposer
+{
+    private List<Classroom> classrooms;
+    private List<Subject> subjects;
+    private List<Teacher> teachers;
+    private List<EmptySlot> timeSlots;
+    private List<CompletedSlot> timetable;
+    private List<GroupEntity> groups;
+
+    public TimetableComposer(List<Classroom> classrooms, List<Subject> subjects, List<Teacher> teachers, List<GroupEntity> groups)
     {
-        public DayOfWeek DayOfWeek { get; set; }
-        public TimeSlot TimeSlot { get; set; }
-        public WeekType WeekType { get; set; }
+        this.classrooms = classrooms;
+        this.subjects = subjects;
+        this.teachers = teachers;
+        timeSlots = GenerateTimeSlots();
+        timetable = [];
+        this.groups = groups;
     }
 
-    public class TimetableComposer
+    private List<EmptySlot> GenerateTimeSlots()
     {
-        private List<Classroom> classrooms;
-        private List<Subject> subjects;
-        private List<Teacher> teachers;
-        private List<EmptySlot> timeSlots;
-        private List<CompletedSlot> timetable;
-        private List<Group> groups;
+        var slots = new List<EmptySlot>();
 
-        public TimetableComposer(List<Classroom> classrooms, List<Subject> subjects, List<Teacher> teachers, List<Group> groups)
+        foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Where(d => d >= DayOfWeek.Monday && d <= DayOfWeek.Friday))
         {
-            this.classrooms = classrooms;
-            this.subjects = subjects;
-            this.teachers = teachers;
-            this.timeSlots = GenerateTimeSlots();
-            this.timetable = [];
-            this.groups = groups;
-        }
-
-        private List<EmptySlot> GenerateTimeSlots()
-        {
-            var slots = new List<EmptySlot>();
-
-            foreach (DayOfWeek day in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Where(d => d >= DayOfWeek.Monday && d <= DayOfWeek.Friday))
+            for (TimeSlot timeSlot = TimeSlot.First; timeSlot <= TimeSlot.Fifth; timeSlot++)
             {
-                for (TimeSlot timeSlot = TimeSlot.First; timeSlot <= TimeSlot.Fifth; timeSlot++)
-                {
-                    slots.AddRange(
-                        new List<EmptySlot>
-                        {
+                slots.AddRange(
+                    new List<EmptySlot>
+                    {
                             new()
                             {
                                 DayOfWeek = day,
@@ -52,119 +52,118 @@ namespace AssemblyService.Application
                                 TimeSlot = timeSlot,
                                 WeekType = WeekType.Lower
                             }
-                        });
-                }
+                    });
             }
-
-            return slots;
         }
 
-        public void ComposeTimetable()
+        return slots;
+    }
+
+    public void ComposeTimetable()
+    {
+        //Count of subjects per day
+        var subjectsPerDay = new Dictionary<DayOfWeek, int>();
+
+        foreach (var day in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Where(d => d >= DayOfWeek.Monday && d <= DayOfWeek.Friday))
         {
-            //Count of subjects per day
-            var subjectsPerDay = new Dictionary<DayOfWeek, int>();
+            //Erase all
+            subjectsPerDay[day] = 0;
+        }
 
-            foreach (var day in Enum.GetValues(typeof(DayOfWeek)).Cast<DayOfWeek>().Where(d => d >= DayOfWeek.Monday && d <= DayOfWeek.Friday))
+        foreach (var subject in subjects.OrderBy(s => s.SubjectType.Name == "PE" ? 0 : 1).ThenBy(s => s.DisciplineId))
+        {
+            //assign according to groups count
+            var availableClassrooms = classrooms
+                .Where(c => c.Capacity >= subject.SubjectType.Id)
+                .ToList();
+
+            var teacher = teachers.FirstOrDefault(t => t.Id == subject.TeacherId);
+
+            foreach (var day in subjectsPerDay.Keys)
             {
-                //Erase all
-                subjectsPerDay[day] = 0;
-            }
+                if (subjectsPerDay[day] >= 4)
+                    continue;
 
-            foreach (var subject in subjects.OrderBy(s => s.SubjectType.Name == "PE" ? 0 : 1).ThenBy(s => s.DisciplineId))
-            {
-                //assign according to groups count
-                var availableClassrooms = classrooms
-                    .Where(c => c.Capacity >= subject.SubjectType.Id)
-                    .ToList();
-
-                var teacher = teachers.FirstOrDefault(t => t.Id == subject.TeacherId);
-
-                foreach (var day in subjectsPerDay.Keys)
+                var daySlots = timeSlots.Where(slot => slot.DayOfWeek == day).ToList();
+                foreach (var slot in daySlots)
                 {
-                    if (subjectsPerDay[day] >= 4)
-                        continue;
-
-                    var daySlots = timeSlots.Where(slot => slot.DayOfWeek == day).ToList();
-                    foreach (var slot in daySlots)
+                    if (IsTeacherAvailable(teacher, slot) && IsClassroomAvailable(availableClassrooms, slot, out Classroom assignedClassroom))
                     {
-                        if (IsTeacherAvailable(teacher, slot) && IsClassroomAvailable(availableClassrooms, slot, out Classroom assignedClassroom))
+                        //Remove taken slot from emptySlots
+                        if (slot.WeekType is WeekType.Lower || slot.WeekType is WeekType.Upper)
                         {
-                            //Remove taken slot from emptySlots
-                            if (slot.WeekType is WeekType.Lower || slot.WeekType is WeekType.Upper)
+                            subject.RequestedHoursPerWeek--;
+                            timetable.Add(new CompletedSlot
                             {
-                                subject.HoursPerWeek--;
+                                ClassroomId = assignedClassroom.Id,
+                                SubjectId = subject.Id,
+                                WeekType = slot.WeekType
+                            });
+
+                            daySlots.Remove(slot);
+                        }
+                        else
+                        {
+                            if (subject.RequestedHoursPerWeek % 2 != 0)
+                            {
+                                subject.RequestedHoursPerWeek--;
                                 timetable.Add(new CompletedSlot
                                 {
                                     ClassroomId = assignedClassroom.Id,
                                     SubjectId = subject.Id,
-                                    WeekType = slot.WeekType
+                                    WeekType = WeekType.Upper
                                 });
 
                                 daySlots.Remove(slot);
                             }
                             else
                             {
-                                if (subject.HoursPerWeek % 2 != 0)
+                                subject.RequestedHoursPerWeek -= 2;
+                                timetable.Add(new CompletedSlot
                                 {
-                                    subject.HoursPerWeek--;
-                                    timetable.Add(new CompletedSlot
-                                    {
-                                        ClassroomId = assignedClassroom.Id,
-                                        SubjectId = subject.Id,
-                                        WeekType = WeekType.Upper
-                                    });
+                                    ClassroomId = assignedClassroom.Id,
+                                    SubjectId = subject.Id,
+                                    WeekType = WeekType.Neutral
+                                });
 
-                                    daySlots.Remove(slot);
-                                }
-                                else
-                                {
-                                    subject.HoursPerWeek -= 2;
-                                    timetable.Add(new CompletedSlot
-                                    {
-                                        ClassroomId = assignedClassroom.Id,
-                                        SubjectId = subject.Id,
-                                        WeekType = WeekType.Neutral
-                                    });
-
-                                    daySlots.Remove(slot);
-                                    daySlots.Remove(daySlots.Where(s => s.DayOfWeek == slot.DayOfWeek && s.TimeSlot == slot.TimeSlot).FirstOrDefault());
-                                }
+                                daySlots.Remove(slot);
+                                daySlots.Remove(daySlots.Where(s => s.DayOfWeek == slot.DayOfWeek && s.TimeSlot == slot.TimeSlot).FirstOrDefault());
                             }
-                            subjectsPerDay[day]++;
-                            MarkSlotAsTaken(teacher, assignedClassroom, slot);
-                            break;
                         }
+                        subjectsPerDay[day]++;
+                        MarkSlotAsTaken(teacher, assignedClassroom, slot);
+                        break;
                     }
                 }
             }
         }
+    }
 
-        private bool IsTeacherAvailable(Teacher teacher, EmptySlot slot)
-        {
-            return !timetable.Any(t => t.Id == teacher.Id && t.DayOfWeek == slot.DayOfWeek && t.WeekType == slot.WeekType && t.TimeSlot == slot.TimeSlot);
-        }
+    private bool IsTeacherAvailable(Teacher teacher, EmptySlot slot)
+    {
+        return !timetable.Any(t => t.Id == teacher.Id && t.DayOfWeek == slot.DayOfWeek && t.WeekType == slot.WeekType && t.TimeSlot == slot.TimeSlot);
+    }
 
-        private bool IsClassroomAvailable(List<Classroom> availableClassrooms, EmptySlot slot, out Classroom assignedClassroom)
-        {
-            assignedClassroom = availableClassrooms.FirstOrDefault(c => !timetable.Any(t => t.ClassroomId == c.Id
-            && t.DayOfWeek == slot.DayOfWeek
-            && (t.WeekType == slot.WeekType || t.WeekType is WeekType.Neutral)));
-            return assignedClassroom != null;
-        }
+    private bool IsClassroomAvailable(List<Classroom> availableClassrooms, EmptySlot slot, out Classroom assignedClassroom)
+    {
+        assignedClassroom = availableClassrooms.FirstOrDefault(c => !timetable.Any(t => t.ClassroomId == c.Id
+        && t.DayOfWeek == slot.DayOfWeek
+        && (t.WeekType == slot.WeekType || t.WeekType is WeekType.Neutral)));
+        return assignedClassroom != null;
+    }
 
-        private void MarkSlotAsTaken(Teacher teacher, Classroom classroom, EmptySlot slot)
+    private void MarkSlotAsTaken(Teacher teacher, Classroom classroom, EmptySlot slot)
+    {
+        timetable.Add(new CompletedSlot
         {
-            timetable.Add(new CompletedSlot
-            {
-                ClassroomId = classroom.Id,
-                SubjectId = -1,
-            });
-        }
+            ClassroomId = classroom.Id,
+            SubjectId = -1,
+        });
+    }
 
-        public List<CompletedSlot> GetTimetable()
-        {
-            return timetable;
-        }
+    public List<CompletedSlot> GetTimetable()
+    {
+        return timetable;
     }
 }
 
