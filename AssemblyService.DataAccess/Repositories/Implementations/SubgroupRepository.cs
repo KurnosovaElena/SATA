@@ -9,4 +9,6 @@ public class SubgroupRepository(TimetableContext context) : RepositoryBase<Subgr
 {
     public async Task<Subgroup> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByConditionAsQueryable(sg => sg.Id == id).Include(sg => sg.Subjects).FirstAsync(cancellationToken);
+
+    //метод для получения данных о подгруппах (с пагинацией)
 }

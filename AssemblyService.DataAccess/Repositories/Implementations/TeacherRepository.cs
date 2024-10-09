@@ -8,4 +8,6 @@ public class TeacherRepository(TimetableContext context) : RepositoryBase<Teache
 {
     public async Task<Teacher> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByConditionAsQueryable(t => t.Id == id).Include(t => t.Subjects).FirstAsync(cancellationToken);
+
+    //метод для получения данных о преподах с ссылкой на кафедру (с пагинацией)
 }
