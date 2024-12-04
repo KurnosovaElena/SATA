@@ -25,6 +25,8 @@ public class TimetableService(IUnitOfWork unitOfWork,
     {
         var department = await departmentService.GetByIdAsync(departmentId, cancellationToken);
 
+        var departmentGroupsCompletedSlots = new List<CompletedSlotModel>();
+
         if (department.Groups is null || department.Groups.Count == 0)
         {
             throw new BadRequestException(DepartmentExceptionMessages.GroupsIsNullOrEmpty(departmentId));
@@ -175,10 +177,16 @@ public class TimetableService(IUnitOfWork unitOfWork,
                             {
                                 if (classroom.CompletedSlots is not null)
                                 {
-                                    if (classroom.CompletedSlots.Count > 0 && classroom.CompletedSlots.Any(slot => slot.WeekType == newSlot.WeekType && slot.DayOfWeek == newSlot.DayOfWeek && slot.TimeSlot == newSlot.TimeSlot))
+                                    if (classroom.CompletedSlots.Count > 0 && classroom.CompletedSlots.Any(slot => (slot.WeekType == newSlot.WeekType || slot.WeekType == WeekType.Neutral) && slot.DayOfWeek == newSlot.DayOfWeek && slot.TimeSlot == newSlot.TimeSlot))
                                         continue;
 
                                     classroom.CompletedSlots.Add(newSlot);
+                                    assignedSlots.Add(newSlot);
+
+                                    if (newSlot.WeekType is WeekType.Neutral)
+                                        subject.RequestedHoursPerWeek -= 2;
+                                    else
+                                        subject.RequestedHoursPerWeek--;
                                 }
                                 else
                                 {
@@ -190,19 +198,19 @@ public class TimetableService(IUnitOfWork unitOfWork,
 
                             newSlots.Remove(newSlot);
                         }
-                        //3. if false, check for teachers current slot
                     }
-
-                //generate empty slots
+                departmentGroupsCompletedSlots.AddRange(assignedSlots);
+                //generate empty slots DONE
                 //if not, substract expected time from subjects by existing slots and make a gap in at least one day for next similar subject
-                //if slot is free, get teacher by id from subject
-                //if teacher slot is busy, move to other slot until true
-                //use slot by pattern: 1. full week, 2. upper week, 3. lower week
-                //if subject cannot be performed in full week, use either upper or lower
-                //if teacher slot is free, get recommended classrooms
-                //if recommended classromms are busy, move to all classrooms that are satisfy subject details
-                //firstly search in current campus, then in campuses nearby(if 2, then 4 and 7)         (HOW TO DO THAT)
+                //if slot is free, get teacher by id from subject DONE
+                //if teacher slot is busy, move to other slot until true DONE
+                //use slot by pattern: 1. full week, 2. upper week, 3. lower week DONE
+                //if subject cannot be performed in full week, use either upper or lower DONE
+                //if teacher slot is free, get recommended classrooms DONE
+                //TODO if recommended classromms are busy, move to all classrooms that are satisfy subject details 
+                //TODO firstly search in current campus, then in campuses nearby(if 2, then 4 and 7)         (HOW TO DO THAT)
             }
         }
+        return departmentGroupsCompletedSlots;
     }
 }
