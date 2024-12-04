@@ -73,9 +73,9 @@ public class TimetableComposer
         foreach (var subject in subjects.OrderBy(s => s.SubjectType.Name == "PE" ? 0 : 1).ThenBy(s => s.DisciplineId))
         {
             //assign according to groups count
-            var availableClassrooms = classrooms
-                .Where(c => c.Capacity >= subject.SubjectType.Id)
-                .ToList();
+            //var availableClassrooms = classrooms
+            //    .Where(c => c.Capacity >= subject.SubjectType.Id)
+            //    .ToList();
 
             var teacher = teachers.FirstOrDefault(t => t.Id == subject.TeacherId);
 
@@ -85,56 +85,56 @@ public class TimetableComposer
                     continue;
 
                 var daySlots = timeSlots.Where(slot => slot.DayOfWeek == day).ToList();
-                foreach (var slot in daySlots)
-                {
-                    if (IsTeacherAvailable(teacher, slot) && IsClassroomAvailable(availableClassrooms, slot, out Classroom assignedClassroom))
-                    {
-                        //Remove taken slot from emptySlots
-                        if (slot.WeekType is WeekType.Lower || slot.WeekType is WeekType.Upper)
-                        {
-                            subject.RequestedHoursPerWeek--;
-                            timetable.Add(new CompletedSlot
-                            {
-                                ClassroomId = assignedClassroom.Id,
-                                SubjectId = subject.Id,
-                                WeekType = slot.WeekType
-                            });
+                //foreach (var slot in daySlots)
+                //{
+                //    if (IsTeacherAvailable(teacher, slot) && IsClassroomAvailable(availableClassrooms, slot, out Classroom assignedClassroom))
+                //    {
+                //        //Remove taken slot from emptySlots
+                //        if (slot.WeekType is WeekType.Lower || slot.WeekType is WeekType.Upper)
+                //        {
+                //            subject.RequestedHoursPerWeek--;
+                //            timetable.Add(new CompletedSlot
+                //            {
+                //                ClassroomId = assignedClassroom.Id,
+                //                SubjectId = subject.Id,
+                //                WeekType = slot.WeekType
+                //            });
 
-                            daySlots.Remove(slot);
-                        }
-                        else
-                        {
-                            if (subject.RequestedHoursPerWeek % 2 != 0)
-                            {
-                                subject.RequestedHoursPerWeek--;
-                                timetable.Add(new CompletedSlot
-                                {
-                                    ClassroomId = assignedClassroom.Id,
-                                    SubjectId = subject.Id,
-                                    WeekType = WeekType.Upper
-                                });
+                //            daySlots.Remove(slot);
+                //        }
+                //        else
+                //        {
+                //            if (subject.RequestedHoursPerWeek % 2 != 0)
+                //            {
+                //                subject.RequestedHoursPerWeek--;
+                //                timetable.Add(new CompletedSlot
+                //                {
+                //                    ClassroomId = assignedClassroom.Id,
+                //                    SubjectId = subject.Id,
+                //                    WeekType = WeekType.Upper
+                //                });
 
-                                daySlots.Remove(slot);
-                            }
-                            else
-                            {
-                                subject.RequestedHoursPerWeek -= 2;
-                                timetable.Add(new CompletedSlot
-                                {
-                                    ClassroomId = assignedClassroom.Id,
-                                    SubjectId = subject.Id,
-                                    WeekType = WeekType.Neutral
-                                });
+                //                daySlots.Remove(slot);
+                //            }
+                //            else
+                //            {
+                //                subject.RequestedHoursPerWeek -= 2;
+                //                timetable.Add(new CompletedSlot
+                //                {
+                //                    ClassroomId = assignedClassroom.Id,
+                //                    SubjectId = subject.Id,
+                //                    WeekType = WeekType.Neutral
+                //                });
 
-                                daySlots.Remove(slot);
-                                daySlots.Remove(daySlots.Where(s => s.DayOfWeek == slot.DayOfWeek && s.TimeSlot == slot.TimeSlot).FirstOrDefault());
-                            }
-                        }
-                        subjectsPerDay[day]++;
-                        MarkSlotAsTaken(teacher, assignedClassroom, slot);
-                        break;
-                    }
-                }
+                //                daySlots.Remove(slot);
+                //                daySlots.Remove(daySlots.Where(s => s.DayOfWeek == slot.DayOfWeek && s.TimeSlot == slot.TimeSlot).FirstOrDefault());
+                //            }
+                //        }
+                //        subjectsPerDay[day]++;
+                //        //MarkSlotAsTaken(teacher, assignedClassroom, slot);
+                //        break;
+                //    }
+                //}
             }
         }
     }
@@ -152,14 +152,14 @@ public class TimetableComposer
         return assignedClassroom != null;
     }
 
-    private void MarkSlotAsTaken(Teacher teacher, Classroom classroom, EmptySlot slot)
-    {
-        timetable.Add(new CompletedSlot
-        {
-            ClassroomId = classroom.Id,
-            SubjectId = -1,
-        });
-    }
+    //private void MarkSlotAsTaken(Teacher teacher, Classroom classroom, EmptySlot slot)
+    //{
+    //    timetable.Add(new CompletedSlot
+    //    {
+    //        ClassroomId = classroom.Id,
+    //        SubjectId = -1,
+    //    });
+    //}
 
     public List<CompletedSlot> GetTimetable()
     {

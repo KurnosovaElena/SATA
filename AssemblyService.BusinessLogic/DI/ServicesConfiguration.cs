@@ -1,4 +1,6 @@
-﻿using AssemblyService.DataAccess.DI;
+﻿using AssemblyService.BusinessLogic.Services.Implementations;
+using AssemblyService.BusinessLogic.Services.Interfaces;
+using AssemblyService.DataAccess.DI;
 using Mapster;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,5 +23,16 @@ public static class ServicesConfiguration
         services.AddDataAccessDependencies(configuration);
 
         TypeAdapterConfig.GlobalSettings.Scan(Assembly.GetExecutingAssembly());
+
+        services.AddServiceDependencies();
+    }
+
+    private static void AddServiceDependencies(this IServiceCollection services)
+    {
+        services.AddScoped<ITimetableService, TimetableService>();
+        services.AddScoped<ICompletedSlotService, CompletedSlotService>();
+        services.AddScoped<IDepartmentService, DepartmentService>();
+        services.AddScoped<ITeacherService, TeacherService>();
+        services.AddScoped<ISubgroupService, SubgroupService>();
     }
 }

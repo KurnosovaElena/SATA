@@ -11,7 +11,8 @@ namespace AssemblyService.BusinessLogic.Services.Implementations;
 public class TimetableService(IUnitOfWork unitOfWork,
     IDepartmentService departmentService,
     ISubgroupService subgroupService,
-    ITeacherService teacherService)
+    ITeacherService teacherService
+    ) : ITimetableService 
 {
     /// <summary>
     /// Generate timetable for every group asigned to department

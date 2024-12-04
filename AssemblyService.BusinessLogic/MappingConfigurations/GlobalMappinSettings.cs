@@ -13,7 +13,7 @@ public class GlobalMappingSettings : IRegister
     /// <param name="config">config argument</param>
     public void Register(TypeAdapterConfig config)
     {
-        TypeAdapterConfig.GlobalSettings.Default.MaxDepth(2);
+        TypeAdapterConfig.GlobalSettings.Default.MaxDepth(3);
         TypeAdapterConfig.GlobalSettings.Default.PreserveReference(true);
     }
 }
