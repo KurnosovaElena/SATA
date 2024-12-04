@@ -8,11 +8,11 @@ public class Classroom
     public int Capacity { get; set; }
 
     public Guid CampusId { get; set; }
-    public Campus Campus { get; set; } = null!;
+    public virtual Campus Campus { get; set; } = null!;
 
-    public ICollection<Detail>? Details { get; set; }
+    public virtual ICollection<Detail>? Details { get; set; }
 
     public virtual ICollection<CompletedSlot>? CompletedSlots { get; set; }
 
-    public ICollection<Subject>? Subjects { get; set; }
+    public virtual ICollection<Subject>? Subjects { get; set; }
 }

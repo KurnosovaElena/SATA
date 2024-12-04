@@ -6,11 +6,11 @@ public class Department
     public string Name { get; set; } = null!;
 
     public Guid CampusId { get; set; }
-    public Campus Campus { get; set; } = null!;
+    public virtual Campus Campus { get; set; } = null!;
 
-    public ICollection<Teacher>? Teachers { get; set; }
+    public virtual ICollection<Teacher>? Teachers { get; set; }
 
-    public ICollection<Discipline>? Disciplines { get; set; }
+    public virtual ICollection<Discipline>? Disciplines { get; set; }
 
-    public ICollection<GroupEntity>? Groups { get; set; }
+    public virtual ICollection<GroupEntity>? Groups { get; set; }
 }

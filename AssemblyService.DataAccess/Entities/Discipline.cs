@@ -8,5 +8,5 @@ public class Discipline
     public string? ShortName { get; set; }
 
     public Guid DepartmentId { get; set; }
-    public Department Department { get; set; } = null!;
+    public virtual Department Department { get; set; } = null!;
 }

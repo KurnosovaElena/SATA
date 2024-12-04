@@ -5,7 +5,7 @@ using AssemblyService.DataAccess.Repositories.Interfaces;
 
 namespace AssemblyService.DataAccess.UnitOfWork;
 
-public class UnitOfWork(TimetableContext context) : IUnitOfWork
+public class UnitOfWork(TimetableContext context) : IUnitOfWork, IDisposable
 {
     private readonly Lazy<IGenericRepository<Campus>> _campusRepository = new(new GenericRepository<Campus>(context));
     private readonly Lazy<IClassroomRepository> _classroomRepository = new(new ClassroomRepository(context));
@@ -51,4 +51,6 @@ public class UnitOfWork(TimetableContext context) : IUnitOfWork
         Dispose(true);
         GC.SuppressFinalize(this);
     }
+
+    ~UnitOfWork() => Dispose(); 
 }

@@ -12,8 +12,8 @@ public class CompletedSlot
     public WeekType WeekType { get; set; }
 
     public Guid SubjectId { get; set; }
-    public Subject Subject { get; set; } = null!;
+    public virtual Subject Subject { get; set; } = null!;
 
     public Guid ClassroomId { get; set; }
-    public Classroom Classroom { get; set; } = null!;
+    public virtual Classroom Classroom { get; set; } = null!;
 }

@@ -8,6 +8,6 @@ public class Campus
 
     public string? Coordinates { get; set; }
 
-    public ICollection<Classroom> Classrooms { get; set; } = null!;
-    public ICollection<Department>? Departments { get; set; }
+    public virtual ICollection<Classroom> Classrooms { get; set; } = null!;
+    public virtual ICollection<Department>? Departments { get; set; }
 }

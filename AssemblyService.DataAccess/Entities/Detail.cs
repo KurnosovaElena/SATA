@@ -6,7 +6,7 @@ public class Detail
 
     public string Name { get; set; } = null!;
 
-    public ICollection<Subject>? Subjects { get; set; }
+    public virtual ICollection<Subject>? Subjects { get; set; }
 
-    public ICollection<Classroom>? Classrooms { get; set; }
+    public virtual ICollection<Classroom>? Classrooms { get; set; }
 }

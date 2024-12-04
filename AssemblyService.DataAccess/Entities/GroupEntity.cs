@@ -12,7 +12,7 @@ public class GroupEntity
     public int IdentityNumber { get; set; }
 
     public Guid DepartmentId { get; set; }
-    public Department Department { get; set; } = null!;
+    public virtual Department Department { get; set; } = null!;
 
     //Lazy loading
     public virtual ICollection<Subgroup> Subgroups { get; set; } = [];

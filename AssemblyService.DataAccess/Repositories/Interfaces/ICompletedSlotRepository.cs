@@ -4,5 +4,5 @@ namespace AssemblyService.DataAccess.Repositories.Interfaces;
 
 public interface ICompletedSlotRepository : IRepositoryBase<CompletedSlot>
 {
-    Task<IEnumerable<CompletedSlot>> GetAllCompletedSlotsOfSubjectsAsync();
+    //Task<IEnumerable<CompletedSlot>> GetAllCompletedSlotsOfSubjectsAsync();
 }
