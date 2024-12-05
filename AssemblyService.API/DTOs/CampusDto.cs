@@ -1,4 +1,6 @@
-﻿namespace AssemblyService.API.DTOs;
+﻿using AssemblyService.API.DTOs.CreateDtos;
+
+namespace AssemblyService.API.DTOs;
 
 public record CampusDto(
     Guid Id,
