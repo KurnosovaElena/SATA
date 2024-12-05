@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AssemblyService.DataAccess.Migrations
 {
     [DbContext(typeof(TimetableContext))]
-    [Migration("20241204194859_init")]
+    [Migration("20241205100642_init")]
     partial class init
     {
         /// <inheritdoc />

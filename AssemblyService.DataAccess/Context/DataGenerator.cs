@@ -24,7 +24,8 @@ public class DataGenerator
 
     public void Init()
     {
-
+        GenerateCampuses();
+        GenerateTeachers();
     }
 
     public List<Campus> GenerateCampuses()
@@ -58,12 +59,6 @@ public class DataGenerator
             .Generate(number); // Generate `number` classrooms for the campus
         Classrooms.AddRange(classroomFaker);
 
-        // You might want to connect the classrooms to other entities like Subjects or CompletedSlots
-        foreach (var classroom in classroomFaker)
-        {
-            GenerateSubjects(3);
-        }
-
         return classroomFaker;
     }
 
@@ -79,39 +74,33 @@ public class DataGenerator
         // Generate teachers, disciplines, and groups for each department
         foreach (var department in departmentFaker)
         {
-            GenerateTeachers(department.Id, 3);
             GenerateDisciplines(department.Id, 3);
             GenerateGroups(department.Id, 3);
         }
         return departmentFaker;
     }
 
-    public List<Teacher> GenerateTeachers(Guid departmentId, int number)
+    public List<Teacher> GenerateTeachers()
     {
         var teacherFaker = new Faker<Teacher>()
             .RuleFor(t => t.Id, f => Guid.NewGuid())
             .RuleFor(t => t.FirstName, f => f.Name.FirstName())
             .RuleFor(t => t.LastName, f => f.Name.LastName())
             .RuleFor(t => t.Position, f => f.Name.JobTitle())
-            .Generate(number); // Generate `number` teachers
+            .Generate(5); // Generate `number` teachers
         Teachers.AddRange(teacherFaker);
 
-        // Assign teachers to the department
-        foreach (var teacher in teacherFaker)
-        {
-            GenerateSubjects(3);
-        }
         return teacherFaker;
     }
 
-    public List<Subject> GenerateSubjects(int number)
+    public List<Subject> GenerateSubjects(int number, Guid teacherId, Guid disciplineId, Guid subjectTypeId)
     {
         var subjectFaker = new Faker<Subject>()
             .RuleFor(s => s.Id, f => Guid.NewGuid())
-            .RuleFor(s => s.TeacherId, f => Guid.NewGuid())
-            .RuleFor(s => s.DisciplineId, f => Guid.NewGuid())
+            .RuleFor(s => s.TeacherId, teacherId)
+            .RuleFor(s => s.DisciplineId, disciplineId)
             .RuleFor(s => s.RequestedHoursPerWeek, f => f.Random.Number(1, 5))
-            .RuleFor(s => s.SubjectTypeId, f => Guid.NewGuid())
+            .RuleFor(s => s.SubjectTypeId, subjectTypeId)
             .Generate(number);
         Subjects.AddRange(subjectFaker);
         return subjectFaker;
@@ -146,4 +135,6 @@ public class DataGenerator
         GroupEntities.AddRange(groupFaker);
         return groupFaker;
     }
+
+
 }
