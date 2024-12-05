@@ -15,4 +15,13 @@ public class DepartmentService(IUnitOfWork unitOfWork) : IDepartmentService
 
         return departmentToReturn;
     }
+
+    public async Task<IEnumerable<DepartmentModel>> GetAllAsync(CancellationToken cancellationToken)
+    {
+        var entity = await unitOfWork.Department.GetAllAsync(cancellationToken);
+
+        var model = entity.Adapt<IEnumerable<DepartmentModel>>();
+
+        return model;
+    }
 }
