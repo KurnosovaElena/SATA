@@ -9,10 +9,10 @@ namespace AssemblyService.API.Controllers;
 [Route("[controller]")]
 public class TimetableController(ITimetableService service) : ControllerBase
 {
-
+    [HttpGet("{departmentId}")]
     public async Task<IEnumerable<CompletedSlotDto>> GenerateSlotsForDepartment([FromRoute] Guid departmentId, CancellationToken cancellationToken)
     {
-        var slots = service.GenerateTimeTableForDepartmentGroupsAsync(departmentId, cancellationToken: cancellationToken);
+        var slots = await service.GenerateTimeTableForDepartmentGroupsAsync(departmentId, cancellationToken: cancellationToken);
 
         var slotsDto = slots.Adapt<IEnumerable<CompletedSlotDto>>();
 

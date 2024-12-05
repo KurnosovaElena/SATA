@@ -30,6 +30,19 @@ public class TimetableContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        new Seed(modelBuilder).SeedTestData();
+            var dg = new DataGenerator();
+
+            dg.GenerateCampuses();
+            modelBuilder.Entity<Teacher>().HasData(dg.Teachers);
+            modelBuilder.Entity<Campus>().HasData(dg.Campuses);
+            modelBuilder.Entity<Classroom>().HasData(dg.Classrooms);
+            modelBuilder.Entity<CompletedSlot>().HasData(dg.CompletedSlots);
+            modelBuilder.Entity<Department>().HasData(dg.Departments);
+            modelBuilder.Entity<Detail>().HasData(dg.Details);
+            modelBuilder.Entity<Discipline>().HasData(dg.Disciplines);
+            modelBuilder.Entity<GroupEntity>().HasData(dg.GroupEntities);
+            modelBuilder.Entity<Subgroup>().HasData(dg.Subgroups);
+            modelBuilder.Entity<Subject>().HasData(dg.Subjects);
+            modelBuilder.Entity<SubjectType>().HasData(dg.Subjects);
     }
 }
