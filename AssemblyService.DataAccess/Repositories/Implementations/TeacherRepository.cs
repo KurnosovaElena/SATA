@@ -6,6 +6,9 @@ using Microsoft.EntityFrameworkCore;
 namespace AssemblyService.DataAccess.Repositories.Implementations;
 public class TeacherRepository(TimetableContext context) : RepositoryBase<Teacher>(context), ITeacherRepository
 {
+    public async Task<IEnumerable<Teacher>> GetAllAsync(CancellationToken cancellationToken) =>
+        await GetAllAsQueryable().ToListAsync(cancellationToken);
+
     public async Task<Teacher> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
         await GetByConditionAsQueryable(t => t.Id == id).Include(t => t.Subjects).FirstAsync(cancellationToken);
 
