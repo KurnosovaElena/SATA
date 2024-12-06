@@ -33,6 +33,11 @@ public static class ServicesConfiguration
         services.AddScoped<ICompletedSlotService, CompletedSlotService>();
         services.AddScoped<IDepartmentService, DepartmentService>();
         services.AddScoped<ITeacherService, TeacherService>();
+        services.AddScoped<ISubjectService, SubjectService>();
+        services.AddScoped<ICampusService, CampusService>();
+        services.AddScoped<IDetailService, DetailService>();
+        services.AddScoped<IDisciplineService, DisciplineService>();
+        services.AddScoped<IClassroomService, ClassroomService>();
         services.AddScoped<ISubgroupService, SubgroupService>();
     }
 }

@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AssemblyService.BusinessLogic.Models;
 
-namespace AssemblyService.BusinessLogic.Services.Interfaces
+namespace AssemblyService.BusinessLogic.Services.Interfaces;
+
+public interface IGroupService
 {
-    interface IGroupService
-    {
-    }
+    Task<IEnumerable<GroupModel>> GetAllAsync(CancellationToken cancellationToken);
+    Task<GroupModel> GetByIdAsync(Guid id, CancellationToken cancellationToken);
+    Task<GroupModel> AddAsync(GroupModel model, CancellationToken cancellationToken);
+    Task<GroupModel> UpdateAsync(GroupModel model, CancellationToken cancellationToken);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
 }

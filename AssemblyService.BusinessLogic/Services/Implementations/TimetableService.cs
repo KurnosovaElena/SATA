@@ -30,7 +30,7 @@ public class TimetableService(IUnitOfWork unitOfWork,
 
         if (department.Groups is null || department.Groups.Count == 0)
         {
-            throw new BadRequestException(DepartmentExceptionMessages.GroupsIsNullOrEmpty(departmentId));
+            throw new BadRequestException(ExceptionMessages.GroupsIsNullOrEmpty(departmentId));
         }
 
         //Order groups by course and name
@@ -40,7 +40,7 @@ public class TimetableService(IUnitOfWork unitOfWork,
         {
             if (group.Subgroups is null || group.Subgroups.Count == 0)
             {
-                throw new BadRequestException(DepartmentExceptionMessages.SubgroupsIsNullOrEmpty(group.Id));
+                throw new BadRequestException(ExceptionMessages.SubgroupsIsNullOrEmpty(group.Id));
             }
 
             foreach (var subgroup in group.Subgroups)
