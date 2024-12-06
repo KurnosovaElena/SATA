@@ -22,6 +22,8 @@ public class ExceptionHandlingMiddleware(RequestDelegate next)
     {
         var responseMessage = ex switch
         {
+            NotFoundException => new ExceptionResponse((int)HttpStatusCode.NotFound, ex.Message),
+
             BadRequestException => new ExceptionResponse(
                 (int)HttpStatusCode.BadRequest,
                 ex.Message
