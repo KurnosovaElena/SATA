@@ -10,6 +10,9 @@ public class RepositoryBase<TEntity>(TimetableContext context) : IRepositoryBase
     public IQueryable<TEntity> GetAllAsQueryable() =>
         context.Set<TEntity>().AsNoTracking();
 
+    public async Task<IEnumerable<TEntity>> GetAllBaseAsync(CancellationToken cancellationToken) =>
+        await GetAllAsQueryable().ToListAsync(cancellationToken);
+
     public IQueryable<TEntity> GetRangeAsQueryable(int pageNumber, int pageSize)
     {
         var rowsToSkip = (pageNumber - 1) * pageSize;

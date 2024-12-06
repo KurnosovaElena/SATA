@@ -11,4 +11,7 @@ public class GenericRepository<TEntity>(TimetableContext context) : RepositoryBa
 
     public async Task<IEnumerable<TEntity>> GetByConditionAsListAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) =>
         await GetAllByConditionAsQueryable(predicate).ToListAsync(cancellationToken);
+
+    public async Task<TEntity?> GetByConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken) =>
+        await GetByConditionAsQueryable(predicate).FirstOrDefaultAsync(cancellationToken);
 }

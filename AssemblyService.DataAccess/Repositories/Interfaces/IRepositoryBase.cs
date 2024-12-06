@@ -6,6 +6,8 @@ public interface IRepositoryBase<TEntity> where TEntity : class
 {
     IQueryable<TEntity> GetAllAsQueryable();
 
+    Task<IEnumerable<TEntity>> GetAllBaseAsync(CancellationToken cancellationToken);
+
     IQueryable<TEntity> GetRangeAsQueryable(int pageNumber, int pageSize);
 
     IQueryable<TEntity> GetByConditionAsQueryable(Expression<Func<TEntity, bool>> predicate);

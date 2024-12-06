@@ -10,6 +10,10 @@ public class GroupRepository(TimetableContext context) : RepositoryBase<GroupEnt
     public async Task<IEnumerable<GroupEntity>> GetAllByDepartmentAsync(Guid departmentId, CancellationToken cancellationToken) =>
         await GetAllByConditionAsQueryable(g => g.DepartmentId == departmentId).ToListAsync(cancellationToken);
 
+    public async Task<GroupEntity?> GetByIdAsync(Guid id, CancellationToken cancellationToken) =>
+        await GetByConditionAsQueryable(e => e.Id == id).FirstOrDefaultAsync(cancellationToken);
+
+
     //метод для получения данных об группах с ссылкой на кафедру (с пагинацией)
     //метод для получения данных об группе по id с ссылкой на кафедру
 

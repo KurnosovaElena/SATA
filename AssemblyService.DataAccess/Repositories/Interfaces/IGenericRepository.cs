@@ -7,4 +7,6 @@ public interface IGenericRepository<TEntity> : IRepositoryBase<TEntity> where TE
     Task<IEnumerable<TEntity>> GetAllAsListAsync(CancellationToken cancellationToken);
 
     Task<IEnumerable<TEntity>> GetByConditionAsListAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
+
+    Task<TEntity?> GetByConditionAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken);
 }
