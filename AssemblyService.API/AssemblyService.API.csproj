@@ -23,4 +23,8 @@
     <ProjectReference Include="..\AssemblyService.BusinessLogic\AssemblyService.BusinessLogic.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="NewFolder\" />
+  </ItemGroup>
+
 </Project>
