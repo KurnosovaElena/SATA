@@ -1,0 +1,47 @@
+[
+    {
+      "name": "Математика",
+      "code": "MATH",
+      "departments": ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+      "forAll": false,
+      "onlyLecture": false,
+      "onlyPractice": false,
+      "department": "Математика"
+    },
+    {
+      "name": "Физика",
+      "code": "PHYS",
+      "departments": ["АСОИР", "ПИР", "МИР"],
+      "forAll": false,
+      "onlyLecture": true,
+      "onlyPractice": false,
+      "department": "Физика"
+    },
+    {
+      "name": "Программирование",
+      "code": "PROG",
+      "departments": ["АСОИР", "ПИР"],
+      "forAll": false,
+      "onlyLecture": false,
+      "onlyPractice": false,
+      "department": "ИТ"
+    },
+    {
+      "name": "Базы данных",
+      "code": "DB",
+      "departments": ["АСОИР", "ПИР"],
+      "forAll": false,
+      "onlyLecture": false,
+      "onlyPractice": false,
+      "department": "ИТ"
+    },
+    {
+      "name": "Физкультура",
+      "code": "PE",
+      "departments": ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+      "forAll": true,
+      "onlyLecture": false,
+      "onlyPractice": true,
+      "department": "Физкультура"
+    }
+  ]
