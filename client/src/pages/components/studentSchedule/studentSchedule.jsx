@@ -11,6 +11,10 @@ const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
     const [currentGroup, setCurrentGroup] = useState(initialGroup);
     const [currentSchedule, setCurrentSchedule] = useState(null);
 
+    //import subjectsData from ../../subjects.json
+    //import professorsData from ../../professors.json
+    //import classroomsData from ../../classrooms.json
+
     // Все группы университета
     const allGroups = [
         'АСОИР-211',
@@ -383,7 +387,7 @@ const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
         const generateWithDelay = async () => {
             for (const groupName of allGroups) {
                 newAllGroupsSchedule[groupName] = generateForGroup(groupName);
-                await new Promise(resolve => setTimeout(resolve, 3000)); // УУУУУУУУУУУУУУУУУУУУУУУУ
+                await new Promise(resolve => setTimeout(resolve, 10000)); // УУУУУУУУУУУУУУУУУУУУУУУУ
                 setAllGroupsSchedule({...newAllGroupsSchedule});
                 setCurrentSchedule(newAllGroupsSchedule[currentGroup]);
             }
