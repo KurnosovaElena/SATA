@@ -1,0 +1,136 @@
+.move-calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.move-calendar-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.move-calendar-dayname {
+    min-width: 110px;
+    text-align: right;
+    margin-right: 12px;
+    font-size: 15px;
+    color: #555;
+    font-weight: 500;
+}
+
+.move-calendar-slots {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* отступ между плитками */
+    margin-bottom: 0;
+}
+
+.move-slot-btn {
+    min-width: 100px;
+    min-height: 48px;
+    border-radius: 10px;
+    border: none;
+    background: #f5f5f5;
+    color: #333;
+    font-size: 15px;
+    transition: box-shadow 0.2s, background 0.2s;
+    cursor: pointer;
+    margin: 0;
+    padding: 6px 0 4px 0;
+    box-shadow: 0 1px 2px #0001;
+    outline: none;
+    /* убираем border для всех состояний */
+}
+.move-slot-btn:active {
+    box-shadow: 0 0 0 2px #83A36B33;
+}
+.move-slot-btn.disabled {
+    background: #eee !important;
+    color: #bbb !important;
+    border: none !important;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.move-slot-btn.current-slot {
+    background: #83A36B !important;
+    color: #fff !important;
+    border: none !important;
+    font-weight: bold;
+    box-shadow: 0 0 0 2px #83A36B33;
+}
+
+.move-slot-btn.selected {
+    background: #EEDC7C !important; /* фирменный желтый */
+    color: #222 !important;
+    border: none !important;
+    font-weight: bold;
+    box-shadow: 0 0 0 2px #EEDC7C33;
+}
+
+.popup-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 12px;
+}
+.popup-actions button {
+    min-width: 110px;
+    min-height: 40px;
+    font-size: 17px;
+    border: none;
+    border-radius: 8px;
+    background: #f5f5f5;
+    color: #333;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 1px 2px #0001;
+    cursor: pointer;
+}
+.popup-actions button:active {
+    background: #e0e0e0;
+}
+.popup-actions button:focus {
+    outline: none;
+}
+
+.popup-content {
+    padding: 18px 22px 18px 22px;
+    border-radius: 16px;
+    background: #fff;
+    min-width: 340px;
+    max-width: 98vw;
+    box-shadow: 0 4px 32px #0002;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.popup-section {
+    margin-bottom: 8px;
+    margin-top: 0;
+}
+.move-calendar {
+    margin-bottom: 0;
+}
+
+.popup-header, .popup-section:last-child {
+    margin-bottom: 0;
+}
+
+.popup-section > .move-calendar {
+    margin-top: 10px;
+}
+
+@media (max-width: 500px) {
+    .popup-content {
+        min-width: 90vw;
+        padding: 10px 4vw;
+    }
+    .move-slot-btn {
+        min-width: 48px;
+        font-size: 13px;
+    }
+}

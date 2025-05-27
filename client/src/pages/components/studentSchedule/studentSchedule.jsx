@@ -378,7 +378,22 @@ const StudentSchedule = () => {
                 }
             });
 
-            return schedule;
+        // --- ДОБАВЛЕНИЕ availableForMove ---
+        // Для каждого дня и пары ищем свободные слоты (нет занятия у этой группы и нет занятия у других групп с этим преподавателем)
+        const availableForMove = {};
+        dayNames.forEach(day => {
+            availableForMove[day] = [];
+            for (let blockIdx = 0; blockIdx < timeBlocks.length; blockIdx++) {
+                // Слот свободен, если у этой группы нет занятия и ни у одной другой группы нет занятия с этим же преподавателем
+                const isSlotFree = !schedule[day][blockIdx].className;
+                if (isSlotFree) {
+                    availableForMove[day].push(blockIdx);
+                }
+            }
+        });
+        schedule.availableForMove = availableForMove;
+        // --- КОНЕЦ ДОБАВЛЕНИЯ ---
+        return schedule;
         };
 
         const generateWithDelay = async () => {
