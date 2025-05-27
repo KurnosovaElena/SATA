@@ -1,3 +1,68 @@
+/* Стилизация аналогично studentSchedule.css */
+.professorschedulepage {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4f6f8;
+    display: flex;
+    flex-direction: column;
+}
+
+.controls-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 30px;
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.group-selector-container {
+    display: flex;
+    justify-content: center;
+}
+
+.group-selector {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+}
+
+.group-selector-label {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.group-select {
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    background-color: white;
+    transition: all 0.3s ease;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+}
+
+.group-select:focus {
+    border-color: #83A36B;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(131, 163, 107, 0.2);
+}
+
+.professors-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
 .professor-schedule-time {
     background-color: #ffffff;
     margin-left: 15px;
@@ -16,12 +81,6 @@
     margin: auto auto 0px auto;
 }
 
-.professors-content{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
 .line-under {
     margin: -12px auto 5% auto;
 }
@@ -35,4 +94,136 @@
     padding: 0 20px;
     margin: 0 15px 0 0;
     border-radius: 10px;
+}
+
+.day-schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    min-width: 120px;
+    margin: 0 5px;
+}
+
+.day-schedule.current-day {
+    background: #f0f7ea;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(131,163,107,0.08);
+}
+
+.day-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4a6fa5;
+    margin: 10px 0 12px 0;
+    text-align: center;
+}
+
+.day-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.time-block {
+    background: #f8f9fa;
+    border-radius: 8px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    color: #32381C;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    padding: 6px 4px;
+    transition: background 0.2s;
+}
+
+.time-block.lecture {
+    background: #e6f3ff;
+    border-left: 6px solid #4a6fa5;
+}
+
+.time-block.practice {
+    background: #f3fbe6;
+    border-left: 6px solid #83A36B;
+}
+
+.time-block.lab {
+    background: #fff7e6;
+    border-left: 6px solid #f5b942;
+}
+
+.time-block.empty-block {
+    background: #f4f6f8;
+    color: #bbb;
+    box-shadow: none;
+    border-left: none;
+}
+
+.block-class {
+    font-weight: 600;
+    color: #32381C;
+    margin-bottom: 2px;
+}
+
+.block-group {
+    font-size: 14px;
+    color: #4a6fa5;
+    margin-bottom: 2px;
+}
+
+.block-classroom {
+    font-size: 13px;
+    color: #888;
+}
+
+@media (max-width: 1200px) {
+    .professor-schedule-days {
+        width: 100%;
+        padding: 0 5px;
+    }
+    .day-schedule {
+        min-width: 90px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 900px) {
+    .professors-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .professor-schedule-time {
+        flex-direction: row;
+        width: 100%;
+        margin: 0 0 15px 0;
+        padding: 10px 0;
+        justify-content: center;
+    }
+    .professor-schedule-days {
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        padding: 0 2px;
+    }
+    .day-schedule {
+        min-width: 70px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .professor-schedule-days {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+    .day-schedule {
+        width: 100%;
+        min-width: unset;
+        margin: 0 0 10px 0;
+    }
 }

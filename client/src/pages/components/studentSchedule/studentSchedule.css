@@ -1,4 +1,11 @@
-/* Контейнеры управления */
+/* Контейнеры управления и селекторы */
+.students-content {
+    width: 100%;
+    min-height: 100vh;
+    background: #f4f6f8;
+    display: flex;
+    flex-direction: column;
+}
 .controls-container {
     display: flex;
     flex-direction: column;
@@ -9,26 +16,22 @@
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
-
 .group-selector-container {
     display: flex;
     justify-content: center;
 }
-
 .group-selector {
     display: flex;
     flex-direction: column;
     width: 100%;
     max-width: 400px;
 }
-
 .group-selector-label {
     font-size: 14px;
     color: #555;
     margin-bottom: 8px;
     font-weight: 500;
 }
-
 .group-select {
     padding: 12px 15px;
     border-radius: 8px;
@@ -42,20 +45,17 @@
     background-position: right 10px center;
     background-size: 16px;
 }
-
 .group-select:focus {
     border-color: #83A36B;
     outline: none;
     box-shadow: 0 0 0 2px rgba(131, 163, 107, 0.2);
 }
-
 .buttons-container {
     display: flex;
     gap: 15px;
     justify-content: center;
     flex-wrap: wrap;
 }
-
 /* Стили кнопок */
 .generate-button, .export-button {
     display: flex;
@@ -70,29 +70,24 @@
     border: none;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
-
 .generate-button {
     background-color: #83A36B;
     color: white;
 }
-
 .generate-button:hover:not(:disabled) {
     background-color: #6d8a58;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
-
 .generate-button:disabled {
     background-color: #a8c990;
     cursor: not-allowed;
     opacity: 0.8;
 }
-
 .generate-button.generating {
     position: relative;
     overflow: hidden;
 }
-
 .generate-button.generating::after {
     content: '';
     position: absolute;
@@ -103,50 +98,180 @@
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
     animation: shimmer 1.5s infinite;
 }
-
 @keyframes shimmer {
     100% {
         left: 100%;
     }
 }
-
 .export-button {
     background-color: #4a6fa5;
     color: white;
 }
-
 .export-button:hover {
     background-color: #3a5a8f;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
-
 .button-icon {
     font-size: 18px;
 }
-
 .button-text {
     white-space: nowrap;
 }
 
+/* Время и дни недели */
+.student-schedule-time {
+    background-color: #ffffff;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 8%;
+    border-radius: 10px;
+    padding: 1.5% 0.7% 0.7% 0.7%;
+}
+.student-schedule-time p {
+    margin: 0;
+    color: #32381C;
+    font-size: 24px;
+    font-weight: bold;
+    margin: auto auto 0px auto;
+}
+.line-under {
+    margin: -12px auto 5% auto;
+}
+.student-schedule-days {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: #ffffff;
+    width: 85%;
+    padding: 0 20px;
+    margin: 0 15px 0 0;
+    border-radius: 10px;
+}
+.day-schedule {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    min-width: 120px;
+    margin: 0 5px;
+}
+.day-schedule.current-day {
+    background: #f0f7ea;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(131,163,107,0.08);
+}
+.day-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #4a6fa5;
+    margin: 10px 0 12px 0;
+    text-align: center;
+}
+.day-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+.time-block {
+    background: #f8f9fa;
+    border-radius: 8px;
+    min-height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-size: 15px;
+    color: #32381C;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    padding: 10px 12px 10px 16px;
+    transition: background 0.2s;
+    margin-bottom: 0;
+    gap: 2px;
+}
+.time-block.lecture {
+    background: #e6f3ff;
+    border-left: 6px solid #4a6fa5;
+}
+.time-block.practice {
+    background: #f3fbe6;
+    border-left: 6px solid #83A36B;
+}
+.time-block.lab {
+    background: #fff7e6;
+    border-left: 6px solid #f5b942;
+}
+.time-block.empty-block {
+    background: #f4f6f8;
+    color: #bbb;
+    box-shadow: none;
+    border-left: none;
+}
+.block-class {
+    font-weight: 600;
+    color: #32381C;
+    margin-bottom: 2px;
+    font-size: 16px;
+    line-height: 1.2;
+}
+.block-group {
+    font-size: 14px;
+    color: #4a6fa5;
+    margin-bottom: 0;
+    line-height: 1.1;
+}
+.block-classroom {
+    font-size: 13px;
+    color: #888;
+    margin-top: 0;
+    line-height: 1.1;
+}
 /* Адаптивность */
-@media (max-width: 768px) {
-    .controls-container {
-        padding: 15px;
-    }
-    
-    .buttons-container {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .generate-button, .export-button {
+@media (max-width: 1200px) {
+    .student-schedule-days {
         width: 100%;
+        padding: 0 5px;
+    }
+    .day-schedule {
+        min-width: 90px;
+        font-size: 13px;
+    }
+}
+@media (max-width: 900px) {
+    .students-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    .student-schedule-time {
+        flex-direction: row;
+        width: 100%;
+        margin: 0 0 15px 0;
+        padding: 10px 0;
         justify-content: center;
     }
-    
-    .group-select {
-        padding: 10px 12px;
+    .student-schedule-days {
+        flex-direction: row;
+        width: 100%;
+        margin: 0;
+        padding: 0 2px;
+    }
+    .day-schedule {
+        min-width: 70px;
+        font-size: 12px;
+    }
+}
+@media (max-width: 600px) {
+    .student-schedule-days {
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+    }
+    .day-schedule {
+        width: 100%;
+        min-width: unset;
+        margin: 0 0 10px 0;
     }
 }
 /* Анимация генерации */
@@ -302,4 +427,227 @@
 @keyframes progressShine {
     0% { background-position: 200% 0; }
     100% { background-position: -200% 0; }
+}
+
+/* Левая панель (sidebar) */
+.sidebar-panel {
+    position: relative;
+    height: 100vh;
+    background: #f8f9fa;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.04);
+    transition: width 0.3s cubic-bezier(.4,0,.2,1);
+    overflow-y: auto;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.sidebar-expanded {
+    width: 260px;
+    min-width: 220px;
+    max-width: 320px;
+}
+.sidebar-collapsed {
+    width: 60px;
+    min-width: 60px;
+    max-width: 60px;
+}
+
+.sidebar-toggle-btn {
+    position: absolute;
+    top: 18px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: #e6f3ff;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 3;
+}
+.sidebar-toggle-btn:hover {
+    background: #d0e7fa;
+}
+
+/* Скрытие текста и элементов в свернутом состоянии */
+.sidebar-collapsed .sidebar-content-text,
+.sidebar-collapsed .group-selector-label,
+.sidebar-collapsed .button-text {
+    display: none !important;
+}
+.sidebar-collapsed .group-select {
+    min-width: 0;
+    width: 48px;
+    padding: 6px 8px 6px 8px;
+    font-size: 15px;
+    background-position: center right 8px;
+    text-align: center;
+    border-radius: 8px;
+    color: #4a6fa5;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    transition: all 0.3s;
+}
+.sidebar-collapsed .group-select option {
+    font-size: 15px;
+}
+
+.sidebar-collapsed .group-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px 0 0 0;
+}
+.sidebar-collapsed .group-select {
+    width: 38px;
+    height: 38px;
+    padding: 0;
+    border-radius: 10px;
+    border: 1.5px solid #4a6fa5;
+    background: #fff;
+    color: transparent;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+    font-size: 0;
+    box-shadow: 0 1px 4px rgba(74,111,165,0.07);
+}
+.sidebar-collapsed .group-select option {
+    color: #32381C;
+    font-size: 15px;
+}
+.sidebar-collapsed .group-select::-ms-expand {
+    display: none;
+}
+.sidebar-collapsed .group-select:after {
+    display: none;
+}
+.sidebar-collapsed .group-select::before {
+    display: none;
+}
+.sidebar-collapsed .group-select {
+    background-image: none;
+}
+.sidebar-collapsed .group-select:focus {
+    border-color: #4a6fa5;
+    box-shadow: 0 0 0 2px rgba(74,111,165,0.13);
+}
+.sidebar-collapsed .group-select {
+    /* Скрываем текст, но оставляем стрелку */
+    color: transparent;
+    text-shadow: 0 0 0 #4a6fa5;
+}
+.sidebar-collapsed .group-select {
+    background: #fff;
+}
+.sidebar-collapsed .group-select {
+    /* Кастомная стрелка */
+    background: #fff;
+    position: relative;
+}
+.sidebar-collapsed .group-select::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 8px solid #4a6fa5;
+    transform: translate(-50%, -40%);
+    pointer-events: none;
+    z-index: 3;
+}
+.sidebar-collapsed .group-selector-label {
+    display: none !important;
+}
+.sidebar-collapsed .generate-button,
+.sidebar-collapsed .export-button {
+    justify-content: center;
+    padding: 10px 0;
+    min-width: 40px;
+}
+.sidebar-collapsed .button-icon {
+    margin: 0;
+}
+.sidebar-collapsed-group-name {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: #4a6fa5;
+    margin: auto 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+    letter-spacing: 1px;
+    user-select: none;
+}
+
+.sidebar-expanded .sidebar-collapsed-group-name {
+    display: none;
+}
+
+.sidebar-buttons-padded {
+    padding: 0 8px 8px 8px;
+    box-sizing: border-box;
+    gap: 8px;
+}
+
+/* Селектор группы и кнопки всегда кликабельны */
+.sidebar-panel .group-select,
+.sidebar-panel .generate-button,
+.sidebar-panel .export-button {
+    pointer-events: auto;
+}
+
+.generate-button, .export-button {
+    width: 100%;
+    min-width: 0;
+    max-width: 220px;
+    margin: 0 auto;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    white-space: normal;
+}
+
+.controls-container {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.sidebar-collapsed .buttons-container.sidebar-buttons-padded {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    padding: 0 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+.sidebar-collapsed .controls-container {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.sidebar-collapsed.sidebar-panel {
+    border-radius: 18px;
+    transition: border-radius 0.3s;
+}
+.sidebar-expanded.sidebar-panel {
+    border-radius: 0;
+    transition: border-radius 0.3s;
 }

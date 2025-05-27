@@ -1,282 +1,280 @@
 import React, { useState, useEffect } from 'react';
 import TimeBlock from '../timeBlock/timeBlock';
 import DaySchedule from '../daySchedule/dayScheduleW';
+import schedulesData from '../../../data/schedules.json';
 import "./studentSchedule.css";
 
-const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
+// Все группы университета
+const allGroups = [
+    'АСОИР-211',
+    'ПИР-211',
+    'МИР-211', 
+    'ЗАР-211',
+    'СПР-211'
+];
+
+// Полный список предметов с указанием необходимых аудиторий
+const subjectsData = [
+    {
+        name: "Математика",
+        code: "MATH",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Математика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Физика",
+        code: "PHYS",
+        departments: ["АСОИР", "ПИР", "МИР"],
+        forAll: false,
+        onlyLecture: true,
+        onlyPractice: false,
+        department: "Физика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Программирование",
+        code: "PROG",
+        departments: ["АСОИР", "ПИР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "ИТ",
+        requiredClassroom: "computer_class"
+    },
+    {
+        name: "Базы данных",
+        code: "DB",
+        departments: ["АСОИР", "ПИР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "ИТ",
+        requiredClassroom: "computer_class"
+    },
+    {
+        name: "Физкультура",
+        code: "PE",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: true,
+        onlyLecture: false,
+        onlyPractice: true,
+        department: "Физкультура",
+        requiredClassroom: "gym"
+    },
+    {
+        name: "Лингвистика",
+        code: "LING",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Лингвистика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Философия",
+        code: "PHIL",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Философия",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Английский язык",
+        code: "ENG",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Лингвистика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Русский язык",
+        code: "RUS",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Лингвистика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "География",
+        code: "GEO",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Лингвистика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "История",
+        code: "HIST",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Лингвистика",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Экономика",
+        code: "ECON",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Философия",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Право",
+        code: "LAW",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Философия",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Социология",
+        code: "SOC",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Философия",
+        requiredClassroom: "lecture_hall"
+    },
+    {
+        name: "Психология",
+        code: "PSY",
+        departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
+        forAll: false,
+        onlyLecture: false,
+        onlyPractice: false,
+        department: "Философия",
+        requiredClassroom: "lecture_hall"
+    }
+];
+
+// Преподаватели
+const professorsData = [
+    { name: "Иванов И.И.", department: "ИТ", maxHours: 12 },
+    { name: "Петров П.П.", department: "Математика", maxHours: 10 },
+    { name: "Сидоров С.С.", department: "Физика", maxHours: 8 },
+    { name: "Кузнецова Е.В.", department: "Программирование", maxHours: 12 },
+    { name: "Смирнов А.А.", department: "Базы данных", maxHours: 10 },
+    
+    // Лингвистика
+    { name: "Васильева О.Н.", department: "Лингвистика", maxHours: 14 },
+    { name: "Ковалева М.С.", department: "Лингвистика", maxHours: 12 },
+    { name: "Жукова Л.Д.", department: "Лингвистика", maxHours: 10 },
+    
+    // Философия и гуманитарные науки
+    { name: "Николаев Д.К.", department: "Философия", maxHours: 8 },
+    { name: "Соколов А.В.", department: "Философия", maxHours: 10 },
+    { name: "Белова Т.М.", department: "Философия", maxHours: 12 },
+    { name: "Громова В.П.", department: "Философия", maxHours: 8 },
+    
+    // Физкультура
+    { name: "Громов В.П.", department: "Физкультура", maxHours: 16 },
+    { name: "Тихонов С.А.", department: "Физкультура", maxHours: 12 },
+    
+    // История и социология
+    { name: "Орлов Н.Ф.", department: "Философия", maxHours: 10 },
+    { name: "Зайцева Е.В.", department: "Философия", maxHours: 8 },
+    
+    // Экономика и право
+    { name: "Крылов М.П.", department: "Философия", maxHours: 12 },
+    { name: "Морозова А.С.", department: "Философия", maxHours: 10 }
+];
+    
+// Аудитории (20 штук)
+const classroomsData = [
+    // Лекционные аудитории (10)
+    { number: "101", building: "1", type: "lecture_hall", capacity: 30 },
+    { number: "102", building: "1", type: "lecture_hall", capacity: 25 },
+    { number: "103", building: "1", type: "lecture_hall", capacity: 40 },
+    { number: "201", building: "1", type: "lecture_hall", capacity: 35 },
+    { number: "202", building: "1", type: "lecture_hall", capacity: 30 },
+    { number: "301", building: "1", type: "lecture_hall", capacity: 50 },
+    { number: "302", building: "1", type: "lecture_hall", capacity: 45 },
+    { number: "401", building: "1", type: "lecture_hall", capacity: 60 },
+    { number: "402", building: "1", type: "lecture_hall", capacity: 55 },
+    { number: "Актовый зал", building: "1", type: "large_lecture_hall", capacity: 100 },
+    
+    // Компьютерные классы (8)
+    { number: "105", building: "2", type: "computer_class", capacity: 20 },
+    { number: "106", building: "2", type: "computer_class", capacity: 18 },
+    { number: "205", building: "2", type: "computer_class", capacity: 22 },
+    { number: "206", building: "2", type: "computer_class", capacity: 20 },
+    { number: "305", building: "2", type: "computer_class", capacity: 25 },
+    { number: "306", building: "2", type: "computer_class", capacity: 20 },
+    { number: "405", building: "2", type: "computer_class", capacity: 30 },
+    { number: "406", building: "2", type: "computer_class", capacity: 25 },
+    
+    // Специальные аудитории (2)
+    { number: "Спортзал", building: "3", type: "gym", capacity: 50 },
+    { number: "Лингафонный кабинет", building: "3", type: "language_lab", capacity: 15 }
+];
+
+// Временные блоки (пары)
+const timeBlocks = [
+    { timeUp: '08:30', timeDown: '10:05' }, // 1 пара
+    { timeUp: '10:25', timeDown: '12:00' }, // 2 пара
+    { timeUp: '12:30', timeDown: '14:05' }, // 3 пара
+    { timeUp: '14:20', timeDown: '15:55' }, // 4 пара
+    { timeUp: '16:05', timeDown: '17:40' }, // 5 пара
+    { timeUp: '17:50', timeDown: '19:25' }  // 6 пара 
+];
+
+const dayNames = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+
+// Создание пустого расписания
+const createEmptySchedule = () => {
+    return dayNames.reduce((acc, day) => {
+        acc[day] = timeBlocks.map(() => ({
+            className: "",
+            professorName: "",
+            classroom: "",
+            type: ""
+        }));
+        return acc;
+    }, {});
+};
+
+// Получение предмета для группы
+const getSubjectForGroup = (groupName) => {
+    const specialty = groupName.split('-')[0] || 'АСОИР';
+    
+    const availableSubjects = subjectsData.filter(subject => {
+        if (subject.forAll) return true;
+        return subject.departments?.includes(specialty);
+    });
+
+    return availableSubjects.length > 0 
+        ? availableSubjects[Math.floor(Math.random() * availableSubjects.length)]
+        : subjectsData[0];
+};
+
+const StudentSchedule = () => {
     const currentDay = new Date().getDay();
     const [isGenerating, setIsGenerating] = useState(false);
     const [animationProgress, setAnimationProgress] = useState(0);
     const [allGroupsSchedule, setAllGroupsSchedule] = useState({});
-    const [currentGroup, setCurrentGroup] = useState(initialGroup);
+    const [currentGroup, setCurrentGroup] = useState('АСОИР-211');
     const [currentSchedule, setCurrentSchedule] = useState(null);
-
-    //import subjectsData from ../../subjects.json
-    //import professorsData from ../../professors.json
-    //import classroomsData from ../../classrooms.json
-
-    // Все группы университета
-    const allGroups = [
-        'АСОИР-211',
-        'ПИР-211',
-        'МИР-211', 
-        'ЗАР-211',
-        'СПР-211'
-    ];
-
-    // Полный список предметов с указанием необходимых аудиторий
-    const subjectsData = [
-        {
-            name: "Математика",
-            code: "MATH",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Математика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Физика",
-            code: "PHYS",
-            departments: ["АСОИР", "ПИР", "МИР"],
-            forAll: false,
-            onlyLecture: true,
-            onlyPractice: false,
-            department: "Физика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Программирование",
-            code: "PROG",
-            departments: ["АСОИР", "ПИР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "ИТ",
-            requiredClassroom: "computer_class"
-        },
-        {
-            name: "Базы данных",
-            code: "DB",
-            departments: ["АСОИР", "ПИР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "ИТ",
-            requiredClassroom: "computer_class"
-        },
-        {
-            name: "Физкультура",
-            code: "PE",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: true,
-            onlyLecture: false,
-            onlyPractice: true,
-            department: "Физкультура",
-            requiredClassroom: "gym"
-        },
-        {
-            name: "Лингвистика",
-            code: "LING",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Лингвистика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Философия",
-            code: "PHIL",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Философия",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Английский язык",
-            code: "ENG",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Лингвистика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Русский язык",
-            code: "RUS",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Лингвистика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "География",
-            code: "GEO",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Лингвистика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "История",
-            code: "HIST",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Лингвистика",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Экономика",
-            code: "ECON",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Философия",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Право",
-            code: "LAW",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Философия",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Социология",
-            code: "SOC",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Философия",
-            requiredClassroom: "lecture_hall"
-        },
-        {
-            name: "Психология",
-            code: "PSY",
-            departments: ["АСОИР", "ПИР", "МИР", "ЗАР", "СПР"],
-            forAll: false,
-            onlyLecture: false,
-            onlyPractice: false,
-            department: "Философия",
-            requiredClassroom: "lecture_hall"
-        }
-    ];
-
-    // Преподаватели
-    const professorsData = [
-        { name: "Иванов И.И.", department: "ИТ", maxHours: 12 },
-        { name: "Петров П.П.", department: "Математика", maxHours: 10 },
-        { name: "Сидоров С.С.", department: "Физика", maxHours: 8 },
-        { name: "Кузнецова Е.В.", department: "Программирование", maxHours: 12 },
-        { name: "Смирнов А.А.", department: "Базы данных", maxHours: 10 },
-        
-        // Лингвистика
-        { name: "Васильева О.Н.", department: "Лингвистика", maxHours: 14 },
-        { name: "Ковалева М.С.", department: "Лингвистика", maxHours: 12 },
-        { name: "Жукова Л.Д.", department: "Лингвистика", maxHours: 10 },
-        
-        // Философия и гуманитарные науки
-        { name: "Николаев Д.К.", department: "Философия", maxHours: 8 },
-        { name: "Соколов А.В.", department: "Философия", maxHours: 10 },
-        { name: "Белова Т.М.", department: "Философия", maxHours: 12 },
-        { name: "Громова В.П.", department: "Философия", maxHours: 8 },
-        
-        // Физкультура
-        { name: "Громов В.П.", department: "Физкультура", maxHours: 16 },
-        { name: "Тихонов С.А.", department: "Физкультура", maxHours: 12 },
-        
-        // История и социология
-        { name: "Орлов Н.Ф.", department: "Философия", maxHours: 10 },
-        { name: "Зайцева Е.В.", department: "Философия", maxHours: 8 },
-        
-        // Экономика и право
-        { name: "Крылов М.П.", department: "Философия", maxHours: 12 },
-        { name: "Морозова А.С.", department: "Философия", maxHours: 10 }
-    ];
-    
-    // Аудитории (20 штук)
-    const classroomsData = [
-        // Лекционные аудитории (10)
-        { number: "101", building: "1", type: "lecture_hall", capacity: 30 },
-        { number: "102", building: "1", type: "lecture_hall", capacity: 25 },
-        { number: "103", building: "1", type: "lecture_hall", capacity: 40 },
-        { number: "201", building: "1", type: "lecture_hall", capacity: 35 },
-        { number: "202", building: "1", type: "lecture_hall", capacity: 30 },
-        { number: "301", building: "1", type: "lecture_hall", capacity: 50 },
-        { number: "302", building: "1", type: "lecture_hall", capacity: 45 },
-        { number: "401", building: "1", type: "lecture_hall", capacity: 60 },
-        { number: "402", building: "1", type: "lecture_hall", capacity: 55 },
-        { number: "Актовый зал", building: "1", type: "large_lecture_hall", capacity: 100 },
-        
-        // Компьютерные классы (8)
-        { number: "105", building: "2", type: "computer_class", capacity: 20 },
-        { number: "106", building: "2", type: "computer_class", capacity: 18 },
-        { number: "205", building: "2", type: "computer_class", capacity: 22 },
-        { number: "206", building: "2", type: "computer_class", capacity: 20 },
-        { number: "305", building: "2", type: "computer_class", capacity: 25 },
-        { number: "306", building: "2", type: "computer_class", capacity: 20 },
-        { number: "405", building: "2", type: "computer_class", capacity: 30 },
-        { number: "406", building: "2", type: "computer_class", capacity: 25 },
-        
-        // Специальные аудитории (2)
-        { number: "Спортзал", building: "3", type: "gym", capacity: 50 },
-        { number: "Лингафонный кабинет", building: "3", type: "language_lab", capacity: 15 }
-    ];
-
-    // Временные блоки (пары)
-    const timeBlocks = [
-        { timeUp: '08:30', timeDown: '10:05' }, // 1 пара
-        { timeUp: '10:25', timeDown: '12:00' }, // 2 пара
-        { timeUp: '12:30', timeDown: '14:05' }, // 3 пара
-        { timeUp: '14:20', timeDown: '15:55' }, // 4 пара
-        { timeUp: '16:05', timeDown: '17:40' }, // 5 пара
-        { timeUp: '17:50', timeDown: '19:25' }  // 6 пара 
-    ];
-
-    const dayNames = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
-
-    // Создание пустого расписания
-    const createEmptySchedule = () => {
-        return dayNames.reduce((acc, day) => {
-            acc[day] = timeBlocks.map(() => ({
-                className: "",
-                professorName: "",
-                classroom: "",
-                type: ""
-            }));
-            return acc;
-        }, {});
-    };
-
-    // Получение предмета для группы
-    const getSubjectForGroup = (groupName) => {
-        const specialty = groupName.split('-')[0] || 'АСОИР';
-        
-        const availableSubjects = subjectsData.filter(subject => {
-            if (subject.forAll) return true;
-            return subject.departments?.includes(specialty);
-        });
-
-        return availableSubjects.length > 0 
-            ? availableSubjects[Math.floor(Math.random() * availableSubjects.length)]
-            : subjectsData[0];
-    };
+    const [sidebarExpanded, setSidebarExpanded] = useState(true);
 
     // Генерация расписания с улучшенной анимацией и новыми ограничениями
     const generateAllSchedules = () => {
@@ -294,7 +292,6 @@ const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
 
         const generateForGroup = (groupName) => {
             const schedule = createEmptySchedule();
-            const specialty = groupName.split('-')[0];
             let peCount = 0; // Счетчик пар физкультуры
 
             dayNames.forEach(day => {
@@ -387,25 +384,22 @@ const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
         const generateWithDelay = async () => {
             for (const groupName of allGroups) {
                 newAllGroupsSchedule[groupName] = generateForGroup(groupName);
-                await new Promise(resolve => setTimeout(resolve, 10000)); // УУУУУУУУУУУУУУУУУУУУУУУУ
+                await new Promise(resolve => setTimeout(resolve, 1000)); // УУУУУУУУУУУУУУУУУУУУУУУУ
                 setAllGroupsSchedule({...newAllGroupsSchedule});
                 setCurrentSchedule(newAllGroupsSchedule[currentGroup]);
             }
             
-            localStorage.setItem('generatedSchedules', JSON.stringify(newAllGroupsSchedule));
             setIsGenerating(false);
         };
 
         generateWithDelay();
     };
 
-    // Загрузка сохраненного расписания
+    // Загрузка расписания
     useEffect(() => {
-        const savedSchedules = localStorage.getItem('generatedSchedules');
-        if (savedSchedules) {
-            const parsed = JSON.parse(savedSchedules);
-            setAllGroupsSchedule(parsed);
-            setCurrentSchedule(parsed[currentGroup] || createEmptySchedule());
+        if (schedulesData && schedulesData[currentGroup]) {
+            setAllGroupsSchedule(schedulesData);
+            setCurrentSchedule(schedulesData[currentGroup]);
         } else {
             setCurrentSchedule(createEmptySchedule());
         }
@@ -433,64 +427,63 @@ const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
         linkElement.setAttribute('href', dataUri);
         linkElement.setAttribute('download', exportFileDefaultName);
         linkElement.click();
+        alert('Файл расписания скачан. Положите его в src/data/schedules.json для загрузки расписания.');
     };
 
     return (
         <div className="students-content">
-            <div className="controls-container">
-                <div className="group-selector-container">
-                    <div className="group-selector">
-                        <label className="group-selector-label">Выберите группу:</label>
-                        <select 
-                            value={currentGroup} 
-                            onChange={handleGroupChange}
-                            disabled={isGenerating}
-                            className="group-select"
-                        >
-                            {allGroups.map(g => (
-                                <option key={g} value={g}>{g}</option>
-                            ))}
-                        </select>
+            <div className={`sidebar-panel ${sidebarExpanded ? 'sidebar-expanded' : 'sidebar-collapsed'}`}> 
+                <button 
+                    className="sidebar-toggle-btn"
+                    onClick={() => setSidebarExpanded(exp => !exp)}
+                    aria-label={sidebarExpanded ? 'Свернуть панель' : 'Развернуть панель'}
+                >
+                    {sidebarExpanded ? <span>&#8592;</span> : <span>&#8594;</span>}
+                </button>
+                {!sidebarExpanded && (
+                    <div className="sidebar-collapsed-group-name">
+                        {currentGroup}
                     </div>
-                </div>
-
-                <div className="buttons-container">
-                    <button 
-                        onClick={generateAllSchedules}
-                        disabled={isGenerating}
-                        className={`generate-button ${isGenerating ? 'generating' : ''}`}
-                    >
-                        <span className="button-icon">🔄</span>
-                        <span className="button-text">
-                            {isGenerating ? `Генерация ${Math.round(animationProgress)}%` : 'Сгенерировать расписание'}
-                        </span>
-                    </button>
-                    
-                    {Object.keys(allGroupsSchedule).length > 0 && (
-                        <button 
-                            onClick={exportToJson}
-                            className="export-button"
-                        >
-                            <span className="button-icon">💾</span>
-                            <span className="button-text">Экспорт в JSON</span>
-                        </button>
-                    )}
-                </div>
-            </div>
-            
-            {isGenerating && (
-                <div className="generation-animation">
-                    <div className="animation-container">
-                        <div className="book-animation"></div>
-                        <div className="clock-animation"></div>
-                        <div className="progress-text">Генерация расписания... {Math.round(animationProgress)}%</div>
-                        <div className="progress-bar">
-                            <div className="progress-fill" style={{ width: `${animationProgress}%` }}></div>
+                )}
+                <div className="controls-container">
+                    <div className="group-selector-container">
+                        <div className="group-selector">
+                            <label className="group-selector-label sidebar-content-text">Выберите группу:</label>
+                            <select 
+                                value={currentGroup} 
+                                onChange={handleGroupChange}
+                                disabled={isGenerating}
+                                className="group-select"
+                            >
+                                {allGroups.map(g => (
+                                    <option key={g} value={g}>{g}</option>
+                                ))}
+                            </select>
                         </div>
                     </div>
+                    <div className="buttons-container sidebar-buttons-padded">
+                        <button 
+                            onClick={generateAllSchedules}
+                            disabled={isGenerating}
+                            className={`generate-button ${isGenerating ? 'generating' : ''}`}
+                        >
+                            <span className="button-icon">🔄</span>
+                            <span className="button-text sidebar-content-text">
+                                {isGenerating ? `Генерация ${Math.round(animationProgress)}%` : 'Сгенерировать'}
+                            </span>
+                        </button>
+                        {Object.keys(allGroupsSchedule).length > 0 && (
+                            <button 
+                                onClick={exportToJson}
+                                className="export-button"
+                            >
+                                <span className="button-icon">💾</span>
+                                <span className="button-text sidebar-content-text">Экспорт в JSON</span>
+                            </button>
+                        )}
+                    </div>
                 </div>
-            )}
-            
+            </div>
             <div className="student-schedule-time">
                 <p>Время</p>
                 <div className="line-under">
@@ -518,6 +511,18 @@ const StudentSchedule = ({ activeWeek, initialGroup = 'АСОИР-211' }) => {
                     />
                 ))}
             </div>
+            {isGenerating && (
+                <div className="generation-animation">
+                    <div className="animation-container">
+                        <div className="book-animation"></div>
+                        <div className="clock-animation"></div>
+                        <div className="progress-text">Генерация расписания... {Math.round(animationProgress)}%</div>
+                        <div className="progress-bar">
+                            <div className="progress-fill" style={{ width: `${animationProgress}%` }}></div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
