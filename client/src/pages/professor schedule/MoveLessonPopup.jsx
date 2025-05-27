@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './popup.css';
+import { addDays, startOfWeek, isBefore, isSameDay, addWeeks, differenceInCalendarWeeks } from 'date-fns';
 
-// dayNames и timeBlocks должны совпадать с ProfessorSchedulePage.jsx
-const dayNames = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница', 'Суббота'];
+const dayNames = ['Понедельник', 'Вторник', 'Среда', 'Четверг', 'Пятница'];
 const timeBlocks = [
     { timeUp: '08:30', timeDown: '10:05' },
     { timeUp: '10:25', timeDown: '12:00' },
@@ -12,16 +12,46 @@ const timeBlocks = [
     { timeUp: '17:50', timeDown: '19:25' }
 ];
 
+const SEMESTER_START = new Date(new Date().getFullYear(), 8, 1); // 1 сентября
+const SEMESTER_END = new Date(new Date().getFullYear() + (new Date().getMonth() >= 8 ? 1 : 0), 5, 1); // 1 июня
+
+function getWeekTypeByIndex(weekIdx) {
+    // 0 - верхняя, 1 - нижняя, 2 - верхняя и т.д.
+    return weekIdx % 2 === 0 ? 'upper' : 'lower';
+}
+function getWeekLabel(weekType) {
+    return weekType === 'upper' ? 'Верхняя неделя' : 'Нижняя неделя';
+}
+
 const MoveLessonPopup = ({ isVisible, onClose, selectedPair, availableSlots, currentSlot, onMoveConfirm }) => {
-    const [selectedDay, setSelectedDay] = useState(null);
-    const [selectedSlot, setSelectedSlot] = useState(null);
+    const today = new Date();
+    // Вычисляем номер текущей недели семестра
+    const baseMonday = startOfWeek(SEMESTER_START, { weekStartsOn: 1 });
+    const currentWeekIdx = Math.max(0, differenceInCalendarWeeks(startOfWeek(today, { weekStartsOn: 1 }), baseMonday));
+    const lastWeekIdx = Math.max(0, differenceInCalendarWeeks(startOfWeek(SEMESTER_END, { weekStartsOn: 1 }), baseMonday));
+
+    const [weekIdx, setWeekIdx] = useState(currentWeekIdx);
+    const [selected, setSelected] = useState({ day: null, slot: null });
 
     useEffect(() => {
-        setSelectedDay(null);
-        setSelectedSlot(null);
+        setWeekIdx(currentWeekIdx);
+        setSelected({ day: null, slot: null });
     }, [isVisible, selectedPair]);
 
     if (!isVisible || !selectedPair) return null;
+
+    // Даты для текущей недели
+    const weekMonday = addWeeks(baseMonday, weekIdx);
+    const weekDates = dayNames.map((_, idx) => addDays(weekMonday, idx));
+    const weekType = getWeekTypeByIndex(weekIdx);
+    const weekLabel = getWeekLabel(weekType);
+
+    // Проверка: можно ли листать недели
+    const canGoPrev = weekIdx > currentWeekIdx;
+    const canGoNext = weekIdx < lastWeekIdx;
+
+    // Доступные слоты для этой недели
+    const weekAvailableSlots = availableSlots?.[weekType] || {};
 
     return (
         <div className="popup" onClick={onClose}>
@@ -33,44 +63,51 @@ const MoveLessonPopup = ({ isVisible, onClose, selectedPair, availableSlots, cur
                     <div>Группа: {selectedPair.block.groupName}</div>
                     <div>День: {selectedPair.day}, Пара: {selectedPair.blockIdx + 1}</div>
                 </div>
-                <div className="popup-section">
-                    <div><b>Выберите новый день и пару:</b></div>
-                    <div className="move-calendar">
-                        {dayNames.map((day, dIdx) => (
-                            <div key={day} className="move-calendar-row">
-                                <div className="move-calendar-dayname">{day}</div>
+                <div className="popup-section" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
+                    <button onClick={() => canGoPrev && setWeekIdx(weekIdx - 1)} disabled={!canGoPrev}>&lt;</button>
+                    <div style={{ minWidth: 180, textAlign: 'center' }}>
+                        <b>{weekLabel}</b><br/>
+                        {weekDates[0].toLocaleDateString('ru-RU')} — {weekDates[4].toLocaleDateString('ru-RU')}
+                    </div>
+                    <button onClick={() => canGoNext && setWeekIdx(weekIdx + 1)} disabled={!canGoNext}>&gt;</button>
+                </div>
+                <div className="move-calendar">
+                    {dayNames.map((day, dayIdx) => {
+                        const date = weekDates[dayIdx];
+                        const isPast = isBefore(date, today) && !isSameDay(date, today);
+                        return (
+                            <div className="move-calendar-row" key={day}>
+                                <div className="move-calendar-dayname">{day}<br/><span style={{ fontSize: 12, color: '#888' }}>{date.toLocaleDateString('ru-RU')}</span></div>
                                 <div className="move-calendar-slots">
-                                    {timeBlocks.map((tb, tIdx) => {
-                                        const isAvailable = availableSlots?.[day]?.includes(tIdx);
-                                        const isCurrent = currentSlot && day === currentSlot.day && tIdx === currentSlot.slot;
+                                    {timeBlocks.map((tb, slotIdx) => {
+                                        const isAvailable = !isPast && weekAvailableSlots[day]?.includes(slotIdx);
+                                        const isCurrent = currentSlot && weekType === currentSlot.week && day === currentSlot.day && slotIdx === currentSlot.slot;
+                                        const isSelected = selected.day === day && selected.slot === slotIdx;
                                         return (
                                             <button
-                                                key={tIdx}
-                                                className={`move-slot-btn${isAvailable ? '' : ' disabled'}${selectedDay === day && selectedSlot === tIdx ? ' selected' : ''}${isCurrent ? ' current-slot' : ''}`}
+                                                key={slotIdx}
+                                                className={`move-slot-btn${isAvailable ? '' : ' disabled'}${isSelected ? ' selected' : ''}${isCurrent ? ' current-slot' : ''}`}
                                                 disabled={!isAvailable}
-                                                onClick={() => {
-                                                    setSelectedDay(day);
-                                                    setSelectedSlot(tIdx);
-                                                }}
+                                                onClick={() => isAvailable && setSelected({ day, slot: slotIdx })}
                                             >
-                                                {tIdx + 1}<br/>{tb.timeUp}-{tb.timeDown}
+                                                {slotIdx + 1}<br/>{tb.timeUp}-{tb.timeDown}
                                             </button>
                                         );
                                     })}
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                        );
+                    })}
                 </div>
                 <div className="popup-actions">
                     <button onClick={onClose}>Отмена</button>
                     <button
                         onClick={() => {
-                            if (selectedDay !== null && selectedSlot !== null) {
-                                onMoveConfirm(selectedDay, selectedSlot);
+                            if (selected.day && selected.slot !== null) {
+                                onMoveConfirm(weekType, selected.day, selected.slot, weekIdx);
                             }
                         }}
-                        disabled={selectedDay === null || selectedSlot === null}
+                        disabled={!selected.day || selected.slot === null}
                     >
                         Перенести
                     </button>

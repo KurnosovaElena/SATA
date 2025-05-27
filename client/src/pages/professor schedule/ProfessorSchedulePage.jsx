@@ -4,8 +4,8 @@ import professorsData from '../../data/professors.json';
 import "./professorschedulePage.css";
 import Menu from '../components/menu/Menu';
 import TimeBlock from '../components/timeBlock/timeBlock';
-import DaySchedule from '../components/daySchedule/dayScheduleW';
 import MoveLessonPopup from './MoveLessonPopup';
+import { isBefore, isSameDay } from 'date-fns';
 
 const timeBlocks = [
     { timeUp: '08:30', timeDown: '10:05' },
@@ -67,13 +67,38 @@ function ProfessorSchedulePage() {
         localStorage.setItem('schedulesData', JSON.stringify(allGroupsSchedule));
     }, [allGroupsSchedule]);
 
-    // Формируем расписание преподавателя по дням и парам
+    // Миграция структуры расписания для поддержки недель (upper/lower)
+    useEffect(() => {
+        // Проверяем, есть ли weekType (upper/lower) в расписании
+        let migrated = false;
+        const newSchedule = { ...allGroupsSchedule };
+        for (const group in newSchedule) {
+            // Если уже есть weekType — пропускаем
+            if (newSchedule[group].upper && newSchedule[group].lower) continue;
+            // Мигрируем: копируем текущее расписание в обе недели
+            const old = newSchedule[group];
+            newSchedule[group] = {
+                upper: JSON.parse(JSON.stringify(old)),
+                lower: JSON.parse(JSON.stringify(old))
+            };
+            migrated = true;
+        }
+        if (migrated) {
+            setAllGroupsSchedule(newSchedule);
+        }
+        // eslint-disable-next-line
+    }, []);
+
+    // Формируем расписание преподавателя по дням и парам с учётом недели
     const getProfessorSchedule = (professorName) => {
         const schedule = {};
         dayNames.forEach(day => {
             schedule[day] = timeBlocks.map((_, blockIdx) => {
                 for (const group in allGroupsSchedule) {
-                    const groupDay = allGroupsSchedule[group][day];
+                    // --- поддержка недель ---
+                    const weekData = allGroupsSchedule[group][activeWeek];
+                    if (!weekData) continue;
+                    const groupDay = weekData[day];
                     if (!groupDay) continue;
                     const pair = groupDay[blockIdx];
                     if (pair && pair.professorName === professorName && pair.className) {
@@ -130,40 +155,50 @@ function ProfessorSchedulePage() {
     );
 
     // --- динамический расчёт доступных слотов для переноса ---
-    function getAvailableSlotsForMove(selectedPair) {
-        if (!selectedPair || !selectedPair.block || !selectedPair.block.groupName) return {};
+    function getAvailableSlotsForMove(selectedPair, weekOverride, dayOverride) {
+        if (!selectedPair || !selectedPair.block || !selectedPair.block.groupName) return { upper: {}, lower: {} };
         const groupName = selectedPair.block.groupName;
         const professorName = selectedPair.block.professorName;
-        const available = {};
-        dayNames.forEach(day => {
-            if (day === 'Суббота') {
-                available[day] = [];
-                return;
-            }
-            available[day] = [];
-            for (let blockIdx = 0; blockIdx < timeBlocks.length; blockIdx++) {
-                // 1. Разрешить перенос в свой же слот (чтобы не было тупика)
-                if (day === selectedPair.day && blockIdx === selectedPair.blockIdx) {
-                    available[day].push(blockIdx);
-                    continue;
+        const result = { upper: {}, lower: {} };
+        ["upper", "lower"].forEach(weekType => {
+            dayNames.forEach(day => {
+                if (day === 'Суббота') {
+                    result[weekType][day] = [];
+                    return;
                 }
-                // 2. Слот должен быть пуст у этой группы
-                const isSlotFree = !allGroupsSchedule[groupName][day][blockIdx].className;
-                if (!isSlotFree) continue;
-                // 3. Преподаватель не должен быть занят в других группах в это время
-                let busy = false;
-                for (const otherGroup in allGroupsSchedule) {
-                    if (otherGroup === groupName) continue;
-                    const pair = allGroupsSchedule[otherGroup][day][blockIdx];
-                    if (pair && pair.professorName === professorName && pair.className) {
-                        busy = true;
-                        break;
+                result[weekType][day] = [];
+                for (let blockIdx = 0; blockIdx < timeBlocks.length; blockIdx++) {
+                    // Разрешаем перенос только на будущие даты
+                    const today = new Date();
+                    const weekStart = new Date(today);
+                    weekStart.setDate(weekStart.getDate() - weekStart.getDay() + 1 + (weekType === 'upper' ? 0 : 7));
+                    const dayIdx = dayNames.indexOf(day);
+                    const slotDate = new Date(weekStart);
+                    slotDate.setDate(weekStart.getDate() + dayIdx);
+                    if (isBefore(slotDate, today) && !isSameDay(slotDate, today)) continue;
+                    if (day === selectedPair.day && blockIdx === selectedPair.blockIdx && weekType === (weekOverride || activeWeek)) {
+                        result[weekType][day].push(blockIdx);
+                        continue;
                     }
+                    const weekData = allGroupsSchedule[groupName][weekType];
+                    const isSlotFree = !weekData[day][blockIdx].className;
+                    if (!isSlotFree) continue;
+                    let busy = false;
+                    for (const otherGroup in allGroupsSchedule) {
+                        if (otherGroup === groupName) continue;
+                        const otherWeekData = allGroupsSchedule[otherGroup][weekType];
+                        if (!otherWeekData) continue;
+                        const pair = otherWeekData[day][blockIdx];
+                        if (pair && pair.professorName === professorName && pair.className) {
+                            busy = true;
+                            break;
+                        }
+                    }
+                    if (!busy) result[weekType][day].push(blockIdx);
                 }
-                if (!busy) available[day].push(blockIdx);
-            }
+            });
         });
-        return available;
+        return result;
     }
 
     return (
@@ -217,42 +252,44 @@ function ProfessorSchedulePage() {
                 onClose={() => setPopupVisible(false)}
                 selectedPair={selectedPair}
                 availableSlots={getAvailableSlotsForMove(selectedPair)}
-                currentSlot={selectedPair ? { day: selectedPair.day, slot: selectedPair.blockIdx } : null}
-                onMoveConfirm={async (newDay, newSlot) => {
+                currentSlot={selectedPair ? { week: activeWeek, day: selectedPair.day, slot: selectedPair.blockIdx } : null}
+                onMoveConfirm={async (weekType, day, slot, weekIdx) => {
                     if (!selectedPair || !selectedPair.block || !selectedPair.block.groupName) return;
+                    // Вычисляем дату и проверяем границы семестра
+                    const SEMESTER_START = new Date(new Date().getFullYear(), 8, 1);
+                    const SEMESTER_END = new Date(new Date().getFullYear() + (new Date().getMonth() >= 8 ? 1 : 0), 5, 1);
+                    const baseMonday = (date => { let d = new Date(date); d.setDate(d.getDate() - d.getDay() + 1); return d; })(SEMESTER_START);
+                    const weekMonday = new Date(baseMonday); weekMonday.setDate(baseMonday.getDate() + weekIdx * 7);
+                    if (weekMonday < SEMESTER_START || weekMonday > SEMESTER_END) return;
                     const groupName = selectedPair.block.groupName;
                     const oldDay = selectedPair.day;
                     const oldSlot = selectedPair.blockIdx;
-                    const movedLesson = { ...allGroupsSchedule[groupName][oldDay][oldSlot] };
-
-                    // 1. Если выбран тот же слот, просто закрыть popup
-                    if (oldDay === newDay && oldSlot === newSlot) {
+                    const oldWeek = activeWeek;
+                    // --- поддержка переноса между неделями ---
+                    const movedLesson = { ...allGroupsSchedule[groupName][oldWeek][oldDay][oldSlot] };
+                    // Если выбран тот же слот и неделя, просто закрыть popup
+                    if (oldDay === day && oldSlot === slot && oldWeek === weekType) {
                         setPopupVisible(false);
                         return;
                     }
-
-                    // 2. Очистить старое место
-                    // 3. Поставить занятие в новое место
                     // Копия расписания для иммутабельности
                     const updatedSchedule = JSON.parse(JSON.stringify(allGroupsSchedule));
-                    updatedSchedule[groupName][oldDay][oldSlot] = {
+                    updatedSchedule[groupName][oldWeek][oldDay][oldSlot] = {
                         className: '', professorName: '', classroom: '', type: ''
                     };
-                    updatedSchedule[groupName][newDay][newSlot] = movedLesson;
-
+                    updatedSchedule[groupName][weekType][day][slot] = movedLesson;
                     // Пересчёт availableForMove (опционально)
                     const availableForMove = {};
-                    dayNames.forEach(day => {
-                        availableForMove[day] = [];
+                    dayNames.forEach(dayName => {
+                        availableForMove[dayName] = [];
                         for (let blockIdx = 0; blockIdx < timeBlocks.length; blockIdx++) {
-                            const isSlotFree = !updatedSchedule[groupName][day][blockIdx].className;
+                            const isSlotFree = !updatedSchedule[groupName][weekType][dayName][blockIdx].className;
                             if (isSlotFree) {
-                                availableForMove[day].push(blockIdx);
+                                availableForMove[dayName].push(blockIdx);
                             }
                         }
                     });
-                    updatedSchedule[groupName].availableForMove = availableForMove;
-
+                    updatedSchedule[groupName][weekType].availableForMove = availableForMove;
                     setAllGroupsSchedule(updatedSchedule);
                     setPopupVisible(false);
                 }}
