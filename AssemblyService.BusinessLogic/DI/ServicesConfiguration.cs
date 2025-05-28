@@ -39,5 +39,6 @@ public static class ServicesConfiguration
         services.AddScoped<IDisciplineService, DisciplineService>();
         services.AddScoped<IClassroomService, ClassroomService>();
         services.AddScoped<ISubgroupService, SubgroupService>();
+        services.AddScoped<IGroupService, GroupService>();
     }
 }
