@@ -20,8 +20,8 @@ const Sidebar = ({ isOpen, onClose }) => {
         )}
         <ul className="sidebar-menu">
             <li><a className='active' href="/">Главная</a></li>
-            <li><a className='active' href="/profschedule">Расписание преп (тест)</a></li>
-            <li><a className='active' href="/stschedule">Расписание (генератор + тест)</a></li>
+            <li><a className='active' href="/profschedule">Расписание преп</a></li>
+            <li><a className='active' href="/stschedule">Расписание занятий</a></li>
             <li><a className='active' href="/stprofile">Личный кабинет (тест)</a></li>
             {isAdmin && (
               <li><a className='active' href="/admin/roles">Управление ролями</a></li>

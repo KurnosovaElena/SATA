@@ -119,9 +119,9 @@ function StudentProfilePage() {
                     <span className="progress-text empty-text">Добавить предмет</span>
                   </div>
                 ))}
-                <Link to="/report-generator" className="progress-bar report-generator">
+                {/* <Link to="/report-generator" className="progress-bar report-generator">
                   <span className="progress-text report-text">Генератор отчетов</span>
-                </Link>
+                </Link> */}
               </div>
             </button>
             <div className="profile-actions">
