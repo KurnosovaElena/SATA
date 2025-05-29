@@ -3,11 +3,13 @@ import './menu.css';
 import ButtonUpDown from '../button_up_down/ButtonUpDown';
 import Sidebar from '../sidebar/Sidebar';
 import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
 
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
+  const { isAuthenticated, user } = useAuth0();
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -65,6 +67,25 @@ const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
             style={{position:'fixed',top:0,left:0,width:'100vw',height:'100vh',zIndex:999,background:'transparent'}}
             onClick={() => setNotificationsOpen(false)}
           />
+        )}
+        {isAuthenticated && user?.email && (
+          <span style={{
+            color: '#676B57',
+            fontSize: 15,
+            fontWeight: 500,
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            maxWidth: 180,
+            marginLeft: 16,
+            display: 'inline-block',
+            verticalAlign: 'middle',
+            lineHeight: '37px'
+          }}
+            title={user.email}
+          >
+            {user.email}
+          </span>
         )}
       </div>
       <div className="middle-combo">
