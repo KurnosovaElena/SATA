@@ -5,6 +5,8 @@ import "./professorschedulePage.css";
 import Menu from '../components/menu/Menu';
 import TimeBlock from '../components/timeBlock/timeBlock';
 import MoveLessonPopup from './MoveLessonPopup';
+import ConfirmMovePopup from './ConfirmMovePopup';
+import AuditLogPopup from './AuditLogPopup';
 import { isBefore, isSameDay } from 'date-fns';
 
 const timeBlocks = [
@@ -42,6 +44,9 @@ function ProfessorSchedulePage() {
     const [currentProfessor, setCurrentProfessor] = useState(allProfessors[0]);
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedPair, setSelectedPair] = useState(null); // {day, blockIdx, block}
+    const [movePopupState, setMovePopupState] = useState(null); // { weekIdx }
+    const [confirmMove, setConfirmMove] = useState({ visible: false, from: null, to: null, prevSchedule: null });
+    const [auditLogVisible, setAuditLogVisible] = useState(false);
     // --- week state ---
     const [currentDate, setCurrentDate] = useState(new Date());
     const [activeWeek, setActiveWeek] = useState(() => getInitialWeekType(new Date()));
@@ -201,6 +206,26 @@ function ProfessorSchedulePage() {
         return result;
     }
 
+    // --- АУДИТ ПЕРЕНОСОВ ---
+    function addMoveAuditLog({
+        professor, group, subject, old, to, initiator
+    }) {
+        const log = {
+            id: Date.now() + Math.random(),
+            timestamp: new Date().toISOString(),
+            professor,
+            group,
+            subject,
+            old,
+            new: to,
+            initiator,
+            status: 'done'
+        };
+        const prev = JSON.parse(localStorage.getItem('lessonMoveAudit') || '[]');
+        prev.push(log);
+        localStorage.setItem('lessonMoveAudit', JSON.stringify(prev));
+    }
+
     return (
         <div className="professorschedulepage">
             <Menu activeWeek={activeWeek} setActiveWeek={setActiveWeek} weekRange={weekRange} switchWeek={switchWeek} />
@@ -218,6 +243,9 @@ function ProfessorSchedulePage() {
                             ))}
                         </select>
                     </div>
+                    <button style={{marginLeft:24,marginTop:8,padding:'6px 18px',fontSize:15,borderRadius:8,background:'#EEDC7C',border:'none',cursor:'pointer'}} onClick={()=>setAuditLogVisible(true)}>
+                        Журнал переносов
+                    </button>
                 </div>
             </div>
             <div className="professors-content">
@@ -253,25 +281,37 @@ function ProfessorSchedulePage() {
                 selectedPair={selectedPair}
                 availableSlots={getAvailableSlotsForMove(selectedPair)}
                 currentSlot={selectedPair ? { week: activeWeek, day: selectedPair.day, slot: selectedPair.blockIdx } : null}
-                onMoveConfirm={async (weekType, day, slot, weekIdx) => {
+                initialWeekIdx={movePopupState?.weekIdx}
+                onMoveConfirm={async (weekType, day, slot, weekIdx, oldWeek) => {
                     if (!selectedPair || !selectedPair.block || !selectedPair.block.groupName) return;
-                    // Вычисляем дату и проверяем границы семестра
-                    const SEMESTER_START = new Date(new Date().getFullYear(), 8, 1);
-                    const SEMESTER_END = new Date(new Date().getFullYear() + (new Date().getMonth() >= 8 ? 1 : 0), 5, 1);
-                    const baseMonday = (date => { let d = new Date(date); d.setDate(d.getDate() - d.getDay() + 1); return d; })(SEMESTER_START);
-                    const weekMonday = new Date(baseMonday); weekMonday.setDate(baseMonday.getDate() + weekIdx * 7);
-                    if (weekMonday < SEMESTER_START || weekMonday > SEMESTER_END) return;
                     const groupName = selectedPair.block.groupName;
                     const oldDay = selectedPair.day;
                     const oldSlot = selectedPair.blockIdx;
-                    const oldWeek = activeWeek;
-                    // --- поддержка переноса между неделями ---
                     const movedLesson = { ...allGroupsSchedule[groupName][oldWeek][oldDay][oldSlot] };
-                    // Если выбран тот же слот и неделя, просто закрыть popup
                     if (oldDay === day && oldSlot === slot && oldWeek === weekType) {
                         setPopupVisible(false);
                         return;
                     }
+                    // --- АУДИТ ---
+                    addMoveAuditLog({
+                        professor: movedLesson.professorName,
+                        group: groupName,
+                        subject: movedLesson.className,
+                        old: {
+                            week: oldWeek,
+                            day: oldDay,
+                            slot: oldSlot,
+                        },
+                        to: {
+                            week: weekType,
+                            day,
+                            slot
+                        },
+                        initiator: movedLesson.professorName
+                    });
+                    // Сохраняем предыдущее состояние для отмены
+                    const prevSchedule = JSON.parse(JSON.stringify(allGroupsSchedule));
+                    setMovePopupState({ weekIdx });
                     // Копия расписания для иммутабельности
                     const updatedSchedule = JSON.parse(JSON.stringify(allGroupsSchedule));
                     updatedSchedule[groupName][oldWeek][oldDay][oldSlot] = {
@@ -292,8 +332,38 @@ function ProfessorSchedulePage() {
                     updatedSchedule[groupName][weekType].availableForMove = availableForMove;
                     setAllGroupsSchedule(updatedSchedule);
                     setPopupVisible(false);
+                    setConfirmMove({
+                        visible: true,
+                        from: {
+                            weekLabel: oldWeek === 'upper' ? 'Верхняя неделя' : 'Нижняя неделя',
+                            day: oldDay,
+                            slot: oldSlot
+                        },
+                        to: {
+                            weekLabel: weekType === 'upper' ? 'Верхняя неделя' : 'Нижняя неделя',
+                            day,
+                            slot
+                        },
+                        prevSchedule,
+                        prevSelectedPair: selectedPair,
+                        prevWeekIdx: weekIdx
+                    });
                 }}
             />
+            <ConfirmMovePopup
+                isVisible={confirmMove.visible}
+                from={confirmMove.from}
+                to={confirmMove.to}
+                onUndo={() => {
+                    setAllGroupsSchedule(confirmMove.prevSchedule);
+                    setConfirmMove({ visible: false, from: null, to: null, prevSchedule: null });
+                    setSelectedPair(confirmMove.prevSelectedPair);
+                    setMovePopupState({ weekIdx: confirmMove.prevWeekIdx });
+                    setPopupVisible(true);
+                }}
+                onConfirm={() => setConfirmMove({ visible: false, from: null, to: null, prevSchedule: null })}
+            />
+            <AuditLogPopup isVisible={auditLogVisible} onClose={()=>setAuditLogVisible(false)} />
         </div>
     );
 }
