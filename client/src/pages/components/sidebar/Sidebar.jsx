@@ -11,6 +11,7 @@ const Sidebar = ({ isOpen, onClose }) => {
           </svg>
         </div>
         <ul className="sidebar-menu">
+            <li><a className='active' href="/">Главная</a></li>
             <li><a className='active' href="/profschedule">Расписание преп (тест)</a></li>
             <li><a className='active' href="/stschedule">Расписание (генератор + тест)</a></li>
             <li><a className='active' href="/stprofile">Личный кабинет (тест)</a></li>

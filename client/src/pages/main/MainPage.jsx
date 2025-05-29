@@ -3,9 +3,10 @@ import "./main.css"
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
-import { Link } from 'react-router-dom';
+import { useAuth0 } from '@auth0/auth0-react';
 
 function MainPage() {
+  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState('');
 
@@ -39,15 +40,25 @@ function MainPage() {
         </div>
         <div className="button-in">
           <ThemeProvider theme={theme}>
-            <Button
-              className="primary-button"
-              variant="contained"
-              sx={{ width: "100%", background: "#83A36B", fontFamily: "Montserrat", fontWeight: "bold", color: "white", borderRadius: "10px", }}
-              type="submit"
-              component={Link} to="/login"
-            >
-              Вход
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                className="primary-button"
+                variant="contained"
+                sx={{ width: "100%", background: "#83A36B", fontFamily: "Montserrat", fontWeight: "bold", color: "white", borderRadius: "10px" }}
+                onClick={() => logout({ returnTo: window.location.origin })}
+              >
+                Выйти
+              </Button>
+            ) : (
+              <Button
+                className="primary-button"
+                variant="contained"
+                sx={{ width: "100%", background: "#83A36B", fontFamily: "Montserrat", fontWeight: "bold", color: "white", borderRadius: "10px" }}
+                onClick={() => loginWithRedirect()}
+              >
+                Вход
+              </Button>
+            )}
           </ThemeProvider>
         </div>
       </div>
