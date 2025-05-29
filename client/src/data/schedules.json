@@ -1,0 +1,1152 @@
+{
+  "АСОИР-211": {
+    "Понедельник": [
+      {
+        "className": "Физика",
+        "professorName": "Сидоров С.С.",
+        "classroom": "302/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Морозова А.С.",
+        "classroom": "103/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Программирование",
+        "professorName": "Иванов И.И.",
+        "classroom": "205/2",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Вторник": [
+      {
+        "className": "Право",
+        "professorName": "Соколов А.В.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Философия",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "202/1",
+        "type": "practice"
+      },
+      {
+        "className": "Английский язык",
+        "professorName": "Ковалева М.С.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "География",
+        "professorName": "Ковалева М.С.",
+        "classroom": "302/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Английский язык",
+        "professorName": "Ковалева М.С.",
+        "classroom": "301/1",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Среда": [
+      {
+        "className": "Социология",
+        "professorName": "Николаев Д.К.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Николаев Д.К.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "202/1",
+        "type": "practice"
+      },
+      {
+        "className": "Программирование",
+        "professorName": "Иванов И.И.",
+        "classroom": "205/2",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Четверг": [
+      {
+        "className": "Базы данных",
+        "professorName": "Иванов И.И.",
+        "classroom": "306/2",
+        "type": "practice"
+      },
+      {
+        "className": "География",
+        "professorName": "Васильева О.Н.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Физика",
+        "professorName": "Сидоров С.С.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Крылов М.П.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Право",
+        "professorName": "Крылов М.П.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Пятница": [
+      {
+        "className": "Программирование",
+        "professorName": "Иванов И.И.",
+        "classroom": "405/2",
+        "type": "practice"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Громова В.П.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Николаев Д.К.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Суббота": [
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ]
+  },
+  "ПИР-211": {
+    "Понедельник": [
+      {
+        "className": "История",
+        "professorName": "Васильева О.Н.",
+        "classroom": "302/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Право",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "102/1",
+        "type": "practice"
+      },
+      {
+        "className": "Английский язык",
+        "professorName": "Васильева О.Н.",
+        "classroom": "103/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Физика",
+        "professorName": "Сидоров С.С.",
+        "classroom": "102/1",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Вторник": [
+      {
+        "className": "Физика",
+        "professorName": "Сидоров С.С.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Николаев Д.К.",
+        "classroom": "402/1",
+        "type": "lecture"
+      },
+      {
+        "className": "География",
+        "professorName": "Ковалева М.С.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Васильева О.Н.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Среда": [
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Базы данных",
+        "professorName": "Иванов И.И.",
+        "classroom": "405/2",
+        "type": "practice"
+      },
+      {
+        "className": "Право",
+        "professorName": "Громова В.П.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Английский язык",
+        "professorName": "Ковалева М.С.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Четверг": [
+      {
+        "className": "Социология",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Морозова А.С.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "202/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "401/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Базы данных",
+        "professorName": "Иванов И.И.",
+        "classroom": "105/2",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Пятница": [
+      {
+        "className": "Психология",
+        "professorName": "Соколов А.В.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "Программирование",
+        "professorName": "Иванов И.И.",
+        "classroom": "205/2",
+        "type": "practice"
+      },
+      {
+        "className": "Философия",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Васильева О.Н.",
+        "classroom": "301/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Программирование",
+        "professorName": "Иванов И.И.",
+        "classroom": "405/2",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Суббота": [
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ]
+  },
+  "МИР-211": {
+    "Понедельник": [
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Ковалева М.С.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Английский язык",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "202/1",
+        "type": "practice"
+      },
+      {
+        "className": "Физика",
+        "professorName": "Сидоров С.С.",
+        "classroom": "402/1",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Вторник": [
+      {
+        "className": "Психология",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "История",
+        "professorName": "Васильева О.Н.",
+        "classroom": "301/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Математика",
+        "professorName": "Петров П.П.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Громова В.П.",
+        "classroom": "202/1",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Среда": [
+      {
+        "className": "Психология",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "302/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Николаев Д.К.",
+        "classroom": "402/1",
+        "type": "lecture"
+      },
+      {
+        "className": "География",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "301/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Русский язык",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "402/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Соколов А.В.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Четверг": [
+      {
+        "className": "Психология",
+        "professorName": "Морозова А.С.",
+        "classroom": "102/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Право",
+        "professorName": "Крылов М.П.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "История",
+        "professorName": "Ковалева М.С.",
+        "classroom": "102/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Николаев Д.К.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Философия",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Пятница": [
+      {
+        "className": "Право",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "401/1",
+        "type": "lecture"
+      },
+      {
+        "className": "География",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "102/1",
+        "type": "practice"
+      },
+      {
+        "className": "Русский язык",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "101/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Суббота": [
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ]
+  },
+  "ЗАР-211": {
+    "Понедельник": [
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Белова Т.М.",
+        "classroom": "202/1",
+        "type": "practice"
+      },
+      {
+        "className": "История",
+        "professorName": "Ковалева М.С.",
+        "classroom": "202/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "401/1",
+        "type": "lecture"
+      },
+      {
+        "className": "География",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "101/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Вторник": [
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Морозова А.С.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "Философия",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "301/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Крылов М.П.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Среда": [
+      {
+        "className": "Право",
+        "professorName": "Громова В.П.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Громова В.П.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "Право",
+        "professorName": "Николаев Д.К.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "Философия",
+        "professorName": "Крылов М.П.",
+        "classroom": "202/1",
+        "type": "lecture"
+      },
+      {
+        "className": "История",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Четверг": [
+      {
+        "className": "Лингвистика",
+        "professorName": "Васильева О.Н.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Васильева О.Н.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Громова В.П.",
+        "classroom": "301/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Русский язык",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "301/1",
+        "type": "practice"
+      },
+      {
+        "className": "География",
+        "professorName": "Ковалева М.С.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Пятница": [
+      {
+        "className": "История",
+        "professorName": "Ковалева М.С.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "История",
+        "professorName": "Ковалева М.С.",
+        "classroom": "101/1",
+        "type": "practice"
+      },
+      {
+        "className": "География",
+        "professorName": "Жукова Л.Д.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "География",
+        "professorName": "Васильева О.Н.",
+        "classroom": "401/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Белова Т.М.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Суббота": [
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ]
+  },
+  "СПР-211": {
+    "Понедельник": [
+      {
+        "className": "Социология",
+        "professorName": "Зайцева Е.В.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "Русский язык",
+        "professorName": "Ковалева М.С.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Право",
+        "professorName": "Белова Т.М.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Николаев Д.К.",
+        "classroom": "302/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Васильева О.Н.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Вторник": [
+      {
+        "className": "Экономика",
+        "professorName": "Соколов А.В.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Право",
+        "professorName": "Соколов А.В.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Соколов А.В.",
+        "classroom": "103/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Право",
+        "professorName": "Громова В.П.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "География",
+        "professorName": "Васильева О.Н.",
+        "classroom": "202/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Среда": [
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "История",
+        "professorName": "Васильева О.Н.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "Лингвистика",
+        "professorName": "Васильева О.Н.",
+        "classroom": "402/1",
+        "type": "practice"
+      },
+      {
+        "className": "Английский язык",
+        "professorName": "Васильева О.Н.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Крылов М.П.",
+        "classroom": "401/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Четверг": [
+      {
+        "className": "Психология",
+        "professorName": "Белова Т.М.",
+        "classroom": "103/1",
+        "type": "practice"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Морозова А.С.",
+        "classroom": "101/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Социология",
+        "professorName": "Соколов А.В.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Право",
+        "professorName": "Белова Т.М.",
+        "classroom": "201/1",
+        "type": "practice"
+      },
+      {
+        "className": "Право",
+        "professorName": "Крылов М.П.",
+        "classroom": "103/1",
+        "type": "lecture"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Пятница": [
+      {
+        "className": "Социология",
+        "professorName": "Белова Т.М.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "Физкультура",
+        "professorName": "Громов В.П.",
+        "classroom": "Спортзал/3",
+        "type": "practice"
+      },
+      {
+        "className": "Психология",
+        "professorName": "Громова В.П.",
+        "classroom": "201/1",
+        "type": "lecture"
+      },
+      {
+        "className": "Экономика",
+        "professorName": "Орлов Н.Ф.",
+        "classroom": "302/1",
+        "type": "practice"
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ],
+    "Суббота": [
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      },
+      {
+        "className": "",
+        "professorName": "",
+        "classroom": "",
+        "type": ""
+      }
+    ]
+  }
+}
