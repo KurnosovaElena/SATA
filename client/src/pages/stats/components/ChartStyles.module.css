@@ -1,0 +1,13 @@
+.chart-container {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.chart-container-large {
+  composes: chart-container;
+  height: 350px; /* Одинаковая высота для обеих диаграмм */
+  margin: 0 auto;
+}

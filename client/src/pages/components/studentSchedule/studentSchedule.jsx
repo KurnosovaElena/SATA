@@ -3,6 +3,7 @@ import TimeBlock from '../timeBlock/timeBlock';
 import DaySchedule from '../daySchedule/dayScheduleW';
 import schedulesData from '../../../data/schedules.json';
 import "./studentSchedule.css";
+import { useAuth0 } from '@auth0/auth0-react';
 
 // Все группы университета
 const allGroups = [
@@ -275,6 +276,12 @@ const StudentSchedule = () => {
     const [currentGroup, setCurrentGroup] = useState('АСОИР-211');
     const [currentSchedule, setCurrentSchedule] = useState(null);
     const [sidebarExpanded, setSidebarExpanded] = useState(true);
+    const { user } = useAuth0();
+    let userRole = null;
+    if (user?.email === 'getrent.v1@gmail.com') userRole = 'admin';
+    else if (user?.email === 'getrent.v2@gmail.com') userRole = 'teacher';
+    else userRole = 'user';
+
 
     // Генерация расписания с улучшенной анимацией и новыми ограничениями
     const generateAllSchedules = () => {
@@ -476,27 +483,29 @@ const StudentSchedule = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="buttons-container sidebar-buttons-padded">
-                        <button 
-                            onClick={generateAllSchedules}
-                            disabled={isGenerating}
-                            className={`generate-button ${isGenerating ? 'generating' : ''}`}
-                        >
-                            <span className="button-icon">🔄</span>
-                            <span className="button-text sidebar-content-text">
-                                {isGenerating ? `Генерация ${Math.round(animationProgress)}%` : 'Сгенерировать'}
-                            </span>
-                        </button>
-                        {Object.keys(allGroupsSchedule).length > 0 && (
+                    {userRole === 'admin' && (
+                        <div className="buttons-container sidebar-buttons-padded">
                             <button 
-                                onClick={exportToJson}
-                                className="export-button"
+                                onClick={generateAllSchedules}
+                                disabled={isGenerating}
+                                className={`generate-button ${isGenerating ? 'generating' : ''}`}
                             >
-                                <span className="button-icon">💾</span>
-                                <span className="button-text sidebar-content-text">Экспорт в JSON</span>
+                                <span className="button-icon">🔄</span>
+                                <span className="button-text sidebar-content-text">
+                                    {isGenerating ? `Генерация ${Math.round(animationProgress)}%` : 'Сгенерировать'}
+                                </span>
                             </button>
-                        )}
-                    </div>
+                            {Object.keys(allGroupsSchedule).length > 0 && (
+                                <button 
+                                    onClick={exportToJson}
+                                    className="export-button"
+                                >
+                                    <span className="button-icon">💾</span>
+                                    <span className="button-text sidebar-content-text">Экспорт в JSON</span>
+                                </button>
+                            )}
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="student-schedule-time">

@@ -21,8 +21,11 @@ const Sidebar = ({ isOpen, onClose }) => {
         <ul className="sidebar-menu">
             <li><a className='active' href="/">Главная</a></li>
             <li><a className='active' href="/profschedule">Расписание преп</a></li>
-            <li><a className='active' href="/stschedule">Расписание занятий</a></li>
-            <li><a className='active' href="/stprofile">Личный кабинет (тест)</a></li>
+            <li><a className='active' href="/stschedule">Расписание</a></li>
+            <li><a className='active' href="/stprofile">Личный кабинет </a></li>
+            {(isAdmin || (isAuthenticated && user?.email === 'getrent.v2@gmail.com')) && (
+              <li><a className='active' href="/stats">Статистика и отчеты</a></li>
+            )}
             {isAdmin && (
               <li><a className='active' href="/admin/roles">Управление ролями</a></li>
             )}

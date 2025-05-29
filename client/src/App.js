@@ -14,6 +14,7 @@ import StudentDoubleSchedule from './pages/student double schedule/StudentDouble
 import ReportGeneratorPage from './pages/report generator page/ReportGeneratorPage'
 import AdminRolesPage from './pages/admin/AdminRolesPage';
 import RequireRole from './components/auth/RequireRole';
+import StatsPage from './pages/stats/StatsPage';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
           <Route path="/report-generator" element={<RequireRole role={["admin"]}><ReportGeneratorPage /></RequireRole>} />
           <Route path="/admin/roles" element={<RequireRole role="admin"><AdminRolesPage /></RequireRole>} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/stats" element={<RequireRole role={["student","user","teacher","admin"]}><StatsPage /></RequireRole>} />
         </Routes>
       </Router>
     </div>

@@ -1,14 +1,21 @@
-import React, { useState }  from 'react';
+import React, { useState, useEffect }  from 'react';
 import "./main.css"
 import Button from "@mui/material/Button";
 import { createTheme, ThemeProvider } from "@mui/material";
 import Sidebar from "../components/sidebar/Sidebar";
 import { useAuth0 } from '@auth0/auth0-react';
+import { useNavigate } from 'react-router-dom';
+import professorsData from '../../data/professors.json';
 
 function MainPage() {
   const { loginWithRedirect, logout, isAuthenticated, user } = useAuth0();
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [searchInputValue, setSearchInputValue] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedCourse, setSelectedCourse] = useState('1 курс');
+  const [selectedGroup, setSelectedGroup] = useState('ПИР-211');
+  const [selectedSubgroup, setSelectedSubgroup] = useState('Первая');
+  const navigate = useNavigate();
 
   const theme = createTheme({
     palette: {
@@ -36,6 +43,30 @@ function MainPage() {
       helloText = 'Добро пожаловать, Пользователь';
     }
   }
+
+  // Поиск по преподавателям
+  useEffect(() => {
+    if (searchInputValue.trim() === '') {
+      setSuggestions([]);
+      return;
+    }
+    const names = professorsData.map(p => p.name);
+    setSuggestions(names.filter(name => name.toLowerCase().includes(searchInputValue.toLowerCase())));
+  }, [searchInputValue]);
+
+  // Обработка выбора преподавателя
+  const handleSelectProfessor = (name) => {
+    localStorage.setItem('selectedProfessor', name);
+    navigate('/profschedule');
+  };
+
+  // Обработка выбора курса/группы/подгруппы и перехода на расписание студента
+  const handleStudentSchedule = () => {
+    localStorage.setItem('selectedCourse', selectedCourse);
+    localStorage.setItem('selectedGroup', selectedGroup);
+    localStorage.setItem('selectedSubgroup', selectedSubgroup);
+    navigate('/studentschedule');
+  };
 
   return (
     <div className='main-page'>
@@ -82,7 +113,7 @@ function MainPage() {
             </svg>
           </div>
           <h1 className='hello'>{helloText}</h1>
-          <div className="search-bar">
+          <div className="search-bar" style={{position:'relative'}}>
             <div className="aw h">
               <div className="ab ax ay az ba q bb bc">
                 <div className="bl" aria-hidden="false" aria-describedby="searchResults" aria-labelledby="searchResults">
@@ -105,46 +136,148 @@ function MainPage() {
                   value={searchInputValue}
                   onChange={(e) => setSearchInputValue(e.target.value)}
                 />
+                {suggestions.length > 0 && (
+                  <ul className="search-suggestions" style={{
+                    position: 'absolute',
+                    top: '100%',
+                    left: 0,
+                    width: 'calc(100% - 2px)',
+                    minWidth: 0,
+                    maxWidth: '100%',
+                    background: '#fff',
+                    zIndex: 100,
+                    listStyle: 'none',
+                    margin: 0,
+                    padding: '4px 0',
+                    border: '1px solid #ccc',
+                    borderRadius: '0 0 8px 8px',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+                    fontSize: '14px',
+                    overflow: 'hidden',
+                  }}>
+                    {suggestions.map(name => (
+                      <li key={name} style={{
+                        padding: '6px 12px',
+                        cursor: 'pointer',
+                        transition: 'background 0.15s',
+                        whiteSpace: 'nowrap',
+                      }}
+                      onMouseDown={() => handleSelectProfessor(name)}
+                      onMouseOver={e => e.currentTarget.style.background = '#f2f2f2'}
+                      onMouseOut={e => e.currentTarget.style.background = '#fff'}
+                      >
+                        {name}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             </div>
           </div>
           <div className="tripple-bar">
             <div className="bar-course">
               <div className="bar-content">
-                <div className="course">Курс</div>
+                <div className="course" style={{fontFamily:'Montserrat',fontWeight:600,fontSize:'16px',color:'#83A36B'}}>Курс</div>
                 <div className="text-course">
                   <div className="mini-line">
                     <svg width="3" height="33" viewBox="0 0 3 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="3" height="33" rx="1.5" fill="#ABABAB" />
                     </svg>
                   </div>
-                  <span>1 курс</span>
+                  <select value={selectedCourse} onChange={e => setSelectedCourse(e.target.value)}
+                    style={{
+                      border:'none',
+                      background:'#F7F9F6',
+                      fontSize:'16px',
+                      outline:'none',
+                      fontFamily:'Montserrat',
+                      fontWeight:500,
+                      color:'#333',
+                      padding:'6px 18px 6px 8px',
+                      borderRadius:'8px',
+                      boxShadow:'0 2px 8px rgba(131,163,107,0.07)',
+                      minWidth:'110px',
+                      cursor:'pointer',
+                      appearance:'none',
+                      WebkitAppearance:'none',
+                      MozAppearance:'none',
+                    }}
+                  >
+                    <option value="1 курс">1 курс</option>
+                    <option value="2 курс">2 курс</option>
+                    <option value="3 курс">3 курс</option>
+                    <option value="4 курс">4 курс</option>
+                  </select>
                 </div>
               </div>
             </div>
             <div className="bar-group">
               <div className="bar-content">
-                <div className="course">Группа</div>
+                <div className="course" style={{fontFamily:'Montserrat',fontWeight:600,fontSize:'16px',color:'#83A36B'}}>Группа</div>
                 <div className="text-course">
                   <div className="mini-line">
                     <svg width="3" height="33" viewBox="0 0 3 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="3" height="33" rx="1.5" fill="#ABABAB" />
                     </svg>
                   </div>
-                  <span>ПИР-211</span>
+                  <select value={selectedGroup} onChange={e => setSelectedGroup(e.target.value)}
+                    style={{
+                      border:'none',
+                      background:'#F7F9F6',
+                      fontSize:'16px',
+                      outline:'none',
+                      fontFamily:'Montserrat',
+                      fontWeight:500,
+                      color:'#333',
+                      padding:'6px 18px 6px 8px',
+                      borderRadius:'8px',
+                      boxShadow:'0 2px 8px rgba(131,163,107,0.07)',
+                      minWidth:'110px',
+                      cursor:'pointer',
+                      appearance:'none',
+                      WebkitAppearance:'none',
+                      MozAppearance:'none',
+                    }}
+                  >
+                    <option value="ПИР-211">ПИР-211</option>
+                    <option value="ПИР-212">ПИР-212</option>
+                    <option value="ПИР-213">ПИР-213</option>
+                    <option value="ПИР-221">ПИР-221</option>
+                  </select>
                 </div>
               </div>
             </div>
             <div className="bar-minigroup">
               <div className="bar-content">
-                <div className="course">Подгруппа</div>
+                <div className="course" style={{fontFamily:'Montserrat',fontWeight:600,fontSize:'16px',color:'#83A36B'}}>Подгруппа</div>
                 <div className="text-course">
                   <div className="mini-line">
                     <svg width="3" height="33" viewBox="0 0 3 33" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect width="3" height="33" rx="1.5" fill="#ABABAB" />
                     </svg>
                   </div>
-                  <span>Первая</span>
+                  <select value={selectedSubgroup} onChange={e => setSelectedSubgroup(e.target.value)}
+                    style={{
+                      border:'none',
+                      background:'#F7F9F6',
+                      fontSize:'16px',
+                      outline:'none',
+                      fontFamily:'Montserrat',
+                      fontWeight:500,
+                      color:'#333',
+                      padding:'6px 18px 6px 8px',
+                      borderRadius:'8px',
+                      boxShadow:'0 2px 8px rgba(131,163,107,0.07)',
+                      minWidth:'110px',
+                      cursor:'pointer',
+                      appearance:'none',
+                      WebkitAppearance:'none',
+                      MozAppearance:'none',
+                    }}
+                  >
+                    <option value="Первая">Первая</option>
+                    <option value="Вторая">Вторая</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -154,7 +287,8 @@ function MainPage() {
               className="main-button"
               variant="contained"
               sx={{ width: "55%", background: "#83A36B", fontFamily: "Montserrat", fontWeight: "bold", color: "white", borderRadius: "10px", }}
-              type="submit"
+              type="button"
+              onClick={handleStudentSchedule}
             >
               Подтвердить
             </Button>

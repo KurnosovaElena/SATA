@@ -1,0 +1,128 @@
+/* StatsPage.module.css */
+.stats-root {
+  display: flex;
+  min-height: 80vh;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+}
+.stats-sidebar {
+  width: 320px;
+  background: #F7F9F6;
+  border-radius: 16px;
+  padding: 32px;
+  margin: 32px;
+  box-shadow: 0 2px 12px #83A36B11;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+.stats-label {
+  font-weight: 600;
+  color: #83A36B;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+.stats-select {
+  width: 100%;
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1.5px solid #B6C9A6;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  background: #fff;
+  color: #333;
+  outline: none;
+  transition: border 0.2s;
+}
+.stats-prof-slider {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+.stats-prof-btn {
+  background: #E5E9E2;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  color: #83A36B;
+  cursor: pointer;
+  margin: 0 8px;
+  transition: background 0.2s;
+}
+.stats-prof-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.stats-prof-name {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  font-size: 17px;
+  color: #333;
+  min-width: 120px;
+}
+.stats-charts {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  padding: 2rem;
+  overflow: auto;
+}
+
+.stats-chart-wrapper {
+  flex: 1;
+  min-width: 400px; /* Минимальная ширина для предотвращения сжатия */
+  max-width: 800px; /* Максимальная ширина для больших экранов */
+}
+.stats-chart-wrapper {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+}
+.stats-chart-wrapper:last-child {
+  margin-bottom: 2rem;
+}
+.stats-chart-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+.stats-chart-info {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+  color: #34495e;
+}
+.home-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 12px 24px;
+  background-color: #83A36B;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  text-transform: uppercase;
+  z-index: 1000;
+}
+
+.home-button:hover {
+  background-color: #6b8756;
+}
+
+.home-button:active {
+  transform: translateY(1px);
+}

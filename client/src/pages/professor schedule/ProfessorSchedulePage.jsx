@@ -42,7 +42,9 @@ const getInitialWeekType = (date) => {
 
 function ProfessorSchedulePage() {
     const currentDay = new Date().getDay();
-    const [currentProfessor, setCurrentProfessor] = useState(allProfessors[0]);
+    const [currentProfessor, setCurrentProfessor] = useState(() => {
+        return localStorage.getItem('selectedProfessor') || allProfessors[0];
+    });
     const [popupVisible, setPopupVisible] = useState(false);
     const [selectedPair, setSelectedPair] = useState(null); // {day, blockIdx, block}
     const [movePopupState, setMovePopupState] = useState(null); // { weekIdx }
