@@ -76,4 +76,33 @@ body {
     gap: 25px; /* Расстояние между элементами */
     padding: 0 1% 0 1%;
   }
-  
+
+.notification-popup-panel {
+  min-width: 320px;
+  max-width: 380px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 32px #0002, 0 1.5px 8px #83A36B22;
+  padding: 18px 22px 18px 22px;
+  animation: notif-slide-in 0.22s cubic-bezier(.4,1.4,.6,1) both;
+  transition: box-shadow 0.2s;
+}
+@keyframes notif-slide-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-16px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.notification-popup-content h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  text-align: center;
+}
+.notification-popup-bg {
+  /* прозрачный слой для ловли клика вне панели */
+}
+

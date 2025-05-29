@@ -221,3 +221,28 @@ body {
   margin: 0 15px 0 0;
   font-weight: bold;
 }
+
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 12px 24px 0 0;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.notification-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 50%;
+  transition: background 0.15s;
+  outline: none;
+}
+
+.notification-btn:hover, .notification-btn:focus {
+  background: #f5f5f5;
+}
