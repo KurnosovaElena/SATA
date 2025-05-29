@@ -66,12 +66,22 @@
 }
 
 /* Additional CSS */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
 body {
   background-color: #F2F2F2;
   font-family: 'Montserrat' !important;;
 }
 
 .main-page {
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   background-color: #F2F2F2;
 }
 
@@ -207,28 +217,19 @@ body {
 }
 
 .menu-lines {
-  margin: 15px 0 15px 15px !important;
+  margin: 15px 0% 0% 15px !important;
   cursor: pointer;
-  flex-shrink: 0;
 }
 
 .content {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  width: 100%;
-  min-width: 0;
-  gap: 16px;
 }
 
 .button-in {
   margin: 0 15px 0 0;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  min-width: 0;
-  gap: 12px;
 }
 
 .top-bar {

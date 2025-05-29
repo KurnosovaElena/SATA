@@ -8,6 +8,7 @@ import MoveLessonPopup from './MoveLessonPopup';
 import ConfirmMovePopup from './ConfirmMovePopup';
 import AuditLogPopup from './AuditLogPopup';
 import { isBefore, isSameDay } from 'date-fns';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const timeBlocks = [
     { timeUp: '08:30', timeDown: '10:05' },
@@ -47,6 +48,7 @@ function ProfessorSchedulePage() {
     const [movePopupState, setMovePopupState] = useState(null); // { weekIdx }
     const [confirmMove, setConfirmMove] = useState({ visible: false, from: null, to: null, prevSchedule: null });
     const [auditLogVisible, setAuditLogVisible] = useState(false);
+    const { user } = useAuth0();
     // --- week state ---
     const [currentDate, setCurrentDate] = useState(new Date());
     const [activeWeek, setActiveWeek] = useState(() => getInitialWeekType(new Date()));
@@ -133,17 +135,19 @@ function ProfessorSchedulePage() {
                     if (block.type === 'lecture') typeClass = 'lecture';
                     else if (block.type === 'practice') typeClass = 'practice';
                     else if (block.type === 'lab') typeClass = 'lab';
+                    // --- разрешаем открытие попапа только для админа и преподавателя ---
+                    const canOpenPopup = user && (user.email === 'getrent.v1@gmail.com' || user.email === 'getrent.v2@gmail.com');
                     return (
                         <div
                             key={idx}
                             className={`time-block${block.className ? ' ' + typeClass : ' empty-block'}`}
                             onClick={() => {
-                                if (block.className) {
+                                if (block.className && canOpenPopup) {
                                     setSelectedPair({ day: dayName, blockIdx: idx, block });
                                     setPopupVisible(true);
                                 }
                             }}
-                            style={{ cursor: block.className ? 'pointer' : 'default' }}
+                            style={{ cursor: block.className && canOpenPopup ? 'pointer' : 'default' }}
                         >
                             {block.className ? (
                                 <>

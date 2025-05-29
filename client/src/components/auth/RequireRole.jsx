@@ -12,10 +12,14 @@ export default function RequireRole({ role, children }) {
   if (!isAuthenticated) return <div style={{padding:32, color:'red'}}>Требуется вход</div>;
   if (!user) return null;
   const roles = Array.isArray(role) ? role : [role];
-  // Для примера: роль хранится в user["https://getrent.ru/roles"]
-  // или в user.role, если вы так настроили Auth0 Rules/Actions
-  const userRole = user["https://getrent.ru/roles"] || user.role;
-  if (!roles.includes(userRole) && !(roles.includes('admin') && user.email === 'getrent.v1@gmail.com')) {
+
+  // Жёсткая привязка email-роль
+  let userRole = null;
+  if (user.email === 'getrent.v1@gmail.com') userRole = 'admin';
+  else if (user.email === 'getrent.v2@gmail.com') userRole = 'teacher';
+  else userRole = 'user';
+
+  if (!roles.includes(userRole)) {
     return <div style={{padding:32, color:'red'}}>Доступ запрещён</div>;
   }
   return children;
