@@ -406,7 +406,7 @@ const StudentSchedule = () => {
         const generateWithDelay = async () => {
             for (const groupName of allGroups) {
                 newAllGroupsSchedule[groupName] = generateForGroup(groupName);
-                await new Promise(resolve => setTimeout(resolve, 1000)); // УУУУУУУУУУУУУУУУУУУУУУУУ
+                await new Promise(resolve => setTimeout(resolve, 10000)); // УУУУУУУУУУУУУУУУУУУУУУУУ
                 setAllGroupsSchedule({...newAllGroupsSchedule});
                 setCurrentSchedule(newAllGroupsSchedule[currentGroup]);
             }
