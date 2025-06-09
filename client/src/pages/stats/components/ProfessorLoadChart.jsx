@@ -5,17 +5,20 @@ import styles from '../StatsPage.module.css';
 
 const MAX_HOURS = 900; // Максимальная нагрузка в часах
 
-const ProfessorLoadChart = memo(({ professor }) => {
+const ProfessorLoadChart = memo(({ professor, dateRange, calculateHours }) => {
   const [isCircular, setIsCircular] = useState(false);
 
   if (!professor) return null;
+
+  const actualLoad = calculateHours(professor.load, dateRange);
+  const maxPeriodLoad = calculateHours(MAX_HOURS, dateRange);
 
   const chartData = {
     labels: ['Нагрузка преподавателя'],
     datasets: [
       {
         label: 'Текущая нагрузка',
-        data: [professor.load],
+        data: [actualLoad],
         backgroundColor: isCircular ? 
           ['rgba(131, 163, 107, 0.7)'] : 
           'rgba(131, 163, 107, 0.5)',
@@ -24,7 +27,7 @@ const ProfessorLoadChart = memo(({ professor }) => {
       },
       {
         label: 'Незанятые часы',
-        data: [MAX_HOURS - professor.load],
+        data: [maxPeriodLoad - actualLoad],
         backgroundColor: isCircular ? 
           ['rgba(220, 220, 220, 0.5)'] :
           'rgba(220, 220, 220, 0.5)',
@@ -84,7 +87,7 @@ const ProfessorLoadChart = memo(({ professor }) => {
     radius: '90%' // Устанавливаем радиус
   };
 
-  const loadPercentage = ((professor.load / MAX_HOURS) * 100).toFixed(1);
+  const loadPercentage = ((actualLoad / maxPeriodLoad) * 100).toFixed(1);
 
   return (
     <div className={styles['stats-chart-block']}>
@@ -102,8 +105,8 @@ const ProfessorLoadChart = memo(({ professor }) => {
         </div>
       </div>
       <div className={styles['stats-chart-info']}>
-        <div>Текущая нагрузка: {professor.load} ч.</div>
-        <div>Доступно часов: {MAX_HOURS - professor.load} ч.</div>
+        <div>Текущая нагрузка: {actualLoad} ч.</div>
+        <div>Доступно часов: {maxPeriodLoad - actualLoad} ч.</div>
         <div>Загруженность: {loadPercentage}%</div>
       </div>
       <div className={styles['chart-type-switch']}>

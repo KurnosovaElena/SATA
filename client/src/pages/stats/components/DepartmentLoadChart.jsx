@@ -5,7 +5,7 @@ import styles from '../StatsPage.module.css';
 
 const MAX_HOURS = 900; // Максимальная нагрузка в часах на преподавателя
 
-const DepartmentLoadChart = memo(({ professors }) => {
+const DepartmentLoadChart = memo(({ professors, dateRange, calculateHours }) => {
   const [isCircular, setIsCircular] = useState(false);
 
   if (!professors?.length) return null;
@@ -15,7 +15,7 @@ const DepartmentLoadChart = memo(({ professors }) => {
     datasets: [
       {
         label: 'Текущая нагрузка',
-        data: professors.map(p => p.load),
+        data: professors.map(p => calculateHours(p.load, dateRange)),
         backgroundColor: isCircular ? 
           professors.map((_, i) => `rgba(131, 163, 107, ${0.5 + (i * 0.1)})`) :
           'rgba(131, 163, 107, 0.5)',
@@ -24,7 +24,7 @@ const DepartmentLoadChart = memo(({ professors }) => {
       },
       {
         label: 'Незанятые часы',
-        data: professors.map(p => MAX_HOURS - p.load),
+        data: professors.map(p => calculateHours(MAX_HOURS - p.load, dateRange)),
         backgroundColor: isCircular ? 
           professors.map(() => 'rgba(220, 220, 220, 0.5)') :
           'rgba(220, 220, 220, 0.5)',
@@ -83,8 +83,12 @@ const DepartmentLoadChart = memo(({ professors }) => {
     radius: '90%' // Устанавливаем радиус
   };
 
-  const totalHours = professors.reduce((sum, p) => sum + (p.load || 0), 0);
-  const totalMaxHours = professors.length * MAX_HOURS;
+  const totalHours = professors.reduce((sum, p) => 
+    sum + calculateHours(p.load, dateRange), 0
+  );
+  const totalMaxHours = professors.reduce((sum, p) => 
+    sum + calculateHours(MAX_HOURS, dateRange), 0
+  );
 
   return (
     <div className={styles['stats-chart-block']}>

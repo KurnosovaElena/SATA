@@ -9,12 +9,12 @@
   width: 320px;
   background: #F7F9F6;
   border-radius: 16px;
-  padding: 32px;
+  padding: 20px;
   margin: 32px;
   box-shadow: 0 2px 12px #83A36B11;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 12px; /* Уменьшаем отступы между элементами */
 }
 .stats-label {
   font-weight: 600;
@@ -149,17 +149,19 @@
 }
 
 .reports-section {
-  margin: 2rem 0;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 32px;
+  margin-left: 0;
+  padding: 20px;
+  background: #F7F9F6;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #83A36B11;
 }
 
 .reports-title {
-  font-size: 1.5rem;
-  color: #32381C;
-  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-bottom: 1rem;
 }
 
 .reports-grid {
@@ -169,19 +171,82 @@
 }
 
 .report-button {
-  padding: 1rem;
-  background: #F7F9F6;
-  border: 1px solid #E5E5E5;
-  border-radius: 8px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 16px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.92);
+  border: none;
+  border-radius: 12px;
   color: #32381C;
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  text-align: left;
+  min-height: 80px;
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 4px 16px rgba(131, 163, 107, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7),
+    inset 0 0 20px rgba(131, 163, 107, 0.04);
 }
 
 .report-button:hover {
-  background: #EEDC7C;
-  border-color: #83A36L;
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 
+    0 8px 24px rgba(131, 163, 107, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.report-button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: rgba(131, 163, 107, 0.15);
+  border-radius: 10px;
+  color: #83A36B;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 
+    inset 0 0 0 1px rgba(131, 163, 107, 0.15),
+    0 2px 4px rgba(131, 163, 107, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.report-button:hover .report-button-icon {
+  background: rgba(131, 163, 107, 0.18);
+  transform: scale(1.1);
+  color: #6b8756;
+}
+
+.report-button:active {
+  transform: scale(0.98);
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.report-button:active .report-button-icon {
+  transform: scale(1.05);
+  background: rgba(131, 163, 107, 0.25);
+}
+
+.report-button-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.report-button-title {
+  font-weight: 600;
+  color: #32381C;
+}
+
+.report-button-subtitle {
+  font-size: 0.85rem;
+  color: #666;
 }
 
 .modal-overlay {
@@ -546,4 +611,243 @@ input:checked + .slider:before {
   font-weight: 600; /* Добавили такой же вес шрифта */
   color: #888888;
   text-transform: uppercase; /* Сделали верхний регистр как у верхней строки */
+}
+
+.date-range-container {
+  margin-top: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.date-range-label {
+  font-weight: 600;
+  color: #83A36B;
+  font-size: 18px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Стили для календаря */
+.react-datepicker {
+  width: 100% !important;
+  border: none !important;
+  background: none !important;
+}
+
+.react-datepicker__month-container {
+  background: #fff;
+}
+
+.react-datepicker__header {
+  background-color: #F7F9F6 !important;
+  border-bottom: 1px solid #E5E9E2 !important;
+}
+
+.react-datepicker__current-month {
+  color: #32381C !important;
+  font-weight: 600 !important;
+  text-transform: capitalize !important;
+}
+
+.react-datepicker__day--selected,
+.react-datepicker__day--in-range,
+.react-datepicker__day--in-selecting-range {
+  background-color: #4a6fa5 !important;
+  color: white !important;
+}
+
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range) {
+  background-color: rgba(74, 111, 165, 0.3) !important;
+}
+
+.react-datepicker__day--keyboard-selected {
+  background-color: #4a6fa5 !important;
+  color: white !important;
+}
+
+.react-datepicker__day:hover {
+  background-color: rgba(74, 111, 165, 0.15) !important;
+}
+
+.react-datepicker__day-name {
+  color: #32381C !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  border-color: #83A36B !important;
+}
+
+.react-datepicker__navigation:hover *::before {
+  border-color: #32381C !important;
+}
+
+.date-display {
+  margin-top: 8px;
+  padding: 8px;
+  background: rgba(131, 163, 107, 0.1);
+  border-radius: 4px;
+  font-size: 14px;
+  color: #32381C;
+  text-align: center;
+}
+
+.stats-charts-loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.stats-charts-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.7);
+  z-index: 1;
+}
+
+.stats-charts-loading::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40px;
+  height: 40px;
+  margin: -20px 0 0 -20px;
+  border: 4px solid #83A36B;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: loading-spinner 0.8s linear infinite;
+  z-index: 2;
+}
+
+@keyframes loading-spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.date-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 250px; /* Уменьшаем ширину контейнера */
+  margin: 0 auto; /* Центрируем контейнер */
+}
+
+.date-input {
+  width: 90%;
+  padding: 8px 12px;
+  border: 1.5px solid #B6C9A6;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  color: #32381C;
+  background: white;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.date-separator {
+  align-self: center;
+  padding: 4px;
+  color: #83A36B;
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.calendar-wrapper {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 12px;
+  border: none;
+}
+
+.sidebar-title {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.sidebar-title-top {
+  font-size: 24px;
+  font-weight: 600;
+  color: #83A36B;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.sidebar-title-bottom {
+  font-size: 18px;
+  font-weight: 600;
+  color: #888888;
+  text-transform: uppercase;
+  line-height: 1.2;
+}
+
+.weekly-stats {
+  margin: 0 32px;
+  padding: 20px;
+  background: #F7F9F6;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px #83A36B11;
+}
+
+.weekly-stats-title {
+  font-size: 1.2rem;
+  color: #32381C;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.weekly-bar-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.weekly-day-label {
+  width: 100px;
+  font-size: 0.9rem;
+  color: #666;
+  text-align: right;
+}
+
+.weekly-bar-wrapper {
+  flex-grow: 1;
+  background: rgba(255, 255, 255, 0.92);
+  height: 32px;
+  border-radius: 8px;
+  position: relative;
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 2px 8px rgba(131, 163, 107, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+
+.weekly-bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: rgba(131, 163, 107, 0.2);
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.weekly-bar-label {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.9rem;
+  color: #32381C;
+  font-weight: 500;
 }
