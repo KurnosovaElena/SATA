@@ -99,6 +99,9 @@
   text-align: center;
 }
 .stats-chart-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   text-align: center;
   font-size: 1.1rem;
   color: #2c3e50;
@@ -107,7 +110,10 @@
   background: rgba(131, 163, 107, 0.1);
   border-radius: 4px;
   transition: all 0.3s ease;
-  display: block;
+}
+
+.stats-chart-info div {
+  padding: 4px;
 }
 
 .stats-chart-info:hover {
@@ -402,9 +408,142 @@
 .chart-container {
   position: relative;
   height: 300px;
-  transition: all 0.3s ease;
+  perspective: 1000px;
+  margin-bottom: 20px;
 }
 
-.chart-container:hover {
-  transform: scale(1.02);
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.bar-chart,
+.pie-chart {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: opacity 0.4s;
+}
+
+.bar-chart {
+  transform: rotateY(0deg);
+  opacity: 1;
+}
+
+.pie-chart {
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+/* Важно! Добавляем правильные стили для переключения */
+.chart-container.show-pie .chart-wrapper {
+  transform: rotateY(180deg);
+}
+
+.chart-container.show-pie .bar-chart {
+  opacity: 0;
+}
+
+.chart-container.show-pie .pie-chart {
+  opacity: 1;
+}
+
+.stats-chart-block {
+  background: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для переключателя типа графика */
+.chart-type-switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.chart-type-label {
+  color: #2c3e50;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Стили для тумблера */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 52px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #E5E9E2;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #83A36B;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #83A36B;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.logo-container {
+  position: fixed;
+  left: 30px;
+  bottom: 30px;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.2;
+  z-index: 100;
+}
+
+.logo-top {
+  font-size: 24px;
+  font-weight: 600;
+  color: #83A36B;
+  text-transform: uppercase;
+}
+
+.logo-bottom {
+  font-size: 18px; /* Увеличили размер */
+  font-weight: 600; /* Добавили такой же вес шрифта */
+  color: #888888;
+  text-transform: uppercase; /* Сделали верхний регистр как у верхней строки */
 }

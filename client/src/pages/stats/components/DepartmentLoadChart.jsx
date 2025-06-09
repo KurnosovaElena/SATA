@@ -1,47 +1,65 @@
-import React, { memo } from 'react';
-import { Bar } from 'react-chartjs-2';
+import React, { memo, useState } from 'react';
+import { Bar, Pie } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js/auto';
-import '../chartConfig';
 import styles from '../StatsPage.module.css';
-import chartStyles from './ChartStyles.module.css';
+
+const MAX_HOURS = 900; // Максимальная нагрузка в часах на преподавателя
 
 const DepartmentLoadChart = memo(({ professors }) => {
+  const [isCircular, setIsCircular] = useState(false);
+
   if (!professors?.length) return null;
 
-  const data = {
+  const chartData = {
     labels: professors.map(p => p.name),
-    datasets: [{
-      label: 'Нагрузка по кафедре',
-      data: professors.map(p => p.load), // Изменено с hours на load
-      backgroundColor: 'rgba(131, 163, 107, 0.5)',
-      borderColor: 'rgba(131, 163, 107, 1)',
-      borderWidth: 1
-    }],
+    datasets: [
+      {
+        label: 'Текущая нагрузка',
+        data: professors.map(p => p.load),
+        backgroundColor: isCircular ? 
+          professors.map((_, i) => `rgba(131, 163, 107, ${0.5 + (i * 0.1)})`) :
+          'rgba(131, 163, 107, 0.5)',
+        borderColor: 'rgba(131, 163, 107, 1)',
+        borderWidth: 1
+      },
+      {
+        label: 'Незанятые часы',
+        data: professors.map(p => MAX_HOURS - p.load),
+        backgroundColor: isCircular ? 
+          professors.map(() => 'rgba(220, 220, 220, 0.5)') :
+          'rgba(220, 220, 220, 0.5)',
+        borderColor: 'rgba(200, 200, 200, 1)',
+        borderWidth: 1
+      }
+    ]
   };
 
-  const options = {
+  const commonOptions = {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
-      duration: 1000,
-      easing: 'easeInOutQuart'
-    },
+      duration: 800,
+      easing: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)'
+    }
+  };
+
+  const barOptions = {
+    ...commonOptions,
     plugins: {
-      title: {
+      legend: { 
         display: true,
-        text: 'Распределение нагрузки по преподавателям'
-      },
-      legend: {
-        display: false
+        position: 'top'
       }
     },
     scales: {
       y: {
         beginAtZero: true,
-        title: {
-          display: true,
-          text: 'Часы'
-        }
+        stacked: false, // Отключаем стекирование для сравнения
+        title: { 
+          display: true, 
+          text: 'Часы' 
+        },
+        max: MAX_HOURS // Устанавливаем максимальное значение шкалы
       },
       x: {
         ticks: {
@@ -53,21 +71,50 @@ const DepartmentLoadChart = memo(({ professors }) => {
     }
   };
 
-  const totalHours = professors.reduce((sum, p) => 
-    sum + (typeof p.load === 'number' ? p.load : 0), 0 // Изменено с hours на load
-  );
+  const pieOptions = {
+    ...commonOptions,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'bottom'
+      }
+    },
+    cutout: 0, // Устанавливаем в 0 для создания полного круга
+    radius: '90%' // Устанавливаем радиус
+  };
+
+  const totalHours = professors.reduce((sum, p) => sum + (p.load || 0), 0);
+  const totalMaxHours = professors.length * MAX_HOURS;
 
   return (
     <div className={styles['stats-chart-block']}>
       <h3 className={styles['stats-chart-title']}>Нагрузка по кафедре</h3>
-      <div className={chartStyles['chart-container-large']}>
-        <Bar 
-          data={data} 
-          options={options} 
-        />
+      <div className={`${styles['chart-container']} ${isCircular ? styles['show-pie'] : ''}`}>
+        <div className={styles['chart-wrapper']}>
+          <div className={styles['bar-chart']}>
+            <Bar data={chartData} options={barOptions} />
+          </div>
+          <div className={styles['pie-chart']}>
+            <Pie data={chartData} options={pieOptions} />
+          </div>
+        </div>
       </div>
       <div className={styles['stats-chart-info']}>
-        Всего часов: {totalHours}
+        <div>Всего часов: {totalHours}</div>
+        <div>Доступно часов: {totalMaxHours - totalHours}</div>
+        <div>Загруженность: {((totalHours / totalMaxHours) * 100).toFixed(1)}%</div>
+      </div>
+      <div className={styles['chart-type-switch']}>
+        <span className={styles['chart-type-label']}>График</span>
+        <label className={styles['switch']}>
+          <input
+            type="checkbox"
+            checked={isCircular}
+            onChange={() => setIsCircular(!isCircular)}
+          />
+          <span className={styles['slider']}></span>
+        </label>
+        <span className={styles['chart-type-label']}>Диаграмма</span>
       </div>
     </div>
   );

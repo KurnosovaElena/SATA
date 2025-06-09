@@ -158,6 +158,11 @@ const StatsPage = () => {
         />
       )}
 
+      <div className={styles['logo-container']}>
+        <div className={styles['logo-top']}>Генератор</div>
+        <div className={styles['logo-bottom']}>статистики и отчетов</div>
+      </div>
+      
       <button
         className={styles['home-button']}
         onClick={() => window.location.href = '/'}
