@@ -3,13 +3,30 @@ import './menu.css';
 import ButtonUpDown from '../button_up_down/ButtonUpDown';
 import Sidebar from '../sidebar/Sidebar';
 import { Link } from 'react-router-dom';
-import { useAuth0 } from '@auth0/auth0-react';
 
 const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
-
   const [isSidebarOpen, setSidebarOpen] = useState(false);
   const [isNotificationsOpen, setNotificationsOpen] = useState(false);
-  const { isAuthenticated, user } = useAuth0();
+  
+  // Добавляем тестовое уведомление
+  const [notifications] = useState([{
+    id: 1,
+    type: 'transfer',
+    title: 'Перенос занятия',
+    message: 'Занятие "Базы данных" перенесено с Понедельника (2 пара) на Среду (4 пара)',
+    professor: 'Петров П.П.',
+    date: '2025-06-09',
+    from: {
+      day: 'Понедельник',
+      slot: 2,
+      weekType: 'upper'
+    },
+    to: {
+      day: 'Среда',
+      slot: 4,
+      weekType: 'upper'
+    }
+  }]);
 
   const toggleSidebar = () => {
     setSidebarOpen(!isSidebarOpen);
@@ -37,6 +54,11 @@ const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
           >
             <path d="M26.0192 15.4828V15.4825C26.0157 12.4377 25.0051 9.4986 23.1772 7.23397C21.3984 5.03026 18.9665 3.61582 16.3269 3.25452V1V0.75H16.0769H13.9231H13.6731V1V3.25452C11.0335 3.61582 8.6016 5.03026 6.82281 7.23397C4.99486 9.4986 3.98429 12.4377 3.98077 15.4825V15.4828V19.7153L1.1289 22.9113C0.883691 23.1861 0.750038 23.5533 0.75 23.931V27.5518C0.75 27.9295 0.883651 28.2968 1.12889 28.5716C1.37496 28.8474 1.71521 29.0087 2.07692 29.0087H9.36539V29.6943C9.34165 31.2784 9.83984 32.8204 10.77 34.0247C11.701 35.2301 13.0017 36.0145 14.4262 36.218L14.4262 36.2181L14.4339 36.2189C15.2216 36.3065 16.0166 36.2083 16.7671 35.9312C17.5176 35.6541 18.2058 35.2049 18.7883 34.6144C19.3708 34.0239 19.8349 33.305 20.1523 32.5048C20.4696 31.7046 20.6337 30.8398 20.6346 29.9658V29.9656V29.0087H27.9231C28.2848 29.0087 28.625 28.8474 28.8711 28.5716C29.1164 28.2968 29.25 27.9295 29.25 27.5518V23.9311C29.25 23.5533 29.1163 23.1861 28.8711 22.9113L26.0192 19.7153V15.4828ZM6.63462 20.3104V20.3104V15.4828C6.63462 12.9798 7.52211 10.5842 9.09454 8.82198C10.6661 7.06071 12.7912 6.07759 15 6.07759C17.2089 6.07759 19.3339 7.06071 20.9055 8.82198C22.4779 10.5842 23.3654 12.9798 23.3654 15.4828V20.3104V20.3104C23.3655 20.6882 23.4992 21.0553 23.7444 21.3301L26.5962 24.5262V26.0949H3.40385V24.5262L6.25559 21.3301C6.50084 21.0553 6.63454 20.6882 6.63462 20.3104ZM17.9808 29.9656C17.9808 30.8681 17.6606 31.7288 17.098 32.3593C16.5362 32.9889 15.7808 33.3362 15 33.3362C14.2192 33.3362 13.4638 32.9889 12.902 32.3593C12.3394 31.7288 12.0192 30.8681 12.0192 29.9656V29.0087H17.9808V29.9656Z" fill="#ABABAB" stroke="#ABABAB" strokeWidth="0.5" />
           </svg>
+          {notifications.length > 0 && (
+            <div className="notification-badge">
+              {notifications.length}
+            </div>
+          )}
           {isNotificationsOpen && (
             <div
               className="notification-popup-panel"
@@ -54,9 +76,36 @@ const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
             >
               <div className="notification-popup-content">
                 <h3>Уведомления</h3>
-                <div style={{ color: '#888', textAlign: 'center', margin: '24px 0' }}>
-                  Здесь будут отображаться уведомления о переносах занятий для студентов.
-                </div>
+                {notifications.length > 0 ? (
+                  <div>
+                    {notifications.map(notif => (
+                      <div 
+                        key={notif.id}
+                        style={{
+                          padding: '12px 16px',
+                          background: '#fff',
+                          borderRadius: '8px',
+                          boxShadow: '0 2px 8px rgba(0,0,0,0.05)',
+                          margin: '8px 0'
+                        }}
+                      >
+                        <div style={{fontWeight: 600, marginBottom: '8px', color: '#32381C'}}>
+                          {notif.title}
+                        </div>
+                        <div style={{color: '#666', fontSize: '0.9em', marginBottom: '8px'}}>
+                          {notif.message}
+                        </div>
+                        <div style={{color: '#83A36B', fontSize: '0.85em', marginTop: '8px'}}>
+                          Преподаватель: {notif.professor}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div style={{ color: '#888', textAlign: 'center', margin: '24px 0' }}>
+                    Нет новых уведомлений
+                  </div>
+                )}
               </div>
             </div>
           )}
@@ -67,25 +116,6 @@ const Menu = ({ activeWeek, setActiveWeek, weekRange, switchWeek }) => {
             style={{position:'fixed',top:0,left:0,width:'100vw',height:'100vh',zIndex:999,background:'transparent'}}
             onClick={() => setNotificationsOpen(false)}
           />
-        )}
-        {isAuthenticated && user?.email && (
-          <span style={{
-            color: '#676B57',
-            fontSize: 15,
-            fontWeight: 500,
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-            textOverflow: 'ellipsis',
-            maxWidth: 180,
-            marginLeft: 16,
-            display: 'inline-block',
-            verticalAlign: 'middle',
-            lineHeight: '37px'
-          }}
-            title={user.email}
-          >
-            {user.email}
-          </span>
         )}
       </div>
       <div className="middle-combo">
