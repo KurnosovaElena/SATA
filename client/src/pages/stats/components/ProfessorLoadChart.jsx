@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
-import { Pie } from 'react-chartjs-2';
+import { Bar } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto';
 import '../chartConfig';
 import styles from '../StatsPage.module.css';
 import chartStyles from './ChartStyles.module.css';
@@ -8,54 +9,51 @@ const ProfessorLoadChart = memo(({ professor }) => {
   if (!professor) return null;
 
   const data = {
-    labels: ['Загружено часов', 'Свободно'],
+    labels: ['Нагрузка'],
     datasets: [{
-      data: [professor.hours, Math.max(200 - professor.hours, 0)],
-      backgroundColor: ['#83A36B', '#E5E9E2'],
-      borderWidth: 0,
-    }],
+      label: 'Академические часы',
+      data: [professor.load],
+      backgroundColor: 'rgba(131, 163, 107, 0.5)',
+      borderColor: 'rgba(131, 163, 107, 1)',
+      borderWidth: 1
+    }]
   };
 
   const options = {
+    responsive: true,
+    maintainAspectRatio: false,
     animation: {
-      animateScale: true,
-      animateRotate: true,
-      duration: 800,
-      easing: 'easeInOutQuart'
+      duration: 1000, // Длительность анимации в мс
+      easing: 'easeInOutQuart', // Тип анимации
     },
     plugins: {
-      legend: {
-        display: false,
-      },
-      tooltip: {
-        enabled: true,
-        animation: {
-          duration: 150
-        },
-        callbacks: {
-          label: (context) => {
-            const value = context.raw;
-            return `${value} часов`;
-          }
+      title: {
+        display: true,
+        text: `Нагрузка преподавателя ${professor.name}`
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Часы'
         }
       }
     }
   };
 
   return (
-    <div className={styles['stats-chart-block']}>      <h3 className={styles['stats-chart-title']}>Нагрузка преподавателя</h3>
+    <div className={styles['stats-chart-block']}>
+      <h3 className={styles['stats-chart-title']}>
+        Нагрузка преподавателя
+      </h3>
       <div className={chartStyles['chart-container']}>
-        <Pie 
-          data={data} 
-          options={{
-            ...options,
-            aspectRatio: 1, // Делаем диаграмму круглой
-          }} 
-        />
+        <Bar data={data} options={options} />
       </div>
-      <span className={styles['stats-chart-info']}>
-        {typeof professor.hours === 'number' ? `${professor.hours} ч. / 200 ч.` : '—'}
-      </span>
+      <div className={styles['stats-total-hours']}>
+        Всего часов: {professor.load}
+      </div>
     </div>
   );
 });

@@ -11,10 +11,9 @@ import StudentProfilePage from './pages/student profile/StudentProfilePage';
 import ProfessorSchedulePage from './pages/professor schedule/ProfessorSchedulePage';
 import ProfessorDoubleSchedule from './pages/professor double schedule/ProfessorDoubleSchedule';
 import StudentDoubleSchedule from './pages/student double schedule/StudentDoubleSchedule';
-import ReportGeneratorPage from './pages/report generator page/ReportGeneratorPage'
 import AdminRolesPage from './pages/admin/AdminRolesPage';
-import RequireRole from './components/auth/RequireRole';
 import StatsPage from './pages/stats/StatsPage';
+import RequireRole from './components/auth/RequireRole';
 
 function App() {
   return (
@@ -29,10 +28,8 @@ function App() {
           <Route path="/profschedule" element={<RequireRole role={["teacher","user","student","admin"]}><ProfessorSchedulePage /></RequireRole>} />
           {/* Личный профиль — доступен всем авторизованным */}
           <Route path="/stprofile" element={<RequireRole role={["student","user","teacher","admin"]}><StudentProfilePage /></RequireRole>} />
-          {/* Остальные страницы — только для соответствующих ролей */}
-          <Route path="/st-double-schedule" element={<RequireRole role={["student","admin"]}><StudentDoubleSchedule /></RequireRole>} />
+          {/* Остальные страницы — только для соответствующих ролей */}          <Route path="/st-double-schedule" element={<RequireRole role={["student","admin"]}><StudentDoubleSchedule /></RequireRole>} />
           <Route path="/prof-double-schedule" element={<RequireRole role={["teacher","admin"]}><ProfessorDoubleSchedule /></RequireRole>} />
-          <Route path="/report-generator" element={<RequireRole role={["admin"]}><ReportGeneratorPage /></RequireRole>} />
           <Route path="/admin/roles" element={<RequireRole role="admin"><AdminRolesPage /></RequireRole>} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/stats" element={<RequireRole role={["student","user","teacher","admin"]}><StatsPage /></RequireRole>} />
