@@ -32,7 +32,7 @@ function App() {
           <Route path="/prof-double-schedule" element={<RequireRole role={["teacher","admin"]}><ProfessorDoubleSchedule /></RequireRole>} />
           <Route path="/admin/roles" element={<RequireRole role="admin"><AdminRolesPage /></RequireRole>} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/stats" element={<RequireRole role={["student","user","teacher","admin"]}><StatsPage /></RequireRole>} />
+          <Route path="/stats" element={<RequireRole role={["teacher","admin"]}><StatsPage /></RequireRole>} />
         </Routes>
       </Router>
     </div>
